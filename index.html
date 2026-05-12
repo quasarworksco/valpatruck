@@ -165,70 +165,50 @@
     .nav-cta:hover { background: var(--acento); color: var(--blanco); }
 
     /* Hamburger button */
+    /* ========================
+       HAMBURGER DROPDOWN MENU
+    ======================== */
+    .hamburger-wrap {
+      position: relative; display: none;
+    }
     .hamburger {
-      display: none; flex-direction: column; gap: 5px;
-      background: none; border: none; cursor: pointer; padding: 4px; z-index: 110;
+      display: flex; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 6px; z-index: 110;
     }
     .hamburger span {
-      display: block; width: 26px; height: 2.5px;
+      display: block; width: 24px; height: 2px;
       background: var(--negro); border-radius: 2px;
-      transition: transform .35s ease, opacity .35s ease;
+      transition: transform .3s ease, opacity .3s ease;
     }
-    .hamburger.active span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
-    .hamburger.active span:nth-child(2) { opacity: 0; }
-    .hamburger.active span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-    /* ========================
-       SIDEBAR / DRAWER MENU
-    ======================== */
-    .sidebar-overlay {
-      position: fixed; inset: 0; z-index: 99;
-      background: rgba(0,0,0,.55); backdrop-filter: blur(4px);
+    .hb-dropdown {
+      position: absolute; top: calc(100% + 8px); right: 0;
+      background: #111; border-top: 3px solid var(--amarillo);
+      border-radius: 0 0 6px 6px;
+      min-width: 210px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.35);
       opacity: 0; pointer-events: none;
-      transition: opacity .3s ease;
+      transform: translateY(-6px);
+      transition: opacity .22s ease, transform .22s ease;
+      z-index: 200;
     }
-    .sidebar-overlay.open { opacity: 1; pointer-events: auto; }
-
-    .sidebar {
-      position: fixed; top: 0; right: 0; bottom: 0; z-index: 105;
-      width: 260px; max-width: 80vw;
-      background: #111;
-      border-left: 3px solid var(--amarillo);
-      transform: translateX(100%);
-      transition: transform .35s cubic-bezier(.22,1,.36,1);
-      display: flex; flex-direction: column;
+    .hb-dropdown.open {
+      opacity: 1; pointer-events: auto; transform: translateY(0);
     }
-    .sidebar.open { transform: translateX(0); }
-
-    .sidebar-header {
-      padding: 1rem 1.2rem;
-      background: #fff;
-      border-bottom: 2px solid var(--amarillo);
-      display: flex; align-items: center; justify-content: space-between;
-      flex-shrink: 0;
-    }
-    .sidebar-header-logo { height: 32px; width: auto; display: block; }
-    .sidebar-close {
-      background: none; border: none; cursor: pointer;
-      color: #555; font-size: 1.4rem; line-height: 1;
-      padding: 0 4px; transition: color .15s;
-    }
-    .sidebar-close:hover { color: #000; }
-
-    .sidebar-nav {
-      flex: 1; overflow-y: auto; padding: .5rem 0;
-    }
-    .sidebar-nav a {
-      display: block;
-      padding: 1rem 1.4rem;
-      color: rgba(255,255,255,.8); text-decoration: none;
+    .hb-dropdown a {
+      display: block; padding: .9rem 1.3rem;
+      color: rgba(255,255,255,.85); text-decoration: none;
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1.25rem; font-weight: 800;
-      letter-spacing: 1px; text-transform: uppercase;
+      font-size: 1.1rem; font-weight: 800;
+      letter-spacing: .8px; text-transform: uppercase;
       border-left: 3px solid transparent;
       transition: color .15s, border-color .15s, background .15s;
     }
-    .sidebar-nav a:hover, .sidebar-nav a:active {
+    .hb-dropdown a + a { border-top: 1px solid rgba(255,255,255,.06); }
+    .hb-dropdown a:hover, .hb-dropdown a:active {
       color: var(--amarillo);
       border-left-color: var(--amarillo);
       background: rgba(247,194,0,.07);
@@ -701,7 +681,7 @@
       .nav-logo-img { height: 44px; }
       .nav-links { display: none; }
       .nav-cta { display: none; }
-      .hamburger { display: flex; }
+      .hamburger-wrap { display: block; }
       section { padding: 3rem 1rem; }
       .section-title { font-size: clamp(1.7rem, 7vw, 2.8rem); }
       .contacto-wrap { grid-template-columns: 1fr; gap: 2rem; }
@@ -768,26 +748,6 @@
   <div class="splash-location">Nashville, Tennessee · 629-200-2544</div>
 </div>
 
-<!-- ======================== SIDEBAR OVERLAY ======================== -->
-<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
-
-<!-- ======================== SIDEBAR / DRAWER MENU ======================== -->
-<div class="sidebar" id="sidebar">
-  <div class="sidebar-header">
-    <img class="sidebar-header-logo"
-         src="https://lh3.googleusercontent.com/d/1bWwp2gk6zUHmlgm2xHqF3-gptP9YiW93"
-         alt="Valpatruck"
-         onerror="this.outerHTML='<span style=\'font-family:Barlow Condensed,sans-serif;font-weight:900;font-size:1.4rem;color:var(--negro)\'>VALPA<span style=\'color:var(--acento)\'>TRUCK</span></span>'" />
-    <button class="sidebar-close" onclick="closeSidebar()">✕</button>
-  </div>
-  <nav class="sidebar-nav">
-    <a href="#hero" onclick="closeSidebar()">Inicio</a>
-    <a href="#cursos" onclick="closeSidebar()">Paquetes &amp; Precios</a>
-    <a href="#about" onclick="closeSidebar()">Nosotros</a>
-    <a href="#por-que" onclick="closeSidebar()">¿Por Qué Nosotros?</a>
-    <a href="#contacto" onclick="closeSidebar()">Contacto</a>
-  </nav>
-</div>
 
 <!-- ======================== NAVBAR ======================== -->
 <nav>
@@ -810,9 +770,18 @@
   </ul>
   <div style="display:flex;align-items:center;gap:.8rem;">
     <a href="#contacto" class="nav-cta">Inscríbete</a>
-    <button class="hamburger" id="hamburger" onclick="toggleSidebar()" aria-label="Menú">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="hamburger-wrap" id="hamburgerWrap">
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="hb-dropdown" id="hbDropdown">
+        <a href="#hero" onclick="closeMenu()">Inicio</a>
+        <a href="#cursos" onclick="closeMenu()">Paquetes &amp; Precios</a>
+        <a href="#about" onclick="closeMenu()">Nosotros</a>
+        <a href="#por-que" onclick="closeMenu()">¿Por Qué Nosotros?</a>
+        <a href="#contacto" onclick="closeMenu()">Contacto</a>
+      </div>
+    </div>
   </div>
 </nav>
 
@@ -1423,7 +1392,7 @@
     const navCta = q('.nav-cta'); if(navCta) navCta.textContent = t.nav_inscribete;
 
     // Sidebar nav
-    const sbLinks = qa('.sidebar-nav a');
+    const sbLinks = qa('.hb-dropdown a');
     if (sbLinks[0]) sbLinks[0].textContent = t.sb_inicio;
     if (sbLinks[1]) sbLinks[1].textContent = t.sb_paquetes;
     if (sbLinks[2]) sbLinks[2].textContent = t.sb_nosotros;
@@ -1563,21 +1532,19 @@
   });
 
   /* ---- SIDEBAR ---- */
-  function toggleSidebar() {
-    const sb = document.getElementById('sidebar');
-    const ov = document.getElementById('sidebarOverlay');
+  function toggleMenu() {
+    const dd = document.getElementById('hbDropdown');
     const hb = document.getElementById('hamburger');
-    const open = sb.classList.toggle('open');
-    ov.classList.toggle('open', open);
-    hb.classList.toggle('active', open);
-    document.body.style.overflow = open ? 'hidden' : '';
+    const open = dd.classList.toggle('open');
+    hb.classList.toggle('open', open);
   }
-  function closeSidebar() {
-    document.getElementById('sidebar').classList.remove('open');
-    document.getElementById('sidebarOverlay').classList.remove('open');
-    document.getElementById('hamburger').classList.remove('active');
-    document.body.style.overflow = '';
+  function closeMenu() {
+    document.getElementById('hbDropdown').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
   }
+  document.addEventListener('click', function(e) {
+    if (!document.getElementById('hamburgerWrap').contains(e.target)) closeMenu();
+  });
 
   /* ---- SLIDER ---- */
   const track = document.getElementById('sliderTrack');
