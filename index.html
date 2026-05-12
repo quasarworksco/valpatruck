@@ -6,8 +6,8 @@
 
   <!-- SEO Primary -->
   <title>Valpatruck | Escuela de Operación de Excavadora en Nashville, TN</title>
-  <meta name="description" content="Aprende a operar una excavadora Caterpillar 320 en Nashville, Tennessee. Entrenamiento 100% práctico desde el primer día. Paquetes desde $2,100. Llama al 629-200-2544."/>
-  <meta name="keywords" content="escuela excavadora Nashville, operador maquinaria pesada Tennessee, curso excavadora Caterpillar, aprender operar excavadora, entrenamiento maquinaria pesada Nashville, heavy equipment training Nashville"/>
+  <meta name="description" content="Escuela de operación de excavadora Caterpillar 320 en Murfreesboro, Tennessee. Entrenamiento 100% práctico, tú operas desde el primer día. Paquetes desde $2,100 · Certificado incluido · 629-200-2544."/>
+  <meta name="keywords" content="escuela excavadora Murfreesboro, operador maquinaria pesada Tennessee, curso excavadora Caterpillar 320, aprender operar excavadora, entrenamiento maquinaria pesada Murfreesboro, heavy equipment training Murfreesboro TN, excavator operator course Tennessee"/>
   <meta name="author" content="Valpatruck LLC"/>
   <meta name="robots" content="index, follow"/>
   <link rel="canonical" href="https://valpatruck.com/"/>
@@ -16,7 +16,7 @@
   <meta property="og:type" content="website"/>
   <meta property="og:url" content="https://valpatruck.com/"/>
   <meta property="og:title" content="Valpatruck | Operación de Excavadora Real en Nashville, TN"/>
-  <meta property="og:description" content="Entrena en una Caterpillar 320. 100% práctico, tú operas desde el primer día. Sin salir de Nashville. Paquetes desde $2,100. ¡Cupos limitados!"/>
+  <meta property="og:description" content="Entrena en una Caterpillar 320 en Murfreesboro, TN. 100% práctico, tú operas desde el primer día. Paquetes desde $2,100 · Certificado incluido · ¡Cupos limitados!"/>
   <meta property="og:image" content="https://lh3.googleusercontent.com/d/1XMX2MLHn2hseyMJRsZOINiO7F49__PnS"/>
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
@@ -191,79 +191,96 @@
 
     .sidebar {
       position: fixed; top: 0; right: 0; bottom: 0; z-index: 105;
-      width: min(320px, 88vw);
-      background: var(--negro);
+      width: min(300px, 85vw);
+      background: #0d0d0d;
       border-left: 3px solid var(--amarillo);
       transform: translateX(100%);
-      transition: transform .35s cubic-bezier(.22,1,.36,1);
+      transition: transform .38s cubic-bezier(.22,1,.36,1);
       overflow-y: auto;
       display: flex; flex-direction: column;
     }
     .sidebar.open { transform: translateX(0); }
 
+    /* Header con logo blanco */
     .sidebar-header {
-      padding: 1.2rem 1.5rem;
-      border-bottom: 1px solid rgba(247,194,0,.2);
+      padding: 1rem 1.4rem;
+      border-bottom: 1px solid rgba(247,194,0,.15);
       display: flex; align-items: center; justify-content: space-between;
       background: var(--blanco);
+      flex-shrink: 0;
     }
-    .sidebar-header-logo { height: 44px; width: auto; }
+    .sidebar-header-logo { height: 40px; width: auto; }
     .sidebar-close {
-      background: none; border: none; cursor: pointer; color: var(--negro);
-      font-size: 1.6rem; line-height: 1; padding: 0 4px;
+      background: none; border: none; cursor: pointer; color: #444;
+      font-size: 1.3rem; line-height: 1; padding: 4px 6px;
+      border-radius: 4px; transition: background .15s;
     }
+    .sidebar-close:hover { background: rgba(0,0,0,.08); }
 
-    .sidebar-nav { padding: 1.5rem 0; border-bottom: 1px solid rgba(255,255,255,.08); }
+    /* Links de navegación — el bloque principal */
+    .sidebar-nav {
+      flex: 1; padding: 1.2rem 0;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
     .sidebar-nav a {
-      display: flex; align-items: center; gap: .75rem;
-      padding: .85rem 1.5rem;
-      color: var(--blanco); text-decoration: none;
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1rem 1.4rem;
+      color: rgba(255,255,255,.75); text-decoration: none;
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1.15rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
-      transition: background .2s, color .2s;
+      font-size: 1.4rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;
+      border-left: 3px solid transparent;
+      transition: color .2s, border-color .2s, background .2s, padding-left .2s;
     }
-    .sidebar-nav a:hover { background: rgba(247,194,0,.08); color: var(--amarillo); }
-    .sidebar-nav a svg { flex-shrink: 0; }
+    .sidebar-nav a:hover {
+      color: var(--amarillo);
+      border-left-color: var(--amarillo);
+      background: rgba(247,194,0,.05);
+      padding-left: 1.7rem;
+    }
+    .sidebar-nav a .sb-num {
+      font-family: 'Inter', sans-serif;
+      font-size: .65rem; font-weight: 700; color: var(--amarillo);
+      letter-spacing: 1px; opacity: .7; min-width: 18px;
+    }
 
-    .sidebar-info { padding: 1.5rem; flex: 1; }
+    /* Info de contacto compacta */
+    .sidebar-info { padding: 1.2rem 1.4rem; }
     .sidebar-info-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: .75rem; font-weight: 700; letter-spacing: 3px;
+      font-family: 'Inter', sans-serif;
+      font-size: .65rem; font-weight: 700; letter-spacing: 3px;
       color: var(--amarillo); text-transform: uppercase;
-      margin-bottom: 1rem;
+      margin-bottom: .9rem; opacity: .8;
     }
     .sidebar-dato {
-      display: flex; align-items: center; gap: .75rem;
-      margin-bottom: .9rem;
+      display: flex; align-items: center; gap: .65rem;
+      margin-bottom: .7rem;
     }
-    .sidebar-dato a { color: var(--gris-texto); text-decoration: none; font-size: .9rem; transition: color .2s; }
+    .sidebar-dato a { color: rgba(255,255,255,.55); text-decoration: none; font-family: 'Inter', sans-serif; font-size: .82rem; transition: color .2s; }
     .sidebar-dato a:hover { color: var(--amarillo); }
-    .sidebar-dato span { color: var(--gris-texto); font-size: .9rem; }
+    .sidebar-dato span { color: rgba(255,255,255,.55); font-family: 'Inter', sans-serif; font-size: .82rem; }
 
-    .sidebar-cta {
-      padding: 1.5rem;
-      border-top: 1px solid rgba(255,255,255,.08);
-    }
+    /* CTA y social */
+    .sidebar-cta { padding: 1.2rem 1.4rem; border-top: 1px solid rgba(255,255,255,.06); }
     .sidebar-cta a {
       display: flex; align-items: center; justify-content: center; gap: .6rem;
       background: var(--amarillo); color: var(--negro);
-      padding: .9rem; border-radius: 2px;
+      padding: .9rem 1rem; border-radius: 6px;
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1.1rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;
-      text-decoration: none; transition: background .2s;
+      font-size: 1.15rem; font-weight: 900; letter-spacing: 1.5px; text-transform: uppercase;
+      text-decoration: none; transition: background .2s, transform .15s;
     }
-    .sidebar-cta a:hover { background: var(--acento); color: var(--blanco); }
+    .sidebar-cta a:hover { background: #e6b400; transform: translateY(-1px); }
 
     .sidebar-social {
-      display: flex; gap: .75rem; padding: 0 1.5rem 1.5rem;
+      display: flex; gap: .6rem; padding: 0 1.4rem 1.2rem;
     }
     .sidebar-social a {
       display: flex; align-items: center; justify-content: center;
-      width: 40px; height: 40px; border-radius: 50%;
+      width: 36px; height: 36px; border-radius: 50%;
       background: rgba(255,255,255,.06);
       transition: background .2s;
     }
-    .sidebar-social a:hover { background: rgba(247,194,0,.15); }
+    .sidebar-social a:hover { background: rgba(247,194,0,.2); }
 
     /* ========================
        HERO
@@ -814,61 +831,45 @@
 
   <nav class="sidebar-nav">
     <a href="#hero" onclick="closeSidebar()">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
-      Inicio
+      <span class="sb-num">01</span> Inicio
     </a>
     <a href="#cursos" onclick="closeSidebar()">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="14" width="14" height="6" rx="2"/><path d="M15 17h2l4-8H9l2 5"/><circle cx="5" cy="20" r="2"/><circle cx="11" cy="20" r="2"/></svg>
-      Paquetes &amp; Precios
+      <span class="sb-num">02</span> Paquetes &amp; Precios
     </a>
     <a href="#about" onclick="closeSidebar()">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-      Nosotros
+      <span class="sb-num">03</span> Nosotros
     </a>
     <a href="#por-que" onclick="closeSidebar()">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-      ¿Por Qué Nosotros?
+      <span class="sb-num">04</span> ¿Por Qué Nosotros?
     </a>
     <a href="#contacto" onclick="closeSidebar()">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.05 1.18 2 2 0 012.04 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-      Contacto
+      <span class="sb-num">05</span> Contacto
     </a>
   </nav>
 
   <div class="sidebar-info">
-    <div class="sidebar-info-title">Información de Contacto</div>
+    <div class="sidebar-info-title">Contacto</div>
     <div class="sidebar-dato">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-      <a href="https://wa.me/16292002544" target="_blank">WhatsApp: 629-200-2544</a>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      <a href="https://wa.me/16292002544" target="_blank">629-200-2544</a>
     </div>
     <div class="sidebar-dato">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.05 1.18 2 2 0 012.04 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-      <a href="tel:+16292002544">629-200-2544</a>
-    </div>
-    <div class="sidebar-dato">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
       <a href="mailto:valpatruckllc@gmail.com">valpatruckllc@gmail.com</a>
-    </div>
-    <div class="sidebar-dato">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-      <span>Nashville, Tennessee</span>
     </div>
   </div>
 
   <div class="sidebar-social">
     <a href="https://www.facebook.com/profile.php?id=61560440650919&mibextid=wwXIfr" target="_blank" title="Facebook">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.49h-2.79V24C19.61 23.1 24 18.1 24 12.07z"/></svg>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.49h-2.79V24C19.61 23.1 24 18.1 24 12.07z"/></svg>
     </a>
     <a href="https://wa.me/16292002544" target="_blank" title="WhatsApp">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
     </a>
   </div>
 
   <div class="sidebar-cta">
-    <a href="#contacto" onclick="closeSidebar()">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="14" width="14" height="6" rx="2"/><path d="M15 17h2l4-8H9l2 5"/><circle cx="5" cy="20" r="2"/><circle cx="11" cy="20" r="2"/></svg>
-      Inscríbete Ahora
-    </a>
+    <a href="#contacto" onclick="closeSidebar()">Inscríbete Ahora</a>
   </div>
 </div>
 
@@ -917,11 +918,10 @@
       Entrenas en una <strong style="color:var(--amarillo)">Caterpillar 320</strong> — una de las máquinas más potentes del mercado. Tú operas desde el primer momento. Sin meses de teoría. Sin salir de Nashville.
     </p>
     <div class="hero-checklist">
-      <div class="hc-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>100% práctica real desde el inicio</div>
-      <div class="hc-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Tú manejas la máquina — no solo miras</div>
-      <div class="hc-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Sin hospedaje ni comida extra</div>
-      <div class="hc-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Vas y vuelves a casa todos los días</div>
-      <div class="hc-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Aprende una habilidad que genera más dinero</div>
+      <div class="hc-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Entrenamiento 100% práctico en maquinaria real</div>
+      <div class="hc-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Tú operas la Caterpillar 320 desde el primer día</div>
+      <div class="hc-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Certificado incluido en el paquete Profesional</div>
+      <div class="hc-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Una habilidad que mejora tus ingresos de verdad</div>
     </div>
     <div class="hero-actions">
       <a href="#cursos" class="btn-primary">
@@ -1289,11 +1289,11 @@
       hero_badge: 'Murfreesboro, Tennessee',
       hero_title: 'Opera una <em>Excavadora</em> Real',
       hero_sub: 'Entrenas en una <strong style="color:var(--amarillo)">Caterpillar 320</strong> — una de las máquinas más potentes del mercado. Tú operas desde el primer momento. Sin meses de teoría. Sin salir de Nashville.',
-      hc1: '100% práctica real desde el inicio',
-      hc2: 'Tú manejas la máquina — no solo miras',
-      hc3: 'Sin hospedaje ni comida extra',
-      hc4: 'Vas y vuelves a casa todos los días',
-      hc5: 'Aprende una habilidad que genera más dinero',
+      hc1: 'Entrenamiento 100% práctico en maquinaria real',
+      hc2: 'Tú operas la Caterpillar 320 desde el primer día',
+      hc3: 'Certificado incluido en el paquete Profesional',
+      hc4: 'Una habilidad que mejora tus ingresos de verdad',
+      hc5: '',
       btn_paquetes: 'Ver Paquetes y Precios',
       btn_wa_hero: 'WhatsApp Ahora',
       stat1_label: 'Maquinaria real',
@@ -1396,11 +1396,11 @@
       hero_badge: 'Murfreesboro, Tennessee',
       hero_title: 'Operate a Real <em>Excavator</em>',
       hero_sub: 'Train on a <strong style="color:var(--amarillo)">Caterpillar 320</strong> — one of the most powerful machines on the market. You operate from day one. No months of theory. No leaving Nashville.',
-      hc1: '100% real hands-on training from day one',
-      hc2: 'You run the machine — not just watch',
-      hc3: 'No lodging or meal costs',
-      hc4: 'Go home every day — no travel needed',
-      hc5: 'Learn a skill that earns real money',
+      hc1: '100% hands-on training on real machinery',
+      hc2: 'You operate the Caterpillar 320 from day one',
+      hc3: 'Certificate included in the Professional package',
+      hc4: 'A skill that genuinely increases your income',
+      hc5: '',
       btn_paquetes: 'View Packages & Prices',
       btn_wa_hero: 'WhatsApp Now',
       stat1_label: 'Real machinery',
