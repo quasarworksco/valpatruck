@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Valpatruck – Aprende a Operar Excavadora en Nashville</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --amarillo: #F7C200;
+      --negro: #0d0d0d;
+      --gris-oscuro: #1a1a1a;
+      --gris-medio: #2e2e2e;
+      --gris-texto: #aaaaaa;
+      --blanco: #ffffff;
+      --acento: #FF6B00;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Barlow', sans-serif; background: var(--negro); color: var(--blanco); overflow-x: hidden; }
+
+    /* NAVBAR */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(13,13,13,0.92); backdrop-filter: blur(10px);
+      border-bottom: 2px solid var(--amarillo);
+    }
+    .logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.8rem; letter-spacing: 1px; color: var(--blanco); }
+    .logo span { color: var(--amarillo); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--gris-texto); text-decoration: none; font-size: 0.9rem; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; transition: color .2s; }
+    .nav-links a:hover { color: var(--amarillo); }
+    .nav-cta { background: var(--amarillo); color: var(--negro); padding: .55rem 1.4rem; border: none; border-radius: 2px; font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: background .2s; text-decoration: none; }
+    .nav-cta:hover { background: var(--acento); color: var(--blanco); }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding: 8rem 2.5rem 4rem; position: relative;
+      background: linear-gradient(135deg, rgba(13,13,13,0.97) 50%, rgba(26,26,26,0.9) 100%), url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&q=80') center/cover no-repeat;
+    }
+    .hero-badge { display: inline-flex; align-items: center; gap: .5rem; background: var(--amarillo); color: var(--negro); font-family: 'Barlow Condensed', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; padding: .3rem .8rem; margin-bottom: 1.2rem; }
+    .hero-title { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(3rem, 9vw, 7rem); font-weight: 900; line-height: .95; text-transform: uppercase; letter-spacing: -1px; max-width: 800px; }
+    .hero-title em { color: var(--amarillo); font-style: normal; display: block; }
+    .hero-sub { margin-top: 1.5rem; font-size: 1.05rem; font-weight: 300; color: var(--gris-texto); max-width: 480px; line-height: 1.7; }
+    .hero-checklist { display: flex; flex-direction: column; gap: .6rem; margin-top: 1.8rem; }
+    .hc-item { display: flex; align-items: center; gap: .7rem; font-size: 0.95rem; color: var(--blanco); font-weight: 400; }
+    .hc-item svg { flex-shrink: 0; }
+    .hero-actions { display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
+    .btn-primary { background: var(--amarillo); color: var(--negro); padding: .9rem 2rem; border: none; border-radius: 2px; font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all .2s; text-decoration: none; display: inline-flex; align-items: center; gap: .5rem; }
+    .btn-primary:hover { background: var(--acento); color: var(--blanco); transform: translateY(-2px); }
+    .btn-outline { background: transparent; color: var(--blanco); padding: .9rem 2rem; border: 2px solid rgba(255,255,255,0.3); border-radius: 2px; font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all .2s; text-decoration: none; display: inline-flex; align-items: center; gap: .5rem; }
+    .btn-outline:hover { border-color: var(--amarillo); color: var(--amarillo); }
+    .hero-stats { display: flex; gap: 3rem; margin-top: 4rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; flex-wrap: wrap; }
+    .stat-num { font-family: 'Barlow Condensed', sans-serif; font-size: 2.5rem; font-weight: 900; color: var(--amarillo); }
+    .stat-label { font-size: 0.8rem; color: var(--gris-texto); letter-spacing: 1px; text-transform: uppercase; }
+
+    /* SECTION SHARED */
+    section { padding: 5rem 2.5rem; }
+    .section-tag { font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 4px; color: var(--amarillo); text-transform: uppercase; margin-bottom: .6rem; }
+    .section-title { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; text-transform: uppercase; line-height: 1; }
+
+    /* CURSOS */
+    #cursos { background: var(--gris-oscuro); }
+    .cursos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .curso-card { background: var(--gris-medio); border: 1px solid rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden; transition: transform .25s, border-color .25s; }
+    .curso-card:hover { transform: translateY(-6px); border-color: var(--amarillo); }
+    .curso-icon-wrap { height: 130px; display: flex; align-items: center; justify-content: center; background: var(--negro); }
+    .curso-body { padding: 1.4rem; }
+    .curso-nombre { font-family: 'Barlow Condensed', sans-serif; font-size: 1.3rem; font-weight: 800; text-transform: uppercase; margin-bottom: .5rem; }
+    .curso-desc { font-size: 0.85rem; color: var(--gris-texto); line-height: 1.6; margin-bottom: 1rem; }
+    .curso-meta { display: flex; gap: .6rem; flex-wrap: wrap; margin-bottom: .8rem; }
+    .curso-tag { display: inline-flex; align-items: center; gap: .3rem; background: rgba(247,194,0,0.1); color: var(--amarillo); font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; padding: .25rem .6rem; border-radius: 2px; }
+    .curso-precio { font-family: 'Barlow Condensed', sans-serif; font-size: 2rem; font-weight: 900; color: var(--amarillo); }
+    .curso-precio.acento { color: var(--acento); }
+
+    /* POR QUE */
+    #por-que { background: var(--negro); }
+    .razones-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem; margin-top: 3rem; }
+    .razon { border-left: 3px solid var(--amarillo); padding-left: 1.2rem; }
+    .razon-icon { margin-bottom: .7rem; }
+    .razon-titulo { font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 800; text-transform: uppercase; margin-bottom: .4rem; }
+    .razon-texto { font-size: 0.85rem; color: var(--gris-texto); line-height: 1.7; }
+
+
+    /* CONTACTO */
+    #contacto { background: var(--negro); }
+    .contacto-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3rem; align-items: start; }
+    .contacto-info h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.4rem; font-weight: 800; text-transform: uppercase; margin-bottom: 1rem; }
+    .contacto-info p { font-size: 0.9rem; color: var(--gris-texto); line-height: 1.7; margin-bottom: 2rem; }
+    .dato { display: flex; align-items: center; gap: .8rem; margin-bottom: 1rem; }
+    .dato-icon { width: 36px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .dato-text { font-size: 0.9rem; color: var(--gris-texto); }
+    .dato-text a { color: var(--amarillo); text-decoration: none; }
+    .dato-text a:hover { text-decoration: underline; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label { display: block; font-size: 0.75rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gris-texto); margin-bottom: .4rem; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; background: var(--gris-medio); border: 1px solid rgba(255,255,255,0.1); border-radius: 2px; color: var(--blanco); font-family: 'Barlow', sans-serif; font-size: 0.95rem; padding: .75rem 1rem; outline: none; transition: border-color .2s; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--amarillo); }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-group select option { background: var(--gris-medio); }
+    .btn-submit { width: 100%; background: var(--amarillo); color: var(--negro); padding: 1rem; border: none; border-radius: 2px; font-family: 'Barlow Condensed', sans-serif; font-size: 1.15rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: background .2s; }
+    .btn-submit:hover { background: var(--acento); color: var(--blanco); }
+
+    /* FOOTER */
+    footer { background: var(--gris-oscuro); border-top: 2px solid var(--amarillo); padding: 2.5rem; text-align: center; }
+    .footer-logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.5rem; margin-bottom: .5rem; }
+    .footer-logo span { color: var(--amarillo); }
+    .footer-copy { font-size: 0.8rem; color: var(--gris-texto); }
+
+    /* WHATSAPP */
+    .wa-float { position: fixed; bottom: 1.8rem; right: 1.8rem; z-index: 200; background: #25D366; width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.5); transition: transform .2s; text-decoration: none; }
+    .wa-float:hover { transform: scale(1.12); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.2rem; }
+      .nav-links { display: none; }
+      section { padding: 3.5rem 1.2rem; }
+      .contacto-wrap { grid-template-columns: 1fr; gap: 2rem; }
+      .hero-stats { gap: 1.5rem; }
+    }
+
+    /* ANIMACIONES */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-badge      { animation: fadeUp .6s ease both; }
+    .hero-title      { animation: fadeUp .7s .1s ease both; }
+    .hero-sub        { animation: fadeUp .7s .2s ease both; }
+    .hero-checklist  { animation: fadeUp .7s .25s ease both; }
+    .hero-actions    { animation: fadeUp .7s .3s ease both; }
+    .hero-stats      { animation: fadeUp .7s .45s ease both; }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">VALPA<span>TRUCK</span></div>
+  <ul class="nav-links">
+    <li><a href="#cursos">Cursos</a></li>
+    <li><a href="#por-que">Nosotros</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a href="#contacto" class="nav-cta">Inscríbete</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div>
+    <div class="hero-badge">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Nashville, Tennessee
+    </div>
+    <h1 class="hero-title">
+      Opera una
+      <em>Excavadora</em>
+      Real
+    </h1>
+    <p class="hero-sub">
+      Entrenas en una <strong style="color:var(--amarillo)">Caterpillar 320</strong> — una de las máquinas más potentes del mercado. Tú operas desde el primer momento. Sin meses de teoría. Sin salir de Nashville.
+    </p>
+    <div class="hero-checklist">
+      <div class="hc-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>100% práctica real desde el inicio</div>
+      <div class="hc-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Tú manejas la máquina — no solo miras</div>
+      <div class="hc-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Sin hospedaje ni comida extra</div>
+      <div class="hc-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Vas y vuelves a casa todos los días</div>
+      <div class="hc-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Aprende una habilidad que genera más dinero</div>
+    </div>
+    <div class="hero-actions">
+      <a href="#cursos" class="btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="14" width="14" height="6" rx="2"/><path d="M15 17h2l4-8H9l2 5"/><circle cx="5" cy="20" r="2"/><circle cx="11" cy="20" r="2"/></svg>
+        Ver Paquetes y Precios
+      </a>
+      <a href="https://wa.me/16292002544?text=Hola,%20quiero%20información%20sobre%20los%20cursos%20de%20Valpatruck" target="_blank" class="btn-outline">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        WhatsApp Ahora
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">CAT 320</div><div class="stat-label">Maquinaria real</div></div>
+      <div><div class="stat-num">$300</div><div class="stat-label">Práctica libre / hr</div></div>
+      <div><div class="stat-num">100%</div><div class="stat-label">Entrenamiento práctico</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CURSOS -->
+<section id="cursos">
+  <p class="section-tag">Elige tu nivel</p>
+  <h2 class="section-title">Paquetes &amp; Precios</h2>
+  <p style="color:var(--gris-texto);margin-top:.8rem;font-size:.95rem;">Entrena en una <strong style="color:var(--amarillo)">Caterpillar 320</strong> — tú operas la máquina desde el primer momento.</p>
+  <div class="cursos-grid">
+
+    <div class="curso-card">
+      <div class="curso-icon-wrap">
+        <svg width="72" height="72" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="48" width="52" height="16" rx="3" fill="#222" stroke="#F7C200" stroke-width="1.8"/>
+          <rect x="14" y="28" width="28" height="22" rx="2" fill="#F7C200" fill-opacity=".12" stroke="#F7C200" stroke-width="1.8"/>
+          <line x1="42" y1="38" x2="62" y2="24" stroke="#F7C200" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="22" cy="64" r="7" fill="#111" stroke="#F7C200" stroke-width="1.8"/>
+          <circle cx="52" cy="64" r="7" fill="#111" stroke="#F7C200" stroke-width="1.8"/>
+        </svg>
+      </div>
+      <div class="curso-body">
+        <div class="curso-nombre">Básico</div>
+        <p class="curso-desc">Aprende los controles esenciales y los movimientos básicos de la excavadora. Ideal si nunca has operado antes.</p>
+        <div class="curso-meta">
+          <span class="curso-tag"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>6 horas</span>
+          <span class="curso-tag">Principiantes</span>
+        </div>
+        <div class="curso-precio">$2,100</div>
+      </div>
+    </div>
+
+    <div class="curso-card">
+      <div class="curso-icon-wrap">
+        <svg width="72" height="72" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="48" width="52" height="16" rx="3" fill="#222" stroke="#F7C200" stroke-width="1.8"/>
+          <rect x="12" y="26" width="30" height="24" rx="2" fill="#F7C200" fill-opacity=".15" stroke="#F7C200" stroke-width="1.8"/>
+          <line x1="42" y1="36" x2="62" y2="20" stroke="#F7C200" stroke-width="2" stroke-linecap="round"/>
+          <line x1="62" y1="20" x2="62" y2="13" stroke="#F7C200" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="22" cy="64" r="7" fill="#111" stroke="#F7C200" stroke-width="1.8"/>
+          <circle cx="52" cy="64" r="7" fill="#111" stroke="#F7C200" stroke-width="1.8"/>
+        </svg>
+      </div>
+      <div class="curso-body">
+        <div class="curso-nombre">Intermedio</div>
+        <p class="curso-desc">Excavación, nivelación y práctica real en terreno. Consolida tus habilidades con el doble de horas.</p>
+        <div class="curso-meta">
+          <span class="curso-tag"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>12 horas</span>
+          <span class="curso-tag">Nivel Medio</span>
+        </div>
+        <div class="curso-precio">$3,960</div>
+      </div>
+    </div>
+
+    <div class="curso-card" style="border-color:rgba(247,194,0,0.35);">
+      <div class="curso-icon-wrap">
+        <svg width="72" height="72" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="48" width="52" height="16" rx="3" fill="#222" stroke="#F7C200" stroke-width="1.8"/>
+          <rect x="10" y="24" width="34" height="26" rx="2" fill="#F7C200" fill-opacity=".2" stroke="#F7C200" stroke-width="1.8"/>
+          <line x1="44" y1="34" x2="64" y2="16" stroke="#F7C200" stroke-width="2" stroke-linecap="round"/>
+          <line x1="64" y1="16" x2="64" y2="9" stroke="#F7C200" stroke-width="2" stroke-linecap="round"/>
+          <rect x="56" y="7" width="16" height="5" rx="1.5" fill="#F7C200" fill-opacity=".4"/>
+          <circle cx="22" cy="64" r="7" fill="#111" stroke="#F7C200" stroke-width="1.8"/>
+          <circle cx="52" cy="64" r="7" fill="#111" stroke="#F7C200" stroke-width="1.8"/>
+        </svg>
+      </div>
+      <div class="curso-body">
+        <div class="curso-nombre">Intermedio Avanzado</div>
+        <p class="curso-desc">Técnicas avanzadas de excavación y manejo en distintos tipos de terreno. Prepárate para el mercado laboral.</p>
+        <div class="curso-meta">
+          <span class="curso-tag"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>18 horas</span>
+          <span class="curso-tag">Avanzado</span>
+        </div>
+        <div class="curso-precio">$5,400</div>
+      </div>
+    </div>
+
+    <div class="curso-card" style="border-color:var(--acento);">
+      <div class="curso-icon-wrap">
+        <svg width="72" height="72" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="48" width="52" height="16" rx="3" fill="#222" stroke="#FF6B00" stroke-width="1.8"/>
+          <rect x="10" y="22" width="36" height="28" rx="2" fill="#FF6B00" fill-opacity=".18" stroke="#FF6B00" stroke-width="1.8"/>
+          <line x1="46" y1="32" x2="66" y2="14" stroke="#FF6B00" stroke-width="2" stroke-linecap="round"/>
+          <line x1="66" y1="14" x2="66" y2="8" stroke="#FF6B00" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="58" cy="22" r="8" fill="#FF6B00"/>
+          <polyline points="54 22 57 25 63 18" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="22" cy="64" r="7" fill="#111" stroke="#FF6B00" stroke-width="1.8"/>
+          <circle cx="52" cy="64" r="7" fill="#111" stroke="#FF6B00" stroke-width="1.8"/>
+        </svg>
+      </div>
+      <div class="curso-body">
+        <div class="curso-nombre">Profesional</div>
+        <p class="curso-desc">Entrenamiento completo + evaluación final + certificado. El paquete más completo para entrar al mundo laboral.</p>
+        <div class="curso-meta">
+          <span class="curso-tag" style="background:rgba(255,107,0,0.12);color:var(--acento);"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>24 horas</span>
+          <span class="curso-tag" style="background:rgba(255,107,0,0.12);color:var(--acento);">Certificado</span>
+        </div>
+        <div class="curso-precio acento">$6,720</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Práctica Libre -->
+  <div style="margin-top:2rem;background:rgba(247,194,0,0.06);border:1px solid rgba(247,194,0,0.25);border-radius:4px;padding:1.5rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+    <div style="display:flex;align-items:center;gap:1rem;">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.2rem;font-weight:800;text-transform:uppercase;">Práctica Libre con Excavadora</div>
+        <div style="font-size:.85rem;color:var(--gris-texto);margin-top:.2rem;">Ya sabes operar? Reserva tiempo de máquina y practica a tu ritmo.</div>
+      </div>
+    </div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:2.2rem;font-weight:900;color:var(--amarillo);">$300 <span style="font-size:1rem;color:var(--gris-texto);">/ hora</span></div>
+  </div>
+
+  <div style="text-align:center;margin-top:2.5rem;">
+    <a href="https://wa.me/16292002544?text=Hola,%20quiero%20reservar%20en%20Valpatruck" target="_blank" class="btn-primary" style="font-size:1.1rem;padding:1rem 2.5rem;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      Reserva tu Turno por WhatsApp
+    </a>
+  </div>
+</section>
+
+<!-- POR QUÉ NOSOTROS -->
+<section id="por-que">
+  <p class="section-tag">Por qué elegirnos</p>
+  <h2 class="section-title">Aquí no vienes<br>a mirar — operas</h2>
+  <div class="razones-grid">
+
+    <div class="razon">
+      <div class="razon-icon">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="14" width="14" height="6" rx="2"/><path d="M15 17h2l4-8H9l2 5"/><circle cx="5" cy="20" r="2"/><circle cx="11" cy="20" r="2"/></svg>
+      </div>
+      <div class="razon-titulo">Caterpillar 320 Real</div>
+      <p class="razon-texto">Practicas en una CAT 320, una de las excavadoras más tecnológicas y potentes del mercado. Nada de simuladores ni maquetas.</p>
+    </div>
+
+    <div class="razon">
+      <div class="razon-icon">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      </div>
+      <div class="razon-titulo">Operas desde el Día 1</div>
+      <p class="razon-texto">Olvida meses sentado viendo teoría. En Valpatruck subes a la máquina desde el primer momento del entrenamiento.</p>
+    </div>
+
+    <div class="razon">
+      <div class="razon-icon">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <div class="razon-titulo">Sin Gastos Extras</div>
+      <p class="razon-texto">No tienes que pagar hospedaje ni comida. Puedes ir y volver a tu casa todos los días. Sin salir de Nashville.</p>
+    </div>
+
+    <div class="razon">
+      <div class="razon-icon">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+      </div>
+      <div class="razon-titulo">Mejora tus Ingresos</div>
+      <p class="razon-texto">Los operadores de maquinaria pesada son de los trabajadores mejor pagados en construcción. Invierte en una habilidad que genera dinero real.</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <p class="section-tag">Hablemos</p>
+  <h2 class="section-title">Inscríbete Ahora</h2>
+  <div class="contacto-wrap">
+    <div class="contacto-info">
+      <h3>Listo para cambiar tu futuro?</h3>
+      <p>Escríbenos ahora mismo y separa tu turno. Nuestro equipo te dará toda la información sobre fechas y horarios disponibles.</p>
+      <div class="dato">
+        <div class="dato-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        </div>
+        <div class="dato-text"><a href="https://wa.me/16292002544" target="_blank">WhatsApp: 629-200-2544</a></div>
+      </div>
+      <div class="dato">
+        <div class="dato-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.05 1.18 2 2 0 012.04 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        </div>
+        <div class="dato-text"><a href="tel:+16292002544">629-200-2544</a></div>
+      </div>
+      <div class="dato">
+        <div class="dato-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="dato-text">Nashville, Tennessee</div>
+      </div>
+      <div class="dato">
+        <div class="dato-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="dato-text">Lunes a Sábado</div>
+      </div>
+    </div>
+
+    <form onsubmit="handleSubmit(event)">
+      <div class="form-group"><label>Nombre completo</label><input type="text" placeholder="Tu nombre" required /></div>
+      <div class="form-group"><label>Teléfono</label><input type="tel" placeholder="(629) 000-0000" required /></div>
+      <div class="form-group"><label>Correo electrónico</label><input type="email" placeholder="correo@ejemplo.com" required /></div>
+      <div class="form-group">
+        <label>Paquete de interés</label>
+        <select required>
+          <option value="" disabled selected>Selecciona un paquete</option>
+          <option>Básico – 6 hrs ($2,100)</option>
+          <option>Intermedio – 12 hrs ($3,960)</option>
+          <option>Intermedio Avanzado – 18 hrs ($5,400)</option>
+          <option>Profesional – 24 hrs ($6,720)</option>
+          <option>Práctica Libre ($300/hr)</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Mensaje (opcional)</label><textarea placeholder="Cuéntanos algo sobre ti o tus preguntas..."></textarea></div>
+      <button type="submit" class="btn-submit">Enviar Solicitud</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">VALPA<span>TRUCK</span></div>
+  <p class="footer-copy">© 2025 Valpatruck – Escuela de Maquinaria Pesada · Nashville, TN · 629-200-2544</p>
+</footer>
+
+<!-- WHATSAPP FLOTANTE -->
+<a href="https://wa.me/16292002544?text=Hola,%20quiero%20información%20sobre%20los%20cursos%20de%20Valpatruck" class="wa-float" target="_blank" title="WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    alert('Solicitud enviada. Te contactaremos a la brevedad.');
+    e.target.reset();
+  }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.style.opacity='1'; entry.target.style.transform='translateY(0)'; }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.curso-card, .razon').forEach(el => {
+    el.style.opacity='0'; el.style.transform='translateY(20px)'; el.style.transition='opacity .5s ease, transform .5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
