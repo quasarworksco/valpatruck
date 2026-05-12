@@ -1810,8 +1810,34 @@
   /* ---- FORM ---- */
   function handleSubmit(e) {
     e.preventDefault();
-    alert('Solicitud enviada. Te contactaremos a la brevedad.');
-    e.target.reset();
+    const f = e.target;
+    const nombre  = f.querySelector('input[type="text"]').value.trim();
+    const telefono = f.querySelector('input[type="tel"]').value.trim();
+    const email   = f.querySelector('input[type="email"]').value.trim();
+    const paquete = f.querySelector('select').value;
+    const mensaje = f.querySelector('textarea').value.trim();
+
+    // WhatsApp con los datos del formulario
+    const waText = [
+      `Hola, me interesa un paquete de Valpatruck.`,
+      ``,
+      `👤 Nombre: ${nombre}`,
+      `📞 Teléfono: ${telefono}`,
+      `📧 Email: ${email}`,
+      `📦 Paquete: ${paquete}`,
+      mensaje ? `💬 Mensaje: ${mensaje}` : ''
+    ].filter(Boolean).join('\n');
+
+    window.open(`https://wa.me/16292002544?text=${encodeURIComponent(waText)}`, '_blank');
+
+    // TODO: Formspree — agregar el endpoint cuando el cliente lo proporcione
+    // fetch('https://formspree.io/f/XXXXXXXX', {
+    //   method: 'POST',
+    //   headers: { 'Accept': 'application/json' },
+    //   body: new FormData(f)
+    // });
+
+    f.reset();
   }
 </script>
 </body>
