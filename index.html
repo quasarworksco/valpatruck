@@ -19,73 +19,396 @@
     html { scroll-behavior: smooth; }
     body { font-family: 'Barlow', sans-serif; background: var(--negro); color: var(--blanco); overflow-x: hidden; }
 
-    /* NAVBAR */
+    /* ========================
+       SPLASH SCREEN
+    ======================== */
+    #splash {
+      position: fixed; inset: 0; z-index: 9999;
+      background: var(--negro);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    #splash.hidden { opacity: 0; transform: translateY(-30px); pointer-events: none; }
+    .splash-logo-img {
+      width: 220px; max-width: 70vw;
+      animation: splashPop .7s cubic-bezier(.22,1,.36,1) both;
+      background: var(--blanco); border-radius: 8px; padding: 12px 20px;
+    }
+    .splash-tagline {
+      margin-top: 1.4rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(1rem, 4vw, 1.4rem);
+      font-weight: 700; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--amarillo);
+      animation: splashPop .7s .2s cubic-bezier(.22,1,.36,1) both;
+    }
+    .splash-bar {
+      margin-top: 2rem; width: 160px; height: 3px;
+      background: rgba(255,255,255,.1); border-radius: 2px; overflow: hidden;
+    }
+    .splash-bar-fill {
+      height: 100%; width: 0; background: var(--amarillo);
+      animation: splashFill 2s .3s ease forwards;
+    }
+    @keyframes splashPop {
+      from { opacity: 0; transform: scale(.85) translateY(20px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    @keyframes splashFill { to { width: 100%; } }
+
+    /* ========================
+       NAVBAR
+    ======================== */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 1rem 2.5rem;
-      background: rgba(13,13,13,0.92); backdrop-filter: blur(10px);
-      border-bottom: 2px solid var(--amarillo);
+      padding: .75rem 2.5rem;
+      background: var(--blanco);
+      border-bottom: 3px solid var(--amarillo);
+      box-shadow: 0 2px 16px rgba(0,0,0,.12);
     }
-    .logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.8rem; letter-spacing: 1px; color: var(--blanco); }
-    .logo span { color: var(--amarillo); }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a { color: var(--gris-texto); text-decoration: none; font-size: 0.9rem; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; transition: color .2s; }
-    .nav-links a:hover { color: var(--amarillo); }
-    .nav-cta { background: var(--amarillo); color: var(--negro); padding: .55rem 1.4rem; border: none; border-radius: 2px; font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: background .2s; text-decoration: none; }
+    .nav-logo-img { height: 52px; width: auto; display: block; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+    .nav-links a {
+      color: var(--negro); text-decoration: none;
+      font-size: 0.85rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--acento); }
+    .nav-fb {
+      display: flex; align-items: center; gap: .4rem;
+      color: #1877F2 !important;
+    }
+    .nav-fb:hover { color: #0a5abf !important; }
+    .nav-cta {
+      background: var(--amarillo); color: var(--negro);
+      padding: .5rem 1.3rem; border: none; border-radius: 2px;
+      font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase; cursor: pointer;
+      transition: background .2s; text-decoration: none;
+    }
     .nav-cta:hover { background: var(--acento); color: var(--blanco); }
 
-    /* HERO */
+    /* Hamburger button */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 4px; z-index: 110;
+    }
+    .hamburger span {
+      display: block; width: 26px; height: 2.5px;
+      background: var(--negro); border-radius: 2px;
+      transition: transform .35s ease, opacity .35s ease;
+    }
+    .hamburger.active span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+    /* ========================
+       SIDEBAR / DRAWER MENU
+    ======================== */
+    .sidebar-overlay {
+      position: fixed; inset: 0; z-index: 99;
+      background: rgba(0,0,0,.5); backdrop-filter: blur(4px);
+      opacity: 0; pointer-events: none;
+      transition: opacity .3s ease;
+    }
+    .sidebar-overlay.open { opacity: 1; pointer-events: auto; }
+
+    .sidebar {
+      position: fixed; top: 0; right: 0; bottom: 0; z-index: 105;
+      width: min(320px, 88vw);
+      background: var(--negro);
+      border-left: 3px solid var(--amarillo);
+      transform: translateX(100%);
+      transition: transform .35s cubic-bezier(.22,1,.36,1);
+      overflow-y: auto;
+      display: flex; flex-direction: column;
+    }
+    .sidebar.open { transform: translateX(0); }
+
+    .sidebar-header {
+      padding: 1.2rem 1.5rem;
+      border-bottom: 1px solid rgba(247,194,0,.2);
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--blanco);
+    }
+    .sidebar-header-logo { height: 44px; width: auto; }
+    .sidebar-close {
+      background: none; border: none; cursor: pointer; color: var(--negro);
+      font-size: 1.6rem; line-height: 1; padding: 0 4px;
+    }
+
+    .sidebar-nav { padding: 1.5rem 0; border-bottom: 1px solid rgba(255,255,255,.08); }
+    .sidebar-nav a {
+      display: flex; align-items: center; gap: .75rem;
+      padding: .85rem 1.5rem;
+      color: var(--blanco); text-decoration: none;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.15rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      transition: background .2s, color .2s;
+    }
+    .sidebar-nav a:hover { background: rgba(247,194,0,.08); color: var(--amarillo); }
+    .sidebar-nav a svg { flex-shrink: 0; }
+
+    .sidebar-info { padding: 1.5rem; flex: 1; }
+    .sidebar-info-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .75rem; font-weight: 700; letter-spacing: 3px;
+      color: var(--amarillo); text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .sidebar-dato {
+      display: flex; align-items: center; gap: .75rem;
+      margin-bottom: .9rem;
+    }
+    .sidebar-dato a { color: var(--gris-texto); text-decoration: none; font-size: .9rem; transition: color .2s; }
+    .sidebar-dato a:hover { color: var(--amarillo); }
+    .sidebar-dato span { color: var(--gris-texto); font-size: .9rem; }
+
+    .sidebar-cta {
+      padding: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+    .sidebar-cta a {
+      display: flex; align-items: center; justify-content: center; gap: .6rem;
+      background: var(--amarillo); color: var(--negro);
+      padding: .9rem; border-radius: 2px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.1rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;
+      text-decoration: none; transition: background .2s;
+    }
+    .sidebar-cta a:hover { background: var(--acento); color: var(--blanco); }
+
+    .sidebar-social {
+      display: flex; gap: .75rem; padding: 0 1.5rem 1.5rem;
+    }
+    .sidebar-social a {
+      display: flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,255,255,.06);
+      transition: background .2s;
+    }
+    .sidebar-social a:hover { background: rgba(247,194,0,.15); }
+
+    /* ========================
+       HERO
+    ======================== */
     #hero {
       min-height: 100vh; display: flex; align-items: center;
-      padding: 8rem 2.5rem 4rem; position: relative;
-      background: linear-gradient(135deg, rgba(13,13,13,0.97) 50%, rgba(26,26,26,0.9) 100%), url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&q=80') center/cover no-repeat;
+      padding: 8rem 2.5rem 4rem; position: relative; overflow: hidden;
     }
-    .hero-badge { display: inline-flex; align-items: center; gap: .5rem; background: var(--amarillo); color: var(--negro); font-family: 'Barlow Condensed', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; padding: .3rem .8rem; margin-bottom: 1.2rem; }
-    .hero-title { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(3rem, 9vw, 7rem); font-weight: 900; line-height: .95; text-transform: uppercase; letter-spacing: -1px; max-width: 800px; }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('https://lh3.googleusercontent.com/d/1XMX2MLHn2hseyMJRsZOINiO7F49__PnS') center/cover no-repeat;
+      transform: scale(1.06);
+      animation: heroBgZoom 8s ease forwards;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(120deg, rgba(13,13,13,.93) 45%, rgba(13,13,13,.55) 100%);
+    }
+    @keyframes heroBgZoom {
+      from { transform: scale(1.06); }
+      to   { transform: scale(1); }
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--amarillo); color: var(--negro);
+      font-family: 'Barlow Condensed', sans-serif; font-size: 0.8rem;
+      font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+      padding: .3rem .8rem; margin-bottom: 1.2rem;
+      animation: fadeUp .6s ease both;
+    }
+    .hero-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(3rem, 9vw, 7rem);
+      font-weight: 900; line-height: .95;
+      text-transform: uppercase; letter-spacing: -1px; max-width: 800px;
+      animation: fadeUp .7s .1s ease both;
+    }
     .hero-title em { color: var(--amarillo); font-style: normal; display: block; }
-    .hero-sub { margin-top: 1.5rem; font-size: 1.05rem; font-weight: 300; color: var(--gris-texto); max-width: 480px; line-height: 1.7; }
-    .hero-checklist { display: flex; flex-direction: column; gap: .6rem; margin-top: 1.8rem; }
-    .hc-item { display: flex; align-items: center; gap: .7rem; font-size: 0.95rem; color: var(--blanco); font-weight: 400; }
+    .hero-sub {
+      margin-top: 1.5rem; font-size: 1.05rem; font-weight: 300;
+      color: var(--gris-texto); max-width: 480px; line-height: 1.7;
+      animation: fadeUp .7s .2s ease both;
+    }
+    .hero-checklist { display: flex; flex-direction: column; gap: .6rem; margin-top: 1.8rem; animation: fadeUp .7s .25s ease both; }
+    .hc-item { display: flex; align-items: center; gap: .7rem; font-size: 0.95rem; color: var(--blanco); }
     .hc-item svg { flex-shrink: 0; }
-    .hero-actions { display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
-    .btn-primary { background: var(--amarillo); color: var(--negro); padding: .9rem 2rem; border: none; border-radius: 2px; font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all .2s; text-decoration: none; display: inline-flex; align-items: center; gap: .5rem; }
+    .hero-actions { display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; animation: fadeUp .7s .3s ease both; }
+    .btn-primary {
+      background: var(--amarillo); color: var(--negro);
+      padding: .9rem 2rem; border: none; border-radius: 2px;
+      font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem;
+      font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      cursor: pointer; transition: all .2s; text-decoration: none;
+      display: inline-flex; align-items: center; gap: .5rem;
+    }
     .btn-primary:hover { background: var(--acento); color: var(--blanco); transform: translateY(-2px); }
-    .btn-outline { background: transparent; color: var(--blanco); padding: .9rem 2rem; border: 2px solid rgba(255,255,255,0.3); border-radius: 2px; font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all .2s; text-decoration: none; display: inline-flex; align-items: center; gap: .5rem; }
+    .btn-outline {
+      background: transparent; color: var(--blanco);
+      padding: .9rem 2rem; border: 2px solid rgba(255,255,255,.3); border-radius: 2px;
+      font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem;
+      font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      cursor: pointer; transition: all .2s; text-decoration: none;
+      display: inline-flex; align-items: center; gap: .5rem;
+    }
     .btn-outline:hover { border-color: var(--amarillo); color: var(--amarillo); }
-    .hero-stats { display: flex; gap: 3rem; margin-top: 4rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; flex-wrap: wrap; }
+    .hero-stats {
+      display: flex; gap: 3rem; margin-top: 4rem;
+      border-top: 1px solid rgba(255,255,255,.1); padding-top: 2rem;
+      flex-wrap: wrap; animation: fadeUp .7s .45s ease both;
+    }
     .stat-num { font-family: 'Barlow Condensed', sans-serif; font-size: 2.5rem; font-weight: 900; color: var(--amarillo); }
     .stat-label { font-size: 0.8rem; color: var(--gris-texto); letter-spacing: 1px; text-transform: uppercase; }
 
-    /* SECTION SHARED */
-    section { padding: 5rem 2.5rem; }
-    .section-tag { font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 4px; color: var(--amarillo); text-transform: uppercase; margin-bottom: .6rem; }
-    .section-title { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; text-transform: uppercase; line-height: 1; }
+    /* ========================
+       IMAGE SLIDER
+    ======================== */
+    #slider { background: var(--gris-oscuro); padding: 0; position: relative; overflow: hidden; }
+    .slider-track {
+      display: flex;
+      transition: transform .6s cubic-bezier(.4,0,.2,1);
+    }
+    .slide {
+      min-width: 100%; height: 520px;
+      background-size: cover; background-position: center;
+      flex-shrink: 0; position: relative;
+    }
+    .slide-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(13,13,13,.7) 0%, transparent 60%);
+    }
+    .slide-caption {
+      position: absolute; bottom: 2.5rem; left: 2.5rem; right: 2.5rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
+      color: var(--blanco); text-shadow: 0 2px 8px rgba(0,0,0,.4);
+    }
+    .slide-caption span { color: var(--amarillo); }
+    .slider-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(13,13,13,.7); border: 2px solid var(--amarillo);
+      color: var(--amarillo); width: 48px; height: 48px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: background .2s, transform .2s; z-index: 10;
+    }
+    .slider-btn:hover { background: var(--amarillo); color: var(--negro); transform: translateY(-50%) scale(1.08); }
+    .slider-btn.prev { left: 1.2rem; }
+    .slider-btn.next { right: 1.2rem; }
+    .slider-dots {
+      position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%);
+      display: flex; gap: .5rem; z-index: 10;
+    }
+    .slider-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,.4); cursor: pointer;
+      transition: background .3s, transform .3s;
+    }
+    .slider-dot.active { background: var(--amarillo); transform: scale(1.35); }
 
-    /* CURSOS */
+    /* ========================
+       SHARED SECTION
+    ======================== */
+    section { padding: 5rem 2.5rem; }
+    .section-tag {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem;
+      font-weight: 700; letter-spacing: 4px; color: var(--amarillo);
+      text-transform: uppercase; margin-bottom: .6rem;
+    }
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900; text-transform: uppercase; line-height: 1;
+    }
+
+    /* ========================
+       CURSOS
+    ======================== */
     #cursos { background: var(--gris-oscuro); }
     .cursos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
-    .curso-card { background: var(--gris-medio); border: 1px solid rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden; transition: transform .25s, border-color .25s; }
+    .curso-card {
+      background: var(--gris-medio); border: 1px solid rgba(255,255,255,.06);
+      border-radius: 4px; overflow: hidden;
+      transition: transform .25s, border-color .25s;
+    }
     .curso-card:hover { transform: translateY(-6px); border-color: var(--amarillo); }
     .curso-icon-wrap { height: 130px; display: flex; align-items: center; justify-content: center; background: var(--negro); }
     .curso-body { padding: 1.4rem; }
     .curso-nombre { font-family: 'Barlow Condensed', sans-serif; font-size: 1.3rem; font-weight: 800; text-transform: uppercase; margin-bottom: .5rem; }
     .curso-desc { font-size: 0.85rem; color: var(--gris-texto); line-height: 1.6; margin-bottom: 1rem; }
     .curso-meta { display: flex; gap: .6rem; flex-wrap: wrap; margin-bottom: .8rem; }
-    .curso-tag { display: inline-flex; align-items: center; gap: .3rem; background: rgba(247,194,0,0.1); color: var(--amarillo); font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; padding: .25rem .6rem; border-radius: 2px; }
+    .curso-tag {
+      display: inline-flex; align-items: center; gap: .3rem;
+      background: rgba(247,194,0,.1); color: var(--amarillo);
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+      padding: .25rem .6rem; border-radius: 2px;
+    }
     .curso-precio { font-family: 'Barlow Condensed', sans-serif; font-size: 2rem; font-weight: 900; color: var(--amarillo); }
     .curso-precio.acento { color: var(--acento); }
 
-    /* POR QUE */
-    #por-que { background: var(--negro); }
+    /* ========================
+       ABOUT US
+    ======================== */
+    #about { background: var(--negro); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; margin-top: 3rem; align-items: center;
+    }
+    .about-visual {
+      position: relative; border-radius: 4px; overflow: hidden;
+      height: 420px;
+    }
+    .about-img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: brightness(.85);
+    }
+    .about-badge {
+      position: absolute; bottom: 1.5rem; left: 1.5rem;
+      background: var(--amarillo); color: var(--negro);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.1rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;
+      padding: .6rem 1.2rem;
+    }
+    .about-text p {
+      font-size: .95rem; color: var(--gris-texto); line-height: 1.8; margin-bottom: 1.2rem;
+    }
+    .about-text p strong { color: var(--amarillo); }
+    .about-values {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem;
+    }
+    .about-val {
+      background: var(--gris-oscuro); border-left: 3px solid var(--amarillo);
+      padding: .8rem 1rem; border-radius: 0 2px 2px 0;
+    }
+    .about-val-title {
+      font-family: 'Barlow Condensed', sans-serif; font-size: .95rem;
+      font-weight: 800; text-transform: uppercase; margin-bottom: .2rem;
+    }
+    .about-val-text { font-size: .8rem; color: var(--gris-texto); }
+    .about-contact { margin-top: 2rem; display: flex; flex-direction: column; gap: .8rem; }
+    .about-link {
+      display: inline-flex; align-items: center; gap: .6rem;
+      font-size: .9rem; color: var(--gris-texto); text-decoration: none;
+      transition: color .2s;
+    }
+    .about-link:hover { color: var(--amarillo); }
+
+    /* ========================
+       POR QUÉ
+    ======================== */
+    #por-que { background: var(--gris-oscuro); }
     .razones-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem; margin-top: 3rem; }
     .razon { border-left: 3px solid var(--amarillo); padding-left: 1.2rem; }
     .razon-icon { margin-bottom: .7rem; }
     .razon-titulo { font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 800; text-transform: uppercase; margin-bottom: .4rem; }
     .razon-texto { font-size: 0.85rem; color: var(--gris-texto); line-height: 1.7; }
 
-
-    /* CONTACTO */
+    /* ========================
+       CONTACTO
+    ======================== */
     #contacto { background: var(--negro); }
     .contacto-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3rem; align-items: start; }
     .contacto-info h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.4rem; font-weight: 800; text-transform: uppercase; margin-bottom: 1rem; }
@@ -97,60 +420,213 @@
     .dato-text a:hover { text-decoration: underline; }
     .form-group { margin-bottom: 1.2rem; }
     .form-group label { display: block; font-size: 0.75rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gris-texto); margin-bottom: .4rem; }
-    .form-group input, .form-group select, .form-group textarea { width: 100%; background: var(--gris-medio); border: 1px solid rgba(255,255,255,0.1); border-radius: 2px; color: var(--blanco); font-family: 'Barlow', sans-serif; font-size: 0.95rem; padding: .75rem 1rem; outline: none; transition: border-color .2s; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; background: var(--gris-medio);
+      border: 1px solid rgba(255,255,255,.1); border-radius: 2px;
+      color: var(--blanco); font-family: 'Barlow', sans-serif;
+      font-size: 0.95rem; padding: .75rem 1rem; outline: none; transition: border-color .2s;
+    }
     .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--amarillo); }
     .form-group textarea { resize: vertical; min-height: 110px; }
     .form-group select option { background: var(--gris-medio); }
-    .btn-submit { width: 100%; background: var(--amarillo); color: var(--negro); padding: 1rem; border: none; border-radius: 2px; font-family: 'Barlow Condensed', sans-serif; font-size: 1.15rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: background .2s; }
+    .btn-submit {
+      width: 100%; background: var(--amarillo); color: var(--negro);
+      padding: 1rem; border: none; border-radius: 2px;
+      font-family: 'Barlow Condensed', sans-serif; font-size: 1.15rem;
+      font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
+      cursor: pointer; transition: background .2s;
+    }
     .btn-submit:hover { background: var(--acento); color: var(--blanco); }
 
-    /* FOOTER */
-    footer { background: var(--gris-oscuro); border-top: 2px solid var(--amarillo); padding: 2.5rem; text-align: center; }
-    .footer-logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.5rem; margin-bottom: .5rem; }
-    .footer-logo span { color: var(--amarillo); }
-    .footer-copy { font-size: 0.8rem; color: var(--gris-texto); }
+    /* ========================
+       FOOTER
+    ======================== */
+    footer {
+      background: var(--blanco);
+      border-top: 3px solid var(--amarillo);
+      padding: 2.5rem;
+    }
+    .footer-inner {
+      max-width: 900px; margin: 0 auto;
+      display: flex; flex-direction: column; align-items: center; gap: 1.2rem;
+    }
+    .footer-logo-img { height: 60px; width: auto; }
+    .footer-links {
+      display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center;
+    }
+    .footer-links a {
+      color: var(--negro); text-decoration: none;
+      font-size: .85rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+      transition: color .2s;
+    }
+    .footer-links a:hover { color: var(--acento); }
+    .footer-social { display: flex; gap: .75rem; }
+    .footer-social a {
+      display: flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(0,0,0,.08); transition: background .2s;
+    }
+    .footer-social a:hover { background: var(--amarillo); }
+    .footer-copy { font-size: .8rem; color: #666; text-align: center; }
 
-    /* WHATSAPP */
-    .wa-float { position: fixed; bottom: 1.8rem; right: 1.8rem; z-index: 200; background: #25D366; width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.5); transition: transform .2s; text-decoration: none; }
+    /* ========================
+       WHATSAPP FLOAT
+    ======================== */
+    .wa-float {
+      position: fixed; bottom: 1.8rem; right: 1.8rem; z-index: 200;
+      background: #25D366; width: 56px; height: 56px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,.5);
+      transition: transform .2s; text-decoration: none;
+    }
     .wa-float:hover { transform: scale(1.12); }
 
-    /* RESPONSIVE */
+    /* ========================
+       ANIMATIONS
+    ======================== */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ========================
+       RESPONSIVE
+    ======================== */
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .about-visual { height: 280px; }
+    }
     @media (max-width: 768px) {
-      nav { padding: 1rem 1.2rem; }
+      nav { padding: .75rem 1.2rem; }
       .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .hamburger { display: flex; }
       section { padding: 3.5rem 1.2rem; }
       .contacto-wrap { grid-template-columns: 1fr; gap: 2rem; }
       .hero-stats { gap: 1.5rem; }
+      .slide { height: 320px; }
+      .about-values { grid-template-columns: 1fr; }
+      #hero { padding: 7rem 1.2rem 3rem; }
     }
-
-    /* ANIMACIONES */
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-    .hero-badge      { animation: fadeUp .6s ease both; }
-    .hero-title      { animation: fadeUp .7s .1s ease both; }
-    .hero-sub        { animation: fadeUp .7s .2s ease both; }
-    .hero-checklist  { animation: fadeUp .7s .25s ease both; }
-    .hero-actions    { animation: fadeUp .7s .3s ease both; }
-    .hero-stats      { animation: fadeUp .7s .45s ease both; }
   </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
+<!-- ======================== SPLASH SCREEN ======================== -->
+<div id="splash">
+  <img class="splash-logo-img"
+       src="https://lh3.googleusercontent.com/d/1bWwp2gk6zUHmlgm2xHqF3-gptP9YiW93"
+       alt="Valpatruck Logo"
+       onerror="this.style.display='none';document.querySelector('.splash-fallback').style.display='block'"/>
+  <div class="splash-fallback" style="display:none;font-family:'Barlow Condensed',sans-serif;font-size:2.5rem;font-weight:900;color:var(--blanco);">VALPA<span style="color:var(--amarillo)">TRUCK</span></div>
+  <div class="splash-tagline">Escuela de Maquinaria Pesada · Nashville, TN</div>
+  <div class="splash-bar"><div class="splash-bar-fill"></div></div>
+</div>
+
+<!-- ======================== SIDEBAR OVERLAY ======================== -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+<!-- ======================== SIDEBAR / DRAWER MENU ======================== -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <img class="sidebar-header-logo"
+         src="https://lh3.googleusercontent.com/d/1bWwp2gk6zUHmlgm2xHqF3-gptP9YiW93"
+         alt="Valpatruck"
+         onerror="this.outerHTML='<span style=\'font-family:Barlow Condensed,sans-serif;font-weight:900;font-size:1.4rem;color:var(--negro)\'>VALPA<span style=\'color:var(--acento)\'>TRUCK</span></span>'" />
+    <button class="sidebar-close" onclick="closeSidebar()">✕</button>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a href="#hero" onclick="closeSidebar()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+      Inicio
+    </a>
+    <a href="#cursos" onclick="closeSidebar()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="14" width="14" height="6" rx="2"/><path d="M15 17h2l4-8H9l2 5"/><circle cx="5" cy="20" r="2"/><circle cx="11" cy="20" r="2"/></svg>
+      Paquetes &amp; Precios
+    </a>
+    <a href="#about" onclick="closeSidebar()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      Nosotros
+    </a>
+    <a href="#por-que" onclick="closeSidebar()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      ¿Por Qué Nosotros?
+    </a>
+    <a href="#contacto" onclick="closeSidebar()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.05 1.18 2 2 0 012.04 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      Contacto
+    </a>
+  </nav>
+
+  <div class="sidebar-info">
+    <div class="sidebar-info-title">Información de Contacto</div>
+    <div class="sidebar-dato">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      <a href="https://wa.me/16292002544" target="_blank">WhatsApp: 629-200-2544</a>
+    </div>
+    <div class="sidebar-dato">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.05 1.18 2 2 0 012.04 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      <a href="tel:+16292002544">629-200-2544</a>
+    </div>
+    <div class="sidebar-dato">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <a href="mailto:valpatruckllc@gmail.com">valpatruckllc@gmail.com</a>
+    </div>
+    <div class="sidebar-dato">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <span>Nashville, Tennessee</span>
+    </div>
+  </div>
+
+  <div class="sidebar-social">
+    <a href="https://www.facebook.com/profile.php?id=61560440650919&mibextid=wwXIfr" target="_blank" title="Facebook">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.49h-2.79V24C19.61 23.1 24 18.1 24 12.07z"/></svg>
+    </a>
+    <a href="https://wa.me/16292002544" target="_blank" title="WhatsApp">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </a>
+  </div>
+
+  <div class="sidebar-cta">
+    <a href="#contacto" onclick="closeSidebar()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="14" width="14" height="6" rx="2"/><path d="M15 17h2l4-8H9l2 5"/><circle cx="5" cy="20" r="2"/><circle cx="11" cy="20" r="2"/></svg>
+      Inscríbete Ahora
+    </a>
+  </div>
+</div>
+
+<!-- ======================== NAVBAR ======================== -->
 <nav>
-  <div class="logo">VALPA<span>TRUCK</span></div>
+  <a href="#hero">
+    <img class="nav-logo-img"
+         src="https://lh3.googleusercontent.com/d/1bWwp2gk6zUHmlgm2xHqF3-gptP9YiW93"
+         alt="Valpatruck"
+         onerror="this.outerHTML='<span style=\'font-family:Barlow Condensed,sans-serif;font-weight:900;font-size:1.6rem;color:var(--negro)\'>VALPA<span style=\'color:var(--acento)\'>TRUCK</span></span>'" />
+  </a>
   <ul class="nav-links">
-    <li><a href="#cursos">Cursos</a></li>
-    <li><a href="#por-que">Nosotros</a></li>
+    <li><a href="#cursos">Paquetes</a></li>
+    <li><a href="#about">Nosotros</a></li>
     <li><a href="#contacto">Contacto</a></li>
+    <li>
+      <a href="https://www.facebook.com/profile.php?id=61560440650919&mibextid=wwXIfr" target="_blank" class="nav-fb">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.49h-2.79V24C19.61 23.1 24 18.1 24 12.07z"/></svg>
+        Facebook
+      </a>
+    </li>
   </ul>
-  <a href="#contacto" class="nav-cta">Inscríbete</a>
+  <div style="display:flex;align-items:center;gap:.8rem;">
+    <a href="#contacto" class="nav-cta">Inscríbete</a>
+    <button class="hamburger" id="hamburger" onclick="toggleSidebar()" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
-<!-- HERO -->
+<!-- ======================== HERO ======================== -->
 <section id="hero">
-  <div>
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
     <div class="hero-badge">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
       Nashville, Tennessee
     </div>
     <h1 class="hero-title">
@@ -186,7 +662,47 @@
   </div>
 </section>
 
-<!-- CURSOS -->
+<!-- ======================== IMAGE SLIDER ======================== -->
+<div id="slider">
+  <div class="slider-track" id="sliderTrack">
+
+    <!-- Slide 1 — reemplaza background-image con tu foto real -->
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1400&q=80');">
+      <div class="slide-overlay"></div>
+      <div class="slide-caption">Entrenamiento <span>100% Práctico</span> en Maquinaria Real</div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&q=80');">
+      <div class="slide-overlay"></div>
+      <div class="slide-caption">Caterpillar 320 — <span>Tú Operas</span> desde el Primer Día</div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1400&q=80');">
+      <div class="slide-overlay"></div>
+      <div class="slide-caption">Aprende en <span>Nashville, TN</span> — Sin Salir del Estado</div>
+    </div>
+
+    <!-- Slide 4 -->
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1400&q=80');">
+      <div class="slide-overlay"></div>
+      <div class="slide-caption">Una Habilidad Que <span>Genera Dinero Real</span></div>
+    </div>
+
+  </div>
+
+  <button class="slider-btn prev" onclick="moveSlider(-1)" aria-label="Anterior">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <button class="slider-btn next" onclick="moveSlider(1)" aria-label="Siguiente">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+
+  <div class="slider-dots" id="sliderDots"></div>
+</div>
+
+<!-- ======================== CURSOS ======================== -->
 <section id="cursos">
   <p class="section-tag">Elige tu nivel</p>
   <h2 class="section-title">Paquetes &amp; Precios</h2>
@@ -195,13 +711,7 @@
 
     <div class="curso-card">
       <div class="curso-icon-wrap">
-        <svg width="72" height="72" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="8" y="48" width="52" height="16" rx="3" fill="#222" stroke="#F7C200" stroke-width="1.8"/>
-          <rect x="14" y="28" width="28" height="22" rx="2" fill="#F7C200" fill-opacity=".12" stroke="#F7C200" stroke-width="1.8"/>
-          <line x1="42" y1="38" x2="62" y2="24" stroke="#F7C200" stroke-width="2" stroke-linecap="round"/>
-          <circle cx="22" cy="64" r="7" fill="#111" stroke="#F7C200" stroke-width="1.8"/>
-          <circle cx="52" cy="64" r="7" fill="#111" stroke="#F7C200" stroke-width="1.8"/>
-        </svg>
+        <svg width="72" height="72" viewBox="0 0 80 80" fill="none"><rect x="8" y="48" width="52" height="16" rx="3" fill="#222" stroke="#F7C200" stroke-width="1.8"/><rect x="14" y="28" width="28" height="22" rx="2" fill="#F7C200" fill-opacity=".12" stroke="#F7C200" stroke-width="1.8"/><line x1="42" y1="38" x2="62" y2="24" stroke="#F7C200" stroke-width="2" stroke-linecap="round"/><circle cx="22" cy="64" r="7" fill="#111" stroke="#F7C200" stroke-width="1.8"/><circle cx="52" cy="64" r="7" fill="#111" stroke="#F7C200" stroke-width="1.8"/></svg>
       </div>
       <div class="curso-body">
         <div class="curso-nombre">Básico</div>
@@ -216,14 +726,7 @@
 
     <div class="curso-card">
       <div class="curso-icon-wrap">
-        <svg width="72" height="72" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="8" y="48" width="52" height="16" rx="3" fill="#222" stroke="#F7C200" stroke-width="1.8"/>
-          <rect x="12" y="26" width="30" height="24" rx="2" fill="#F7C200" fill-opacity=".15" stroke="#F7C200" stroke-width="1.8"/>
-          <line x1="42" y1="36" x2="62" y2="20" stroke="#F7C200" stroke-width="2" stroke-linecap="round"/>
-          <line x1="62" y1="20" x2="62" y2="13" stroke="#F7C200" stroke-width="2" stroke-linecap="round"/>
-          <circle cx="22" cy="64" r="7" fill="#111" stroke="#F7C200" stroke-width="1.8"/>
-          <circle cx="52" cy="64" r="7" fill="#111" stroke="#F7C200" stroke-width="1.8"/>
-        </svg>
+        <svg width="72" height="72" viewBox="0 0 80 80" fill="none"><rect x="8" y="48" width="52" height="16" rx="3" fill="#222" stroke="#F7C200" stroke-width="1.8"/><rect x="12" y="26" width="30" height="24" rx="2" fill="#F7C200" fill-opacity=".15" stroke="#F7C200" stroke-width="1.8"/><line x1="42" y1="36" x2="62" y2="20" stroke="#F7C200" stroke-width="2" stroke-linecap="round"/><line x1="62" y1="20" x2="62" y2="13" stroke="#F7C200" stroke-width="2" stroke-linecap="round"/><circle cx="22" cy="64" r="7" fill="#111" stroke="#F7C200" stroke-width="1.8"/><circle cx="52" cy="64" r="7" fill="#111" stroke="#F7C200" stroke-width="1.8"/></svg>
       </div>
       <div class="curso-body">
         <div class="curso-nombre">Intermedio</div>
@@ -238,15 +741,7 @@
 
     <div class="curso-card" style="border-color:rgba(247,194,0,0.35);">
       <div class="curso-icon-wrap">
-        <svg width="72" height="72" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="8" y="48" width="52" height="16" rx="3" fill="#222" stroke="#F7C200" stroke-width="1.8"/>
-          <rect x="10" y="24" width="34" height="26" rx="2" fill="#F7C200" fill-opacity=".2" stroke="#F7C200" stroke-width="1.8"/>
-          <line x1="44" y1="34" x2="64" y2="16" stroke="#F7C200" stroke-width="2" stroke-linecap="round"/>
-          <line x1="64" y1="16" x2="64" y2="9" stroke="#F7C200" stroke-width="2" stroke-linecap="round"/>
-          <rect x="56" y="7" width="16" height="5" rx="1.5" fill="#F7C200" fill-opacity=".4"/>
-          <circle cx="22" cy="64" r="7" fill="#111" stroke="#F7C200" stroke-width="1.8"/>
-          <circle cx="52" cy="64" r="7" fill="#111" stroke="#F7C200" stroke-width="1.8"/>
-        </svg>
+        <svg width="72" height="72" viewBox="0 0 80 80" fill="none"><rect x="8" y="48" width="52" height="16" rx="3" fill="#222" stroke="#F7C200" stroke-width="1.8"/><rect x="10" y="24" width="34" height="26" rx="2" fill="#F7C200" fill-opacity=".2" stroke="#F7C200" stroke-width="1.8"/><line x1="44" y1="34" x2="64" y2="16" stroke="#F7C200" stroke-width="2" stroke-linecap="round"/><line x1="64" y1="16" x2="64" y2="9" stroke="#F7C200" stroke-width="2" stroke-linecap="round"/><rect x="56" y="7" width="16" height="5" rx="1.5" fill="#F7C200" fill-opacity=".4"/><circle cx="22" cy="64" r="7" fill="#111" stroke="#F7C200" stroke-width="1.8"/><circle cx="52" cy="64" r="7" fill="#111" stroke="#F7C200" stroke-width="1.8"/></svg>
       </div>
       <div class="curso-body">
         <div class="curso-nombre">Intermedio Avanzado</div>
@@ -261,23 +756,14 @@
 
     <div class="curso-card" style="border-color:var(--acento);">
       <div class="curso-icon-wrap">
-        <svg width="72" height="72" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="8" y="48" width="52" height="16" rx="3" fill="#222" stroke="#FF6B00" stroke-width="1.8"/>
-          <rect x="10" y="22" width="36" height="28" rx="2" fill="#FF6B00" fill-opacity=".18" stroke="#FF6B00" stroke-width="1.8"/>
-          <line x1="46" y1="32" x2="66" y2="14" stroke="#FF6B00" stroke-width="2" stroke-linecap="round"/>
-          <line x1="66" y1="14" x2="66" y2="8" stroke="#FF6B00" stroke-width="2" stroke-linecap="round"/>
-          <circle cx="58" cy="22" r="8" fill="#FF6B00"/>
-          <polyline points="54 22 57 25 63 18" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="22" cy="64" r="7" fill="#111" stroke="#FF6B00" stroke-width="1.8"/>
-          <circle cx="52" cy="64" r="7" fill="#111" stroke="#FF6B00" stroke-width="1.8"/>
-        </svg>
+        <svg width="72" height="72" viewBox="0 0 80 80" fill="none"><rect x="8" y="48" width="52" height="16" rx="3" fill="#222" stroke="#FF6B00" stroke-width="1.8"/><rect x="10" y="22" width="36" height="28" rx="2" fill="#FF6B00" fill-opacity=".18" stroke="#FF6B00" stroke-width="1.8"/><line x1="46" y1="32" x2="66" y2="14" stroke="#FF6B00" stroke-width="2" stroke-linecap="round"/><line x1="66" y1="14" x2="66" y2="8" stroke="#FF6B00" stroke-width="2" stroke-linecap="round"/><circle cx="58" cy="22" r="8" fill="#FF6B00"/><polyline points="54 22 57 25 63 18" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="22" cy="64" r="7" fill="#111" stroke="#FF6B00" stroke-width="1.8"/><circle cx="52" cy="64" r="7" fill="#111" stroke="#FF6B00" stroke-width="1.8"/></svg>
       </div>
       <div class="curso-body">
         <div class="curso-nombre">Profesional</div>
         <p class="curso-desc">Entrenamiento completo + evaluación final + certificado. El paquete más completo para entrar al mundo laboral.</p>
         <div class="curso-meta">
-          <span class="curso-tag" style="background:rgba(255,107,0,0.12);color:var(--acento);"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>24 horas</span>
-          <span class="curso-tag" style="background:rgba(255,107,0,0.12);color:var(--acento);">Certificado</span>
+          <span class="curso-tag" style="background:rgba(255,107,0,.12);color:var(--acento);"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>24 horas</span>
+          <span class="curso-tag" style="background:rgba(255,107,0,.12);color:var(--acento);">Certificado</span>
         </div>
         <div class="curso-precio acento">$6,720</div>
       </div>
@@ -286,12 +772,12 @@
   </div>
 
   <!-- Práctica Libre -->
-  <div style="margin-top:2rem;background:rgba(247,194,0,0.06);border:1px solid rgba(247,194,0,0.25);border-radius:4px;padding:1.5rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+  <div style="margin-top:2rem;background:rgba(247,194,0,.06);border:1px solid rgba(247,194,0,.25);border-radius:4px;padding:1.5rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
     <div style="display:flex;align-items:center;gap:1rem;">
       <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
       <div>
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.2rem;font-weight:800;text-transform:uppercase;">Práctica Libre con Excavadora</div>
-        <div style="font-size:.85rem;color:var(--gris-texto);margin-top:.2rem;">Ya sabes operar? Reserva tiempo de máquina y practica a tu ritmo.</div>
+        <div style="font-size:.85rem;color:var(--gris-texto);margin-top:.2rem;">¿Ya sabes operar? Reserva tiempo de máquina y practica a tu ritmo.</div>
       </div>
     </div>
     <div style="font-family:'Barlow Condensed',sans-serif;font-size:2.2rem;font-weight:900;color:var(--amarillo);">$300 <span style="font-size:1rem;color:var(--gris-texto);">/ hora</span></div>
@@ -305,7 +791,65 @@
   </div>
 </section>
 
-<!-- POR QUÉ NOSOTROS -->
+<!-- ======================== ABOUT US ======================== -->
+<section id="about">
+  <p class="section-tag">Quiénes Somos</p>
+  <h2 class="section-title">Sobre <em style="color:var(--amarillo);font-style:normal;">Valpatruck</em></h2>
+  <div class="about-grid">
+    <div class="about-visual">
+      <img class="about-img"
+           src="https://lh3.googleusercontent.com/d/1XMX2MLHn2hseyMJRsZOINiO7F49__PnS"
+           alt="Valpatruck – Entrenamiento en excavadora"
+           onerror="this.style.background='#1a1a1a'" />
+      <div class="about-badge">Nashville, Tennessee</div>
+    </div>
+    <div class="about-text">
+      <p>
+        <strong>Valpatruck</strong> es una escuela de maquinaria pesada ubicada en Nashville, Tennessee, creada para personas que quieren aprender una habilidad real y bien pagada sin tener que viajar ni invertir meses en teoría.
+      </p>
+      <p>
+        Nuestro método es simple: <strong>tú operas desde el primer momento.</strong> Nada de sentarte meses viendo diapositivas. En Valpatruck subes a la máquina y empiezas a trabajar de verdad desde el día uno.
+      </p>
+      <p>
+        Entrenamos en una <strong>Caterpillar 320</strong>, una de las excavadoras más tecnológicas y potentes del mercado — la misma maquinaria que encontrarás en los trabajos reales. Puedes ir y volver a tu casa todos los días sin pagar hospedaje ni comida.
+      </p>
+      <div class="about-values">
+        <div class="about-val">
+          <div class="about-val-title">100% Práctico</div>
+          <div class="about-val-text">Operas la máquina desde el inicio</div>
+        </div>
+        <div class="about-val">
+          <div class="about-val-title">Sin Gastos Extra</div>
+          <div class="about-val-text">Sin hospedaje ni comida</div>
+        </div>
+        <div class="about-val">
+          <div class="about-val-title">Maquinaria Real</div>
+          <div class="about-val-text">Caterpillar 320 original</div>
+        </div>
+        <div class="about-val">
+          <div class="about-val-title">Flexible</div>
+          <div class="about-val-text">Lunes a sábado, tus horarios</div>
+        </div>
+      </div>
+      <div class="about-contact">
+        <a href="https://wa.me/16292002544" target="_blank" class="about-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          629-200-2544
+        </a>
+        <a href="mailto:valpatruckllc@gmail.com" class="about-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          valpatruckllc@gmail.com
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=61560440650919&mibextid=wwXIfr" target="_blank" class="about-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.49h-2.79V24C19.61 23.1 24 18.1 24 12.07z"/></svg>
+          Síguenos en Facebook
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== POR QUÉ NOSOTROS ======================== -->
 <section id="por-que">
   <p class="section-tag">Por qué elegirnos</p>
   <h2 class="section-title">Aquí no vienes<br>a mirar — operas</h2>
@@ -346,38 +890,37 @@
   </div>
 </section>
 
-
-<!-- CONTACTO -->
+<!-- ======================== CONTACTO ======================== -->
 <section id="contacto">
   <p class="section-tag">Hablemos</p>
   <h2 class="section-title">Inscríbete Ahora</h2>
   <div class="contacto-wrap">
     <div class="contacto-info">
-      <h3>Listo para cambiar tu futuro?</h3>
+      <h3>¿Listo para cambiar tu futuro?</h3>
       <p>Escríbenos ahora mismo y separa tu turno. Nuestro equipo te dará toda la información sobre fechas y horarios disponibles.</p>
       <div class="dato">
-        <div class="dato-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-        </div>
+        <div class="dato-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></div>
         <div class="dato-text"><a href="https://wa.me/16292002544" target="_blank">WhatsApp: 629-200-2544</a></div>
       </div>
       <div class="dato">
-        <div class="dato-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.05 1.18 2 2 0 012.04 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-        </div>
+        <div class="dato-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.05 1.18 2 2 0 012.04 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
         <div class="dato-text"><a href="tel:+16292002544">629-200-2544</a></div>
       </div>
       <div class="dato">
-        <div class="dato-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        </div>
+        <div class="dato-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div class="dato-text"><a href="mailto:valpatruckllc@gmail.com">valpatruckllc@gmail.com</a></div>
+      </div>
+      <div class="dato">
+        <div class="dato-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
         <div class="dato-text">Nashville, Tennessee</div>
       </div>
       <div class="dato">
-        <div class="dato-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        </div>
+        <div class="dato-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
         <div class="dato-text">Lunes a Sábado</div>
+      </div>
+      <div class="dato">
+        <div class="dato-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.49h-2.79V24C19.61 23.1 24 18.1 24 12.07z"/></svg></div>
+        <div class="dato-text"><a href="https://www.facebook.com/profile.php?id=61560440650919&mibextid=wwXIfr" target="_blank">Valpatruck en Facebook</a></div>
       </div>
     </div>
 
@@ -402,32 +945,118 @@
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ======================== FOOTER ======================== -->
 <footer>
-  <div class="footer-logo">VALPA<span>TRUCK</span></div>
-  <p class="footer-copy">© 2025 Valpatruck – Escuela de Maquinaria Pesada · Nashville, TN · 629-200-2544</p>
+  <div class="footer-inner">
+    <img class="footer-logo-img"
+         src="https://lh3.googleusercontent.com/d/1bWwp2gk6zUHmlgm2xHqF3-gptP9YiW93"
+         alt="Valpatruck"
+         onerror="this.outerHTML='<span style=\'font-family:Barlow Condensed,sans-serif;font-weight:900;font-size:1.8rem;color:var(--negro)\'>VALPA<span style=\'color:var(--acento)\'>TRUCK</span></span>'" />
+    <div class="footer-links">
+      <a href="#cursos">Paquetes</a>
+      <a href="#about">Nosotros</a>
+      <a href="#por-que">¿Por Qué?</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+    <div class="footer-social">
+      <a href="https://www.facebook.com/profile.php?id=61560440650919&mibextid=wwXIfr" target="_blank" title="Facebook">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.49h-2.79V24C19.61 23.1 24 18.1 24 12.07z"/></svg>
+      </a>
+      <a href="https://wa.me/16292002544" target="_blank" title="WhatsApp">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      </a>
+      <a href="mailto:valpatruckllc@gmail.com" title="Email">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </a>
+    </div>
+    <p class="footer-copy">© 2025 Valpatruck LLC – Escuela de Maquinaria Pesada · Nashville, TN · 629-200-2544</p>
+  </div>
 </footer>
 
-<!-- WHATSAPP FLOTANTE -->
+<!-- ======================== WHATSAPP FLOAT ======================== -->
 <a href="https://wa.me/16292002544?text=Hola,%20quiero%20información%20sobre%20los%20cursos%20de%20Valpatruck" class="wa-float" target="_blank" title="WhatsApp">
   <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
 </a>
 
 <script>
+  /* ---- SPLASH ---- */
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('splash').classList.add('hidden');
+      setTimeout(() => document.getElementById('splash').remove(), 700);
+    }, 2600);
+  });
+
+  /* ---- SIDEBAR ---- */
+  function toggleSidebar() {
+    const sb = document.getElementById('sidebar');
+    const ov = document.getElementById('sidebarOverlay');
+    const hb = document.getElementById('hamburger');
+    const open = sb.classList.toggle('open');
+    ov.classList.toggle('open', open);
+    hb.classList.toggle('active', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  function closeSidebar() {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('sidebarOverlay').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  /* ---- SLIDER ---- */
+  const track = document.getElementById('sliderTrack');
+  const slides = track.querySelectorAll('.slide');
+  const dotsContainer = document.getElementById('sliderDots');
+  let current = 0;
+  let timer;
+
+  slides.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'slider-dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Ir a slide ' + (i + 1));
+    d.onclick = () => goToSlide(i);
+    dotsContainer.appendChild(d);
+  });
+
+  function goToSlide(n) {
+    current = (n + slides.length) % slides.length;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dotsContainer.querySelectorAll('.slider-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+    resetTimer();
+  }
+
+  function moveSlider(dir) { goToSlide(current + dir); }
+
+  function resetTimer() {
+    clearInterval(timer);
+    timer = setInterval(() => goToSlide(current + 1), 4500);
+  }
+  resetTimer();
+
+  /* ---- SCROLL ANIMATIONS ---- */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.curso-card, .razon, .about-val').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity .5s ease, transform .5s ease';
+    observer.observe(el);
+  });
+
+  /* ---- FORM ---- */
   function handleSubmit(e) {
     e.preventDefault();
     alert('Solicitud enviada. Te contactaremos a la brevedad.');
     e.target.reset();
   }
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) { entry.target.style.opacity='1'; entry.target.style.transform='translateY(0)'; }
-    });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.curso-card, .razon').forEach(el => {
-    el.style.opacity='0'; el.style.transform='translateY(20px)'; el.style.transition='opacity .5s ease, transform .5s ease';
-    observer.observe(el);
-  });
 </script>
 </body>
 </html>
