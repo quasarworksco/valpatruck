@@ -191,96 +191,93 @@
 
     .sidebar {
       position: fixed; top: 0; right: 0; bottom: 0; z-index: 105;
-      width: min(300px, 85vw);
-      background: #0d0d0d;
+      width: clamp(260px, 80vw, 320px);
+      background: #111111;
       border-left: 3px solid var(--amarillo);
       transform: translateX(100%);
       transition: transform .38s cubic-bezier(.22,1,.36,1);
-      overflow-y: auto;
       display: flex; flex-direction: column;
+      overflow: hidden;
     }
     .sidebar.open { transform: translateX(0); }
 
-    /* Header con logo blanco */
     .sidebar-header {
-      padding: 1rem 1.4rem;
-      border-bottom: 1px solid rgba(247,194,0,.15);
+      padding: .85rem 1.2rem;
+      background: #fff;
+      border-bottom: 2px solid var(--amarillo);
       display: flex; align-items: center; justify-content: space-between;
-      background: var(--blanco);
       flex-shrink: 0;
     }
-    .sidebar-header-logo { height: 40px; width: auto; }
+    .sidebar-header-logo { height: 36px; width: auto; display: block; }
     .sidebar-close {
-      background: none; border: none; cursor: pointer; color: #444;
-      font-size: 1.3rem; line-height: 1; padding: 4px 6px;
-      border-radius: 4px; transition: background .15s;
+      background: none; border: 1.5px solid #ccc; cursor: pointer;
+      color: #444; font-size: .9rem; font-weight: 900;
+      width: 30px; height: 30px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: all .15s; flex-shrink: 0; line-height: 1;
     }
-    .sidebar-close:hover { background: rgba(0,0,0,.08); }
+    .sidebar-close:hover { border-color: #999; background: #f0f0f0; }
 
-    /* Links de navegación — el bloque principal */
-    .sidebar-nav {
-      flex: 1; padding: 1.2rem 0;
-      border-bottom: 1px solid rgba(255,255,255,.06);
-    }
+    .sidebar-nav { flex: 1; overflow-y: auto; padding: .5rem 0; }
     .sidebar-nav a {
-      display: flex; align-items: center; gap: 1rem;
-      padding: 1rem 1.4rem;
-      color: rgba(255,255,255,.75); text-decoration: none;
+      display: flex; align-items: center; gap: .85rem;
+      padding: .85rem 1.2rem;
+      color: rgba(255,255,255,.78); text-decoration: none;
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1.4rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;
+      font-size: 1.2rem; font-weight: 800;
+      letter-spacing: 1px; text-transform: uppercase;
       border-left: 3px solid transparent;
-      transition: color .2s, border-color .2s, background .2s, padding-left .2s;
+      transition: color .18s, border-color .18s, background .18s;
     }
     .sidebar-nav a:hover {
       color: var(--amarillo);
       border-left-color: var(--amarillo);
-      background: rgba(247,194,0,.05);
-      padding-left: 1.7rem;
+      background: rgba(247,194,0,.06);
     }
-    .sidebar-nav a .sb-num {
-      font-family: 'Inter', sans-serif;
-      font-size: .65rem; font-weight: 700; color: var(--amarillo);
-      letter-spacing: 1px; opacity: .7; min-width: 18px;
+    .sb-num {
+      font-family: 'Inter', sans-serif; font-size: .58rem;
+      font-weight: 700; color: var(--amarillo);
+      opacity: .55; min-width: 16px; flex-shrink: 0;
     }
 
-    /* Info de contacto compacta */
-    .sidebar-info { padding: 1.2rem 1.4rem; }
+    .sidebar-info {
+      padding: .9rem 1.2rem;
+      border-top: 1px solid rgba(255,255,255,.07);
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
     .sidebar-info-title {
-      font-family: 'Inter', sans-serif;
-      font-size: .65rem; font-weight: 700; letter-spacing: 3px;
-      color: var(--amarillo); text-transform: uppercase;
-      margin-bottom: .9rem; opacity: .8;
+      font-family: 'Inter', sans-serif; font-size: .58rem;
+      font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--amarillo); opacity: .7; margin-bottom: .65rem;
     }
-    .sidebar-dato {
-      display: flex; align-items: center; gap: .65rem;
-      margin-bottom: .7rem;
+    .sidebar-dato { display: flex; align-items: center; gap: .55rem; margin-bottom: .5rem; }
+    .sidebar-dato a {
+      color: rgba(255,255,255,.48); text-decoration: none;
+      font-family: 'Inter', sans-serif; font-size: .8rem;
+      transition: color .18s;
     }
-    .sidebar-dato a { color: rgba(255,255,255,.55); text-decoration: none; font-family: 'Inter', sans-serif; font-size: .82rem; transition: color .2s; }
     .sidebar-dato a:hover { color: var(--amarillo); }
-    .sidebar-dato span { color: rgba(255,255,255,.55); font-family: 'Inter', sans-serif; font-size: .82rem; }
 
-    /* CTA y social */
-    .sidebar-cta { padding: 1.2rem 1.4rem; border-top: 1px solid rgba(255,255,255,.06); }
-    .sidebar-cta a {
-      display: flex; align-items: center; justify-content: center; gap: .6rem;
-      background: var(--amarillo); color: var(--negro);
-      padding: .9rem 1rem; border-radius: 6px;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1.15rem; font-weight: 900; letter-spacing: 1.5px; text-transform: uppercase;
-      text-decoration: none; transition: background .2s, transform .15s;
-    }
-    .sidebar-cta a:hover { background: #e6b400; transform: translateY(-1px); }
-
-    .sidebar-social {
-      display: flex; gap: .6rem; padding: 0 1.4rem 1.2rem;
-    }
+    .sidebar-social { display: flex; gap: .5rem; padding: .75rem 1.2rem .4rem; }
     .sidebar-social a {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(255,255,255,.07);
       display: flex; align-items: center; justify-content: center;
-      width: 36px; height: 36px; border-radius: 50%;
-      background: rgba(255,255,255,.06);
-      transition: background .2s;
+      transition: background .18s;
     }
     .sidebar-social a:hover { background: rgba(247,194,0,.2); }
+
+    .sidebar-cta { padding: .6rem 1.2rem 1rem; }
+    .sidebar-cta a {
+      display: block; text-align: center;
+      background: var(--amarillo); color: var(--negro);
+      padding: .8rem; border-radius: 6px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.1rem; font-weight: 900;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      text-decoration: none; transition: background .2s;
+    }
+    .sidebar-cta a:hover { background: #e0b000; }
 
     /* ========================
        HERO
