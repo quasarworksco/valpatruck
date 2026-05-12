@@ -183,7 +183,7 @@
     ======================== */
     .sidebar-overlay {
       position: fixed; inset: 0; z-index: 99;
-      background: rgba(0,0,0,.5); backdrop-filter: blur(4px);
+      background: rgba(0,0,0,.55); backdrop-filter: blur(4px);
       opacity: 0; pointer-events: none;
       transition: opacity .3s ease;
     }
@@ -191,93 +191,48 @@
 
     .sidebar {
       position: fixed; top: 0; right: 0; bottom: 0; z-index: 105;
-      width: clamp(260px, 80vw, 320px);
-      background: #111111;
+      width: 260px; max-width: 80vw;
+      background: #111;
       border-left: 3px solid var(--amarillo);
       transform: translateX(100%);
-      transition: transform .38s cubic-bezier(.22,1,.36,1);
+      transition: transform .35s cubic-bezier(.22,1,.36,1);
       display: flex; flex-direction: column;
-      overflow: hidden;
     }
     .sidebar.open { transform: translateX(0); }
 
     .sidebar-header {
-      padding: .85rem 1.2rem;
+      padding: 1rem 1.2rem;
       background: #fff;
       border-bottom: 2px solid var(--amarillo);
       display: flex; align-items: center; justify-content: space-between;
       flex-shrink: 0;
     }
-    .sidebar-header-logo { height: 36px; width: auto; display: block; }
+    .sidebar-header-logo { height: 32px; width: auto; display: block; }
     .sidebar-close {
-      background: none; border: 1.5px solid #ccc; cursor: pointer;
-      color: #444; font-size: .9rem; font-weight: 900;
-      width: 30px; height: 30px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      transition: all .15s; flex-shrink: 0; line-height: 1;
+      background: none; border: none; cursor: pointer;
+      color: #555; font-size: 1.4rem; line-height: 1;
+      padding: 0 4px; transition: color .15s;
     }
-    .sidebar-close:hover { border-color: #999; background: #f0f0f0; }
+    .sidebar-close:hover { color: #000; }
 
-    .sidebar-nav { flex: 1; overflow-y: auto; padding: .5rem 0; }
+    .sidebar-nav {
+      flex: 1; overflow-y: auto; padding: .5rem 0;
+    }
     .sidebar-nav a {
-      display: flex; align-items: center; gap: .85rem;
-      padding: .85rem 1.2rem;
-      color: rgba(255,255,255,.78); text-decoration: none;
+      display: block;
+      padding: 1rem 1.4rem;
+      color: rgba(255,255,255,.8); text-decoration: none;
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1.2rem; font-weight: 800;
+      font-size: 1.25rem; font-weight: 800;
       letter-spacing: 1px; text-transform: uppercase;
       border-left: 3px solid transparent;
-      transition: color .18s, border-color .18s, background .18s;
+      transition: color .15s, border-color .15s, background .15s;
     }
-    .sidebar-nav a:hover {
+    .sidebar-nav a:hover, .sidebar-nav a:active {
       color: var(--amarillo);
       border-left-color: var(--amarillo);
-      background: rgba(247,194,0,.06);
+      background: rgba(247,194,0,.07);
     }
-    .sb-num {
-      font-family: 'Inter', sans-serif; font-size: .58rem;
-      font-weight: 700; color: var(--amarillo);
-      opacity: .55; min-width: 16px; flex-shrink: 0;
-    }
-
-    .sidebar-info {
-      padding: .9rem 1.2rem;
-      border-top: 1px solid rgba(255,255,255,.07);
-      border-bottom: 1px solid rgba(255,255,255,.07);
-    }
-    .sidebar-info-title {
-      font-family: 'Inter', sans-serif; font-size: .58rem;
-      font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
-      color: var(--amarillo); opacity: .7; margin-bottom: .65rem;
-    }
-    .sidebar-dato { display: flex; align-items: center; gap: .55rem; margin-bottom: .5rem; }
-    .sidebar-dato a {
-      color: rgba(255,255,255,.48); text-decoration: none;
-      font-family: 'Inter', sans-serif; font-size: .8rem;
-      transition: color .18s;
-    }
-    .sidebar-dato a:hover { color: var(--amarillo); }
-
-    .sidebar-social { display: flex; gap: .5rem; padding: .75rem 1.2rem .4rem; }
-    .sidebar-social a {
-      width: 32px; height: 32px; border-radius: 50%;
-      background: rgba(255,255,255,.07);
-      display: flex; align-items: center; justify-content: center;
-      transition: background .18s;
-    }
-    .sidebar-social a:hover { background: rgba(247,194,0,.2); }
-
-    .sidebar-cta { padding: .6rem 1.2rem 1rem; }
-    .sidebar-cta a {
-      display: block; text-align: center;
-      background: var(--amarillo); color: var(--negro);
-      padding: .8rem; border-radius: 6px;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1.1rem; font-weight: 900;
-      letter-spacing: 1.5px; text-transform: uppercase;
-      text-decoration: none; transition: background .2s;
-    }
-    .sidebar-cta a:hover { background: #e0b000; }
 
     /* ========================
        HERO
@@ -825,49 +780,13 @@
          onerror="this.outerHTML='<span style=\'font-family:Barlow Condensed,sans-serif;font-weight:900;font-size:1.4rem;color:var(--negro)\'>VALPA<span style=\'color:var(--acento)\'>TRUCK</span></span>'" />
     <button class="sidebar-close" onclick="closeSidebar()">✕</button>
   </div>
-
   <nav class="sidebar-nav">
-    <a href="#hero" onclick="closeSidebar()">
-      <span class="sb-num">01</span> Inicio
-    </a>
-    <a href="#cursos" onclick="closeSidebar()">
-      <span class="sb-num">02</span> Paquetes &amp; Precios
-    </a>
-    <a href="#about" onclick="closeSidebar()">
-      <span class="sb-num">03</span> Nosotros
-    </a>
-    <a href="#por-que" onclick="closeSidebar()">
-      <span class="sb-num">04</span> ¿Por Qué Nosotros?
-    </a>
-    <a href="#contacto" onclick="closeSidebar()">
-      <span class="sb-num">05</span> Contacto
-    </a>
+    <a href="#hero" onclick="closeSidebar()">Inicio</a>
+    <a href="#cursos" onclick="closeSidebar()">Paquetes &amp; Precios</a>
+    <a href="#about" onclick="closeSidebar()">Nosotros</a>
+    <a href="#por-que" onclick="closeSidebar()">¿Por Qué Nosotros?</a>
+    <a href="#contacto" onclick="closeSidebar()">Contacto</a>
   </nav>
-
-  <div class="sidebar-info">
-    <div class="sidebar-info-title">Contacto</div>
-    <div class="sidebar-dato">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-      <a href="https://wa.me/16292002544" target="_blank">629-200-2544</a>
-    </div>
-    <div class="sidebar-dato">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-      <a href="mailto:valpatruckllc@gmail.com">valpatruckllc@gmail.com</a>
-    </div>
-  </div>
-
-  <div class="sidebar-social">
-    <a href="https://www.facebook.com/profile.php?id=61560440650919&mibextid=wwXIfr" target="_blank" title="Facebook">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.49h-2.79V24C19.61 23.1 24 18.1 24 12.07z"/></svg>
-    </a>
-    <a href="https://wa.me/16292002544" target="_blank" title="WhatsApp">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-    </a>
-  </div>
-
-  <div class="sidebar-cta">
-    <a href="#contacto" onclick="closeSidebar()">Inscríbete Ahora</a>
-  </div>
 </div>
 
 <!-- ======================== NAVBAR ======================== -->
@@ -1505,13 +1424,11 @@
 
     // Sidebar nav
     const sbLinks = qa('.sidebar-nav a');
-    if (sbLinks[0]) { const tn=[...sbLinks[0].childNodes].find(n=>n.nodeType===3&&n.textContent.trim()); if(tn) tn.textContent = ' '+t.sb_inicio; }
-    if (sbLinks[1]) { const tn=[...sbLinks[1].childNodes].find(n=>n.nodeType===3&&n.textContent.trim()); if(tn) tn.textContent = ' '+t.sb_paquetes; }
-    if (sbLinks[2]) { const tn=[...sbLinks[2].childNodes].find(n=>n.nodeType===3&&n.textContent.trim()); if(tn) tn.textContent = ' '+t.sb_nosotros; }
-    if (sbLinks[3]) { const tn=[...sbLinks[3].childNodes].find(n=>n.nodeType===3&&n.textContent.trim()); if(tn) tn.textContent = ' '+t.sb_porque; }
-    if (sbLinks[4]) { const tn=[...sbLinks[4].childNodes].find(n=>n.nodeType===3&&n.textContent.trim()); if(tn) tn.textContent = ' '+t.sb_contacto; }
-    const sbInfoTitle = q('.sidebar-info-title'); if(sbInfoTitle) sbInfoTitle.textContent = t.sb_info_title;
-    const sbCta = q('.sidebar-cta a'); if(sbCta) { const tn=[...sbCta.childNodes].find(n=>n.nodeType===3&&n.textContent.trim()); if(tn) tn.textContent = ' '+t.sb_cta; }
+    if (sbLinks[0]) sbLinks[0].textContent = t.sb_inicio;
+    if (sbLinks[1]) sbLinks[1].textContent = t.sb_paquetes;
+    if (sbLinks[2]) sbLinks[2].textContent = t.sb_nosotros;
+    if (sbLinks[3]) sbLinks[3].textContent = t.sb_porque;
+    if (sbLinks[4]) sbLinks[4].textContent = t.sb_contacto;
 
     // Hero
     const heroBadge = q('.hero-badge'); if(heroBadge) { const tn=[...heroBadge.childNodes].find(n=>n.nodeType===3&&n.textContent.trim()); if(tn) tn.textContent = ' '+t.hero_badge; }
