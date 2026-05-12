@@ -1387,7 +1387,6 @@
     if (navLinks[0]) navLinks[0].textContent = t.nav_paquetes;
     if (navLinks[1]) navLinks[1].textContent = t.nav_nosotros;
     if (navLinks[2]) navLinks[2].textContent = t.nav_contacto;
-    if (navLinks[3]) { navLinks[3].childNodes.forEach(n=>{ if(n.nodeType===3) n.textContent = ' '+t.nav_facebook; }); }
     const navCta = q('.nav-cta'); if(navCta) navCta.textContent = t.nav_inscribete;
 
     // Sidebar nav
