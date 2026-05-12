@@ -1,10 +1,76 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" prefix="og: https://ogp.me/ns#">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Valpatruck – Aprende a Operar Excavadora en Nashville</title>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet"/>
+
+  <!-- SEO Primary -->
+  <title>Valpatruck | Escuela de Operación de Excavadora en Nashville, TN</title>
+  <meta name="description" content="Aprende a operar una excavadora Caterpillar 320 en Nashville, Tennessee. Entrenamiento 100% práctico desde el primer día. Paquetes desde $2,100. Llama al 629-200-2544."/>
+  <meta name="keywords" content="escuela excavadora Nashville, operador maquinaria pesada Tennessee, curso excavadora Caterpillar, aprender operar excavadora, entrenamiento maquinaria pesada Nashville, heavy equipment training Nashville"/>
+  <meta name="author" content="Valpatruck LLC"/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://valpatruck.com/"/>
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://valpatruck.com/"/>
+  <meta property="og:title" content="Valpatruck | Operación de Excavadora Real en Nashville, TN"/>
+  <meta property="og:description" content="Entrena en una Caterpillar 320. 100% práctico, tú operas desde el primer día. Sin salir de Nashville. Paquetes desde $2,100. ¡Cupos limitados!"/>
+  <meta property="og:image" content="https://lh3.googleusercontent.com/d/1XMX2MLHn2hseyMJRsZOINiO7F49__PnS"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:image:alt" content="Entrenamiento en excavadora Caterpillar 320 - Valpatruck Nashville"/>
+  <meta property="og:locale" content="es_US"/>
+  <meta property="og:site_name" content="Valpatruck"/>
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Valpatruck | Operación de Excavadora Real en Nashville, TN"/>
+  <meta name="twitter:description" content="Entrena en una Caterpillar 320. 100% práctico, tú operas desde el primer día. Paquetes desde $2,100."/>
+  <meta name="twitter:image" content="https://lh3.googleusercontent.com/d/1XMX2MLHn2hseyMJRsZOINiO7F49__PnS"/>
+
+  <!-- WhatsApp / iMessage preview -->
+  <meta property="og:phone_number" content="+16292002544"/>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VocationalTrainingCenter",
+    "name": "Valpatruck LLC",
+    "description": "Escuela de maquinaria pesada en Nashville, Tennessee. Entrenamiento 100% práctico en excavadora Caterpillar 320.",
+    "url": "https://valpatruck.com",
+    "telephone": "+16292002544",
+    "email": "valpatruckllc@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Nashville",
+      "addressRegion": "TN",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "addressLocality": "Nashville, Tennessee"
+    },
+    "openingHours": "Mo-Sa 08:00-18:00",
+    "sameAs": [
+      "https://www.facebook.com/profile.php?id=61560440650919"
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Paquetes de Entrenamiento",
+      "itemListElement": [
+        { "@type": "Offer", "name": "Básico – 6 horas", "price": "2100", "priceCurrency": "USD" },
+        { "@type": "Offer", "name": "Intermedio – 12 horas", "price": "3960", "priceCurrency": "USD" },
+        { "@type": "Offer", "name": "Intermedio Avanzado – 18 horas", "price": "5400", "priceCurrency": "USD" },
+        { "@type": "Offer", "name": "Profesional – 24 horas", "price": "6720", "priceCurrency": "USD" }
+      ]
+    }
+  }
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -17,44 +83,53 @@
       --acento: #FF6B00;
     }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Barlow', sans-serif; background: var(--negro); color: var(--blanco); overflow-x: hidden; }
+    body { font-family: 'Inter', 'Barlow', sans-serif; background: var(--negro); color: var(--blanco); overflow-x: hidden; line-height: 1.6; }
 
     /* ========================
        SPLASH SCREEN
     ======================== */
     #splash {
       position: fixed; inset: 0; z-index: 9999;
-      background: var(--negro);
+      background: var(--blanco);
       display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 0;
       transition: opacity .6s ease, transform .6s ease;
     }
-    #splash.hidden { opacity: 0; transform: translateY(-30px); pointer-events: none; }
+    #splash.hidden { opacity: 0; transform: translateY(-20px); pointer-events: none; }
     .splash-logo-img {
-      width: 220px; max-width: 70vw;
+      width: 240px; max-width: 72vw;
       animation: splashPop .7s cubic-bezier(.22,1,.36,1) both;
-      background: var(--blanco); border-radius: 8px; padding: 12px 20px;
     }
     .splash-tagline {
-      margin-top: 1.4rem;
+      margin-top: 1rem;
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(1rem, 4vw, 1.4rem);
+      font-size: clamp(.85rem, 3.5vw, 1.1rem);
       font-weight: 700; letter-spacing: 4px; text-transform: uppercase;
-      color: var(--amarillo);
-      animation: splashPop .7s .2s cubic-bezier(.22,1,.36,1) both;
+      color: #555;
+      animation: splashPop .7s .15s cubic-bezier(.22,1,.36,1) both;
     }
-    .splash-bar {
-      margin-top: 2rem; width: 160px; height: 3px;
-      background: rgba(255,255,255,.1); border-radius: 2px; overflow: hidden;
+    /* Spinner */
+    .splash-spinner {
+      margin-top: 2.2rem;
+      width: 42px; height: 42px;
+      border: 3px solid rgba(247,194,0,.25);
+      border-top-color: var(--amarillo);
+      border-radius: 50%;
+      animation: splashSpin .9s linear infinite, splashPop .5s .3s both;
     }
-    .splash-bar-fill {
-      height: 100%; width: 0; background: var(--amarillo);
-      animation: splashFill 2s .3s ease forwards;
+    .splash-location {
+      margin-top: 1rem;
+      font-family: 'Inter', 'Barlow', sans-serif;
+      font-size: .78rem; font-weight: 500;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: #999;
+      animation: splashPop .5s .4s both;
     }
     @keyframes splashPop {
-      from { opacity: 0; transform: scale(.85) translateY(20px); }
+      from { opacity: 0; transform: scale(.88) translateY(16px); }
       to   { opacity: 1; transform: scale(1) translateY(0); }
     }
-    @keyframes splashFill { to { width: 100%; } }
+    @keyframes splashSpin { to { transform: rotate(360deg); } }
 
     /* ========================
        NAVBAR
@@ -418,25 +493,37 @@
     .dato-text { font-size: 0.9rem; color: var(--gris-texto); }
     .dato-text a { color: var(--amarillo); text-decoration: none; }
     .dato-text a:hover { text-decoration: underline; }
-    .form-group { margin-bottom: 1.2rem; }
-    .form-group label { display: block; font-size: 0.75rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gris-texto); margin-bottom: .4rem; }
-    .form-group input, .form-group select, .form-group textarea {
-      width: 100%; background: var(--gris-medio);
-      border: 1px solid rgba(255,255,255,.1); border-radius: 2px;
-      color: var(--blanco); font-family: 'Barlow', sans-serif;
-      font-size: 0.95rem; padding: .75rem 1rem; outline: none; transition: border-color .2s;
+    .form-group { margin-bottom: 1.3rem; }
+    .form-group label {
+      display: block; font-family: 'Inter', sans-serif;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--gris-texto); margin-bottom: .5rem;
     }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--amarillo); }
-    .form-group textarea { resize: vertical; min-height: 110px; }
-    .form-group select option { background: var(--gris-medio); }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; background: rgba(255,255,255,.04);
+      border: 1.5px solid rgba(255,255,255,.1); border-radius: 6px;
+      color: var(--blanco); font-family: 'Inter', sans-serif;
+      font-size: 0.95rem; font-weight: 400;
+      padding: .85rem 1.1rem; outline: none;
+      transition: border-color .2s, background .2s;
+      -webkit-appearance: none;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(255,255,255,.3); font-size: .9rem; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color: var(--amarillo); background: rgba(247,194,0,.04);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
+    .form-group select { cursor: pointer; }
+    .form-group select option { background: #2e2e2e; color: var(--blanco); }
     .btn-submit {
       width: 100%; background: var(--amarillo); color: var(--negro);
-      padding: 1rem; border: none; border-radius: 2px;
-      font-family: 'Barlow Condensed', sans-serif; font-size: 1.15rem;
+      padding: 1.05rem; border: none; border-radius: 6px;
+      font-family: 'Barlow Condensed', sans-serif; font-size: 1.2rem;
       font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
-      cursor: pointer; transition: background .2s;
+      cursor: pointer; transition: background .2s, transform .15s;
     }
-    .btn-submit:hover { background: var(--acento); color: var(--blanco); }
+    .btn-submit:hover { background: var(--acento); color: var(--blanco); transform: translateY(-2px); }
 
     /* ========================
        FOOTER
@@ -489,21 +576,48 @@
     /* ========================
        RESPONSIVE
     ======================== */
+    @media (max-width: 1024px) {
+      nav { padding: .75rem 1.8rem; }
+      .nav-links { gap: 1.4rem; }
+    }
     @media (max-width: 900px) {
       .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .about-visual { height: 280px; }
+      .about-visual { height: 260px; }
+      .cursos-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
     }
     @media (max-width: 768px) {
-      nav { padding: .75rem 1.2rem; }
+      nav { padding: .7rem 1rem; }
+      .nav-logo-img { height: 44px; }
       .nav-links { display: none; }
       .nav-cta { display: none; }
       .hamburger { display: flex; }
-      section { padding: 3.5rem 1.2rem; }
+      section { padding: 3rem 1rem; }
+      .section-title { font-size: clamp(1.7rem, 7vw, 2.8rem); }
       .contacto-wrap { grid-template-columns: 1fr; gap: 2rem; }
-      .hero-stats { gap: 1.5rem; }
-      .slide { height: 320px; }
+      .hero-stats { gap: 1.2rem; }
+      .hero-stats .stat-num { font-size: 2rem; }
+      .slide { height: 280px; }
+      .slide-caption { font-size: clamp(1rem, 4vw, 1.4rem); bottom: 1.5rem; left: 1rem; right: 1rem; }
+      .about-values { grid-template-columns: 1fr 1fr; }
+      #hero { padding: 6.5rem 1rem 3rem; }
+      .hero-title { font-size: clamp(2.6rem, 10vw, 5rem); }
+      .razones-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .slider-btn { width: 38px; height: 38px; }
+      .slider-btn.prev { left: .5rem; }
+      .slider-btn.next { right: .5rem; }
+      .footer-links { gap: 1rem; }
+    }
+    @media (max-width: 480px) {
+      .hero-sub { font-size: .9rem; }
+      .hc-item { font-size: .88rem; }
+      .btn-primary, .btn-outline { padding: .8rem 1.3rem; font-size: 1rem; }
+      .hero-stats { gap: 1rem; flex-wrap: wrap; }
+      .cursos-grid { grid-template-columns: 1fr; }
       .about-values { grid-template-columns: 1fr; }
-      #hero { padding: 7rem 1.2rem 3rem; }
+      .slide { height: 240px; }
+      section { padding: 2.5rem .9rem; }
+      .footer-links { flex-direction: column; gap: .6rem; align-items: center; }
+      .contacto-info p { font-size: .85rem; }
     }
   </style>
 </head>
@@ -514,10 +628,11 @@
   <img class="splash-logo-img"
        src="https://lh3.googleusercontent.com/d/1bWwp2gk6zUHmlgm2xHqF3-gptP9YiW93"
        alt="Valpatruck Logo"
-       onerror="this.style.display='none';document.querySelector('.splash-fallback').style.display='block'"/>
-  <div class="splash-fallback" style="display:none;font-family:'Barlow Condensed',sans-serif;font-size:2.5rem;font-weight:900;color:var(--blanco);">VALPA<span style="color:var(--amarillo)">TRUCK</span></div>
+       onerror="this.style.display='none';document.getElementById('splash-fallback').style.display='block'"/>
+  <div id="splash-fallback" style="display:none;font-family:'Barlow Condensed',sans-serif;font-size:2.8rem;font-weight:900;color:var(--negro);">VALPA<span style="color:var(--acento)">TRUCK</span></div>
   <div class="splash-tagline">Escuela de Maquinaria Pesada · Nashville, TN</div>
-  <div class="splash-bar"><div class="splash-bar-fill"></div></div>
+  <div class="splash-spinner"></div>
+  <div class="splash-location">Nashville, Tennessee · 629-200-2544</div>
 </div>
 
 <!-- ======================== SIDEBAR OVERLAY ======================== -->
@@ -966,7 +1081,8 @@
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
       </a>
     </div>
-    <p class="footer-copy">© 2025 Valpatruck LLC – Escuela de Maquinaria Pesada · Nashville, TN · 629-200-2544</p>
+    <p class="footer-copy">© 2026 Valpatruck LLC – Escuela de Maquinaria Pesada · Nashville, TN · 629-200-2544</p>
+    <p class="footer-copy" style="margin-top:.4rem;font-size:.72rem;color:#bbb;">Desarrollado por <strong style="color:var(--negro);font-weight:600;">DGP Global Group</strong></p>
   </div>
 </footer>
 
