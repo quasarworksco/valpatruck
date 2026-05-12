@@ -1,10 +1,76 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" prefix="og: https://ogp.me/ns#">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Valpatruck – Aprende a Operar Excavadora en Nashville</title>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet"/>
+
+  <!-- SEO Primary -->
+  <title>Valpatruck | Escuela de Operación de Excavadora en Nashville, TN</title>
+  <meta name="description" content="Aprende a operar una excavadora Caterpillar 320 en Nashville, Tennessee. Entrenamiento 100% práctico desde el primer día. Paquetes desde $2,100. Llama al 629-200-2544."/>
+  <meta name="keywords" content="escuela excavadora Nashville, operador maquinaria pesada Tennessee, curso excavadora Caterpillar, aprender operar excavadora, entrenamiento maquinaria pesada Nashville, heavy equipment training Nashville"/>
+  <meta name="author" content="Valpatruck LLC"/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://valpatruck.com/"/>
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://valpatruck.com/"/>
+  <meta property="og:title" content="Valpatruck | Operación de Excavadora Real en Nashville, TN"/>
+  <meta property="og:description" content="Entrena en una Caterpillar 320. 100% práctico, tú operas desde el primer día. Sin salir de Nashville. Paquetes desde $2,100. ¡Cupos limitados!"/>
+  <meta property="og:image" content="https://lh3.googleusercontent.com/d/1XMX2MLHn2hseyMJRsZOINiO7F49__PnS"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:image:alt" content="Entrenamiento en excavadora Caterpillar 320 - Valpatruck Nashville"/>
+  <meta property="og:locale" content="es_US"/>
+  <meta property="og:site_name" content="Valpatruck"/>
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Valpatruck | Operación de Excavadora Real en Nashville, TN"/>
+  <meta name="twitter:description" content="Entrena en una Caterpillar 320. 100% práctico, tú operas desde el primer día. Paquetes desde $2,100."/>
+  <meta name="twitter:image" content="https://lh3.googleusercontent.com/d/1XMX2MLHn2hseyMJRsZOINiO7F49__PnS"/>
+
+  <!-- WhatsApp / iMessage preview -->
+  <meta property="og:phone_number" content="+16292002544"/>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VocationalTrainingCenter",
+    "name": "Valpatruck LLC",
+    "description": "Escuela de maquinaria pesada en Nashville, Tennessee. Entrenamiento 100% práctico en excavadora Caterpillar 320.",
+    "url": "https://valpatruck.com",
+    "telephone": "+16292002544",
+    "email": "valpatruckllc@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Nashville",
+      "addressRegion": "TN",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "addressLocality": "Nashville, Tennessee"
+    },
+    "openingHours": "Mo-Sa 08:00-18:00",
+    "sameAs": [
+      "https://www.facebook.com/profile.php?id=61560440650919"
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Paquetes de Entrenamiento",
+      "itemListElement": [
+        { "@type": "Offer", "name": "Básico – 6 horas", "price": "2100", "priceCurrency": "USD" },
+        { "@type": "Offer", "name": "Intermedio – 12 horas", "price": "3960", "priceCurrency": "USD" },
+        { "@type": "Offer", "name": "Intermedio Avanzado – 18 horas", "price": "5400", "priceCurrency": "USD" },
+        { "@type": "Offer", "name": "Profesional – 24 horas", "price": "6720", "priceCurrency": "USD" }
+      ]
+    }
+  }
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -17,44 +83,53 @@
       --acento: #FF6B00;
     }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Barlow', sans-serif; background: var(--negro); color: var(--blanco); overflow-x: hidden; }
+    body { font-family: 'Inter', 'Barlow', sans-serif; background: var(--negro); color: var(--blanco); overflow-x: hidden; line-height: 1.6; }
 
     /* ========================
        SPLASH SCREEN
     ======================== */
     #splash {
       position: fixed; inset: 0; z-index: 9999;
-      background: var(--negro);
+      background: var(--blanco);
       display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 0;
       transition: opacity .6s ease, transform .6s ease;
     }
-    #splash.hidden { opacity: 0; transform: translateY(-30px); pointer-events: none; }
+    #splash.hidden { opacity: 0; transform: translateY(-20px); pointer-events: none; }
     .splash-logo-img {
-      width: 220px; max-width: 70vw;
+      width: 240px; max-width: 72vw;
       animation: splashPop .7s cubic-bezier(.22,1,.36,1) both;
-      background: var(--blanco); border-radius: 8px; padding: 12px 20px;
     }
     .splash-tagline {
-      margin-top: 1.4rem;
+      margin-top: 1rem;
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(1rem, 4vw, 1.4rem);
+      font-size: clamp(.85rem, 3.5vw, 1.1rem);
       font-weight: 700; letter-spacing: 4px; text-transform: uppercase;
-      color: var(--amarillo);
-      animation: splashPop .7s .2s cubic-bezier(.22,1,.36,1) both;
+      color: #555;
+      animation: splashPop .7s .15s cubic-bezier(.22,1,.36,1) both;
     }
-    .splash-bar {
-      margin-top: 2rem; width: 160px; height: 3px;
-      background: rgba(255,255,255,.1); border-radius: 2px; overflow: hidden;
+    /* Spinner */
+    .splash-spinner {
+      margin-top: 2.2rem;
+      width: 42px; height: 42px;
+      border: 3px solid rgba(247,194,0,.25);
+      border-top-color: var(--amarillo);
+      border-radius: 50%;
+      animation: splashSpin .9s linear infinite, splashPop .5s .3s both;
     }
-    .splash-bar-fill {
-      height: 100%; width: 0; background: var(--amarillo);
-      animation: splashFill 2s .3s ease forwards;
+    .splash-location {
+      margin-top: 1rem;
+      font-family: 'Inter', 'Barlow', sans-serif;
+      font-size: .78rem; font-weight: 500;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: #999;
+      animation: splashPop .5s .4s both;
     }
     @keyframes splashPop {
-      from { opacity: 0; transform: scale(.85) translateY(20px); }
+      from { opacity: 0; transform: scale(.88) translateY(16px); }
       to   { opacity: 1; transform: scale(1) translateY(0); }
     }
-    @keyframes splashFill { to { width: 100%; } }
+    @keyframes splashSpin { to { transform: rotate(360deg); } }
 
     /* ========================
        NAVBAR
@@ -418,25 +493,37 @@
     .dato-text { font-size: 0.9rem; color: var(--gris-texto); }
     .dato-text a { color: var(--amarillo); text-decoration: none; }
     .dato-text a:hover { text-decoration: underline; }
-    .form-group { margin-bottom: 1.2rem; }
-    .form-group label { display: block; font-size: 0.75rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gris-texto); margin-bottom: .4rem; }
-    .form-group input, .form-group select, .form-group textarea {
-      width: 100%; background: var(--gris-medio);
-      border: 1px solid rgba(255,255,255,.1); border-radius: 2px;
-      color: var(--blanco); font-family: 'Barlow', sans-serif;
-      font-size: 0.95rem; padding: .75rem 1rem; outline: none; transition: border-color .2s;
+    .form-group { margin-bottom: 1.3rem; }
+    .form-group label {
+      display: block; font-family: 'Inter', sans-serif;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--gris-texto); margin-bottom: .5rem;
     }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--amarillo); }
-    .form-group textarea { resize: vertical; min-height: 110px; }
-    .form-group select option { background: var(--gris-medio); }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; background: rgba(255,255,255,.04);
+      border: 1.5px solid rgba(255,255,255,.1); border-radius: 6px;
+      color: var(--blanco); font-family: 'Inter', sans-serif;
+      font-size: 0.95rem; font-weight: 400;
+      padding: .85rem 1.1rem; outline: none;
+      transition: border-color .2s, background .2s;
+      -webkit-appearance: none;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(255,255,255,.3); font-size: .9rem; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color: var(--amarillo); background: rgba(247,194,0,.04);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
+    .form-group select { cursor: pointer; }
+    .form-group select option { background: #2e2e2e; color: var(--blanco); }
     .btn-submit {
       width: 100%; background: var(--amarillo); color: var(--negro);
-      padding: 1rem; border: none; border-radius: 2px;
-      font-family: 'Barlow Condensed', sans-serif; font-size: 1.15rem;
+      padding: 1.05rem; border: none; border-radius: 6px;
+      font-family: 'Barlow Condensed', sans-serif; font-size: 1.2rem;
       font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
-      cursor: pointer; transition: background .2s;
+      cursor: pointer; transition: background .2s, transform .15s;
     }
-    .btn-submit:hover { background: var(--acento); color: var(--blanco); }
+    .btn-submit:hover { background: var(--acento); color: var(--blanco); transform: translateY(-2px); }
 
     /* ========================
        FOOTER
@@ -482,28 +569,203 @@
     .wa-float:hover { transform: scale(1.12); }
 
     /* ========================
-       ANIMATIONS
+       ANIMATIONS — KEYFRAMES
     ======================== */
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeUp    { from { opacity:0; transform:translateY(32px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeLeft  { from { opacity:0; transform:translateX(-40px); } to { opacity:1; transform:translateX(0); } }
+    @keyframes fadeRight { from { opacity:0; transform:translateX(40px); } to { opacity:1; transform:translateX(0); } }
+    @keyframes fadeIn    { from { opacity:0; } to { opacity:1; } }
+    @keyframes scaleIn   { from { opacity:0; transform:scale(.92); } to { opacity:1; transform:scale(1); } }
+
+    /* Reveal classes — set by JS */
+    .reveal { opacity:0; will-change:opacity,transform; }
+    .reveal.visible { animation: fadeUp .65s cubic-bezier(.22,1,.36,1) forwards; }
+    .reveal-left.visible { animation: fadeLeft .65s cubic-bezier(.22,1,.36,1) forwards; }
+    .reveal-right.visible { animation: fadeRight .65s cubic-bezier(.22,1,.36,1) forwards; }
+    .reveal-scale.visible { animation: scaleIn .6s cubic-bezier(.22,1,.36,1) forwards; }
+
+    /* Section title underline reveal */
+    .section-title { position: relative; display: inline-block; }
+    .section-title::after {
+      content:''; position:absolute; bottom:-6px; left:0;
+      width:0; height:3px;
+      background: linear-gradient(90deg, var(--amarillo), var(--acento));
+      border-radius:2px;
+      transition: width .7s cubic-bezier(.22,1,.36,1);
+    }
+    .section-title.line-visible::after { width:100%; }
+
+    /* Section tag animated left bar */
+    .section-tag {
+      position:relative; padding-left: .8rem;
+    }
+    .section-tag::before {
+      content:''; position:absolute; left:0; top:50%; transform:translateY(-50%);
+      width:3px; height:0;
+      background: linear-gradient(180deg, var(--amarillo), var(--acento));
+      border-radius:2px;
+      transition: height .5s ease;
+    }
+    .section-tag.tag-visible::before { height:100%; }
+
+    /* Animated gradient background — subtle color shift on sections */
+    @keyframes gradientDrift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    #por-que {
+      background: linear-gradient(135deg, #1a1a1a 0%, #1f1c0e 50%, #1a1a1a 100%);
+      background-size: 200% 200%;
+      animation: gradientDrift 8s ease infinite;
+    }
+    #about {
+      background: linear-gradient(135deg, #0d0d0d 0%, #12110a 50%, #0d0d0d 100%);
+      background-size: 200% 200%;
+      animation: gradientDrift 10s ease infinite;
+    }
+    #contacto {
+      background: linear-gradient(135deg, #0d0d0d 0%, #110d05 50%, #0d0d0d 100%);
+      background-size: 200% 200%;
+      animation: gradientDrift 12s ease infinite;
+    }
+
+    /* Nav border color shimmer */
+    nav { border-image: linear-gradient(90deg, var(--amarillo), var(--acento), var(--amarillo)) 1; }
+    @keyframes navBorder {
+      0%,100% { border-image-source: linear-gradient(90deg, var(--amarillo), var(--acento), var(--amarillo)); }
+      50%     { border-image-source: linear-gradient(90deg, var(--acento), var(--amarillo), var(--acento)); }
+    }
+    nav { animation: navBorder 4s ease infinite; }
+
+    /* WhatsApp float — pulse ring */
+    @keyframes waPulse {
+      0%   { box-shadow: 0 4px 20px rgba(37,211,102,.5), 0 0 0 0 rgba(37,211,102,.4); }
+      70%  { box-shadow: 0 4px 20px rgba(37,211,102,.5), 0 0 0 14px rgba(37,211,102,0); }
+      100% { box-shadow: 0 4px 20px rgba(37,211,102,.5), 0 0 0 0 rgba(37,211,102,0); }
+    }
+    .wa-float { animation: waPulse 2.2s ease infinite; }
+
+    /* CTA button glow pulse */
+    @keyframes ctaGlow {
+      0%,100% { box-shadow: 0 4px 20px rgba(247,194,0,.2); }
+      50%     { box-shadow: 0 4px 30px rgba(247,194,0,.5); }
+    }
+    .btn-primary { animation: ctaGlow 2.5s ease infinite; }
+    .btn-primary:hover { animation: none; }
+
+    /* Card shimmer on hover */
+    .curso-card { position:relative; overflow:hidden; }
+    .curso-card::before {
+      content:''; position:absolute; top:0; left:-100%; width:60%; height:100%;
+      background: linear-gradient(120deg, transparent, rgba(247,194,0,.06), transparent);
+      transition: left .5s ease;
+    }
+    .curso-card:hover::before { left:150%; }
+
+    /* Razon icon color shift */
+    @keyframes iconPulse {
+      0%,100% { filter: drop-shadow(0 0 0px var(--amarillo)); }
+      50%     { filter: drop-shadow(0 0 6px rgba(247,194,0,.6)); }
+    }
+    .razon-icon svg { animation: iconPulse 3s ease infinite; }
+
+    /* Stat number glow */
+    @keyframes statGlow {
+      0%,100% { text-shadow: 0 0 0 transparent; }
+      50%     { text-shadow: 0 0 18px rgba(247,194,0,.4); }
+    }
+    .stat-num { animation: statGlow 3s ease infinite; }
+
+    /* About image overlay color shift */
+    .about-visual::after {
+      content:''; position:absolute; inset:0; pointer-events:none;
+      background: linear-gradient(135deg, rgba(247,194,0,.08) 0%, transparent 60%);
+      animation: gradientDrift 6s ease infinite;
+      background-size: 200% 200%;
+    }
+
+    /* Hero badge subtle pulse */
+    @keyframes badgePulse {
+      0%,100% { opacity:1; }
+      50%     { opacity:.85; }
+    }
+    .hero-badge { animation: fadeUp .6s ease both, badgePulse 3s 1s ease infinite; }
+
+    /* Slider caption animation */
+    @keyframes captionIn {
+      from { opacity:0; transform:translateY(16px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .slide.active-slide .slide-caption { animation: captionIn .5s .2s ease both; }
 
     /* ========================
        RESPONSIVE
     ======================== */
+    @media (max-width: 1024px) {
+      nav { padding: .75rem 1.8rem; }
+      .nav-links { gap: 1.4rem; }
+    }
     @media (max-width: 900px) {
       .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .about-visual { height: 280px; }
+      .about-visual { height: 260px; }
+      .cursos-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
     }
     @media (max-width: 768px) {
-      nav { padding: .75rem 1.2rem; }
+      nav { padding: .7rem 1rem; }
+      .nav-logo-img { height: 44px; }
       .nav-links { display: none; }
       .nav-cta { display: none; }
       .hamburger { display: flex; }
-      section { padding: 3.5rem 1.2rem; }
+      section { padding: 3rem 1rem; }
+      .section-title { font-size: clamp(1.7rem, 7vw, 2.8rem); }
       .contacto-wrap { grid-template-columns: 1fr; gap: 2rem; }
-      .hero-stats { gap: 1.5rem; }
-      .slide { height: 320px; }
+      .hero-stats { gap: 1.2rem; }
+      .hero-stats .stat-num { font-size: 2rem; }
+      .slide { height: 280px; }
+      .slide-caption { font-size: clamp(1rem, 4vw, 1.4rem); bottom: 1.5rem; left: 1rem; right: 1rem; }
+      .about-values { grid-template-columns: 1fr 1fr; }
+      #hero { padding: 6.5rem 1rem 3rem; }
+      .hero-title { font-size: clamp(2.6rem, 10vw, 5rem); }
+      .razones-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .slider-btn { width: 38px; height: 38px; }
+      .slider-btn.prev { left: .5rem; }
+      .slider-btn.next { right: .5rem; }
+      .footer-links { gap: 1rem; }
+    }
+    @media (max-width: 480px) {
+      .hero-sub { font-size: .9rem; }
+      .hc-item { font-size: .88rem; }
+      .btn-primary, .btn-outline { padding: .8rem 1.3rem; font-size: 1rem; }
+      .hero-stats { gap: 1rem; flex-wrap: wrap; }
+      .cursos-grid { grid-template-columns: 1fr; }
       .about-values { grid-template-columns: 1fr; }
-      #hero { padding: 7rem 1.2rem 3rem; }
+      .slide { height: 240px; }
+      section { padding: 2.5rem .9rem; }
+      .footer-links { flex-direction: column; gap: .6rem; align-items: center; }
+      .contacto-info p { font-size: .85rem; }
+    }
+
+    /* ========================
+       LANGUAGE TOGGLE BUTTON
+    ======================== */
+    #lang-btn {
+      position: fixed; bottom: 1.8rem; left: 1.8rem; z-index: 200;
+      display: flex; align-items: center; gap: .5rem;
+      background: var(--blanco); color: var(--negro);
+      border: 2px solid var(--amarillo); border-radius: 50px;
+      padding: .45rem .9rem;
+      font-family: 'Inter', sans-serif; font-size: .8rem; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+      cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,.25);
+      transition: background .2s, color .2s, transform .15s, box-shadow .2s;
+      user-select: none;
+    }
+    #lang-btn:hover { background: var(--amarillo); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(247,194,0,.35); }
+    #lang-btn .lang-flag { font-size: 1.1rem; line-height: 1; }
+    #lang-btn .lang-code { font-size: .75rem; font-weight: 800; }
+    @media (max-width: 480px) {
+      #lang-btn { bottom: 1rem; left: 1rem; padding: .4rem .75rem; }
     }
   </style>
 </head>
@@ -514,10 +776,11 @@
   <img class="splash-logo-img"
        src="https://lh3.googleusercontent.com/d/1bWwp2gk6zUHmlgm2xHqF3-gptP9YiW93"
        alt="Valpatruck Logo"
-       onerror="this.style.display='none';document.querySelector('.splash-fallback').style.display='block'"/>
-  <div class="splash-fallback" style="display:none;font-family:'Barlow Condensed',sans-serif;font-size:2.5rem;font-weight:900;color:var(--blanco);">VALPA<span style="color:var(--amarillo)">TRUCK</span></div>
+       onerror="this.style.display='none';document.getElementById('splash-fallback').style.display='block'"/>
+  <div id="splash-fallback" style="display:none;font-family:'Barlow Condensed',sans-serif;font-size:2.8rem;font-weight:900;color:var(--negro);">VALPA<span style="color:var(--acento)">TRUCK</span></div>
   <div class="splash-tagline">Escuela de Maquinaria Pesada · Nashville, TN</div>
-  <div class="splash-bar"><div class="splash-bar-fill"></div></div>
+  <div class="splash-spinner"></div>
+  <div class="splash-location">Nashville, Tennessee · 629-200-2544</div>
 </div>
 
 <!-- ======================== SIDEBAR OVERLAY ======================== -->
@@ -751,18 +1014,19 @@
       </div>
     </div>
 
-    <div class="curso-card" style="border-color:var(--acento);">
-      <div class="curso-icon-wrap">
-        <svg width="72" height="72" viewBox="0 0 80 80" fill="none"><rect x="8" y="48" width="52" height="16" rx="3" fill="#222" stroke="#FF6B00" stroke-width="1.8"/><rect x="10" y="22" width="36" height="28" rx="2" fill="#FF6B00" fill-opacity=".18" stroke="#FF6B00" stroke-width="1.8"/><line x1="46" y1="32" x2="66" y2="14" stroke="#FF6B00" stroke-width="2" stroke-linecap="round"/><line x1="66" y1="14" x2="66" y2="8" stroke="#FF6B00" stroke-width="2" stroke-linecap="round"/><circle cx="58" cy="22" r="8" fill="#FF6B00"/><polyline points="54 22 57 25 63 18" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="22" cy="64" r="7" fill="#111" stroke="#FF6B00" stroke-width="1.8"/><circle cx="52" cy="64" r="7" fill="#111" stroke="#FF6B00" stroke-width="1.8"/></svg>
+    <div class="curso-card" style="border-color:var(--amarillo);border-width:2px;box-shadow:0 0 28px rgba(247,194,0,.18),inset 0 0 0 1px rgba(247,194,0,.08);position:relative;">
+      <div style="position:absolute;top:-1px;right:1.1rem;background:var(--amarillo);color:var(--negro);font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:.22rem .7rem;border-radius:0 0 4px 4px;">⭐ MÁS COMPLETO</div>
+      <div class="curso-icon-wrap" style="background:rgba(247,194,0,.05);">
+        <svg width="72" height="72" viewBox="0 0 80 80" fill="none"><rect x="8" y="48" width="52" height="16" rx="3" fill="#222" stroke="#F7C200" stroke-width="1.8"/><rect x="10" y="22" width="36" height="28" rx="2" fill="#F7C200" fill-opacity=".18" stroke="#F7C200" stroke-width="1.8"/><line x1="46" y1="32" x2="66" y2="14" stroke="#F7C200" stroke-width="2" stroke-linecap="round"/><line x1="66" y1="14" x2="66" y2="8" stroke="#F7C200" stroke-width="2" stroke-linecap="round"/><circle cx="58" cy="22" r="8" fill="#F7C200"/><polyline points="54 22 57 25 63 18" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="22" cy="64" r="7" fill="#111" stroke="#F7C200" stroke-width="1.8"/><circle cx="52" cy="64" r="7" fill="#111" stroke="#F7C200" stroke-width="1.8"/></svg>
       </div>
       <div class="curso-body">
         <div class="curso-nombre">Profesional</div>
         <p class="curso-desc">Entrenamiento completo + evaluación final + certificado. El paquete más completo para entrar al mundo laboral.</p>
         <div class="curso-meta">
-          <span class="curso-tag" style="background:rgba(255,107,0,.12);color:var(--acento);"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>24 horas</span>
-          <span class="curso-tag" style="background:rgba(255,107,0,.12);color:var(--acento);">Certificado</span>
+          <span class="curso-tag"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>24 horas</span>
+          <span class="curso-tag">Certificado</span>
         </div>
-        <div class="curso-precio acento">$6,720</div>
+        <div class="curso-precio">$6,720</div>
       </div>
     </div>
 
@@ -798,7 +1062,7 @@
            src="https://lh3.googleusercontent.com/d/1XMX2MLHn2hseyMJRsZOINiO7F49__PnS"
            alt="Valpatruck – Entrenamiento en excavadora"
            onerror="this.style.background='#1a1a1a'" />
-      <div class="about-badge">Nashville, Tennessee</div>
+      <div class="about-badge">Murfreesboro, Tennessee</div>
     </div>
     <div class="about-text">
       <p>
@@ -966,9 +1230,16 @@
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
       </a>
     </div>
-    <p class="footer-copy">© 2025 Valpatruck LLC – Escuela de Maquinaria Pesada · Nashville, TN · 629-200-2544</p>
+    <p class="footer-copy">© 2026 Valpatruck LLC – Escuela de Maquinaria Pesada · Nashville, TN · 629-200-2544</p>
+    <p class="footer-copy" style="margin-top:.4rem;font-size:.72rem;color:#bbb;">Desarrollado por <strong style="color:var(--negro);font-weight:600;">DGP Global Group</strong></p>
   </div>
 </footer>
+
+<!-- ======================== LANGUAGE TOGGLE ======================== -->
+<button id="lang-btn" onclick="toggleLang()" aria-label="Cambiar idioma / Change language">
+  <span class="lang-flag">🇺🇸</span>
+  <span class="lang-code">EN</span>
+</button>
 
 <!-- ======================== WHATSAPP FLOAT ======================== -->
 <a href="https://wa.me/16292002544?text=Hola,%20quiero%20información%20sobre%20los%20cursos%20de%20Valpatruck" class="wa-float" target="_blank" title="WhatsApp">
@@ -976,8 +1247,385 @@
 </a>
 
 <script>
+  /* ===================================================
+     TRANSLATION SYSTEM
+  =================================================== */
+  const T = {
+    es: {
+      // --- Splash ---
+      splash_tagline: 'Escuela de Maquinaria Pesada · Nashville, TN',
+      splash_location: 'Nashville, Tennessee · 629-200-2544',
+      // --- Nav ---
+      nav_paquetes: 'Paquetes',
+      nav_nosotros: 'Nosotros',
+      nav_contacto: 'Contacto',
+      nav_facebook: 'Facebook',
+      nav_inscribete: 'Inscríbete',
+      // --- Sidebar ---
+      sb_inicio: 'Inicio',
+      sb_paquetes: 'Paquetes & Precios',
+      sb_nosotros: 'Nosotros',
+      sb_porque: '¿Por Qué Nosotros?',
+      sb_contacto: 'Contacto',
+      sb_info_title: 'Información de Contacto',
+      sb_cta: 'Inscríbete Ahora',
+      // --- Hero ---
+      hero_badge: 'Nashville, Tennessee',
+      hero_title: 'Opera una <em>Excavadora</em> Real',
+      hero_sub: 'Entrenas en una <strong style="color:var(--amarillo)">Caterpillar 320</strong> — una de las máquinas más potentes del mercado. Tú operas desde el primer momento. Sin meses de teoría. Sin salir de Nashville.',
+      hc1: '100% práctica real desde el inicio',
+      hc2: 'Tú manejas la máquina — no solo miras',
+      hc3: 'Sin hospedaje ni comida extra',
+      hc4: 'Vas y vuelves a casa todos los días',
+      hc5: 'Aprende una habilidad que genera más dinero',
+      btn_paquetes: 'Ver Paquetes y Precios',
+      btn_wa_hero: 'WhatsApp Ahora',
+      stat1_label: 'Maquinaria real',
+      stat2_label: 'Práctica libre / hr',
+      stat3_label: 'Entrenamiento práctico',
+      // --- Slider captions ---
+      slide1: 'Entrenamiento <span>100% Práctico</span> en Maquinaria Real',
+      slide2: 'Caterpillar 320 — <span>Tú Operas</span> desde el Primer Día',
+      slide3: 'Aprende en <span>Nashville, TN</span> — Sin Salir del Estado',
+      slide4: 'Una Habilidad Que <span>Genera Dinero Real</span>',
+      // --- Cursos ---
+      cursos_tag: 'Elige tu nivel',
+      cursos_title: 'Paquetes &amp; Precios',
+      cursos_sub: 'Entrena en una <strong style="color:var(--amarillo)">Caterpillar 320</strong> — tú operas la máquina desde el primer momento.',
+      c1_nombre: 'Básico',
+      c1_desc: 'Aprende los controles esenciales y los movimientos básicos de la excavadora. Ideal si nunca has operado antes.',
+      c1_tag1: '6 horas', c1_tag2: 'Principiantes',
+      c2_nombre: 'Intermedio',
+      c2_desc: 'Excavación, nivelación y práctica real en terreno. Consolida tus habilidades con el doble de horas.',
+      c2_tag1: '12 horas', c2_tag2: 'Nivel Medio',
+      c3_nombre: 'Intermedio Avanzado',
+      c3_desc: 'Técnicas avanzadas de excavación y manejo en distintos tipos de terreno. Prepárate para el mercado laboral.',
+      c3_tag1: '18 horas', c3_tag2: 'Avanzado',
+      c4_nombre: 'Profesional',
+      c4_desc: 'Entrenamiento completo + evaluación final + certificado. El paquete más completo para entrar al mundo laboral.',
+      c4_tag1: '24 horas', c4_tag2: 'Certificado',
+      libre_title: 'Práctica Libre con Excavadora',
+      libre_desc: '¿Ya sabes operar? Reserva tiempo de máquina y practica a tu ritmo.',
+      libre_hr: '/ hora',
+      btn_reserva: 'Reserva tu Turno por WhatsApp',
+      // --- About ---
+      about_tag: 'Quiénes Somos',
+      about_title: 'Sobre <em style="color:var(--amarillo);font-style:normal;">Valpatruck</em>',
+      about_badge: 'Murfreesboro, Tennessee',
+      about_p1: '<strong>Valpatruck</strong> es una escuela de maquinaria pesada ubicada en Murfreesboro, Tennessee, creada para personas que quieren aprender una habilidad real y bien pagada sin tener que viajar ni invertir meses en teoría.',
+      about_p2: 'Nuestro método es simple: <strong>tú operas desde el primer momento.</strong> Nada de sentarte meses viendo diapositivas. En Valpatruck subes a la máquina y empiezas a trabajar de verdad desde el día uno.',
+      about_p3: 'Entrenamos en una <strong>Caterpillar 320</strong>, una de las excavadoras más tecnológicas y potentes del mercado — la misma maquinaria que encontrarás en los trabajos reales. Puedes ir y volver a tu casa todos los días sin pagar hospedaje ni comida.',
+      av1_title: '100% Práctico', av1_text: 'Operas la máquina desde el inicio',
+      av2_title: 'Sin Gastos Extra', av2_text: 'Sin hospedaje ni comida',
+      av3_title: 'Maquinaria Real', av3_text: 'Caterpillar 320 original',
+      av4_title: 'Flexible', av4_text: 'Lunes a sábado, tus horarios',
+      about_fb: 'Síguenos en Facebook',
+      // --- Por Qué ---
+      pq_tag: 'Por qué elegirnos',
+      pq_title: 'Aquí no vienes<br>a mirar — operas',
+      r1_title: 'Caterpillar 320 Real',
+      r1_text: 'Practicas en una CAT 320, una de las excavadoras más tecnológicas y potentes del mercado. Nada de simuladores ni maquetas.',
+      r2_title: 'Operas desde el Día 1',
+      r2_text: 'Olvida meses sentado viendo teoría. En Valpatruck subes a la máquina desde el primer momento del entrenamiento.',
+      r3_title: 'Sin Gastos Extras',
+      r3_text: 'No tienes que pagar hospedaje ni comida. Puedes ir y volver a tu casa todos los días. Sin salir de Nashville.',
+      r4_title: 'Mejora tus Ingresos',
+      r4_text: 'Los operadores de maquinaria pesada son de los trabajadores mejor pagados en construcción. Invierte en una habilidad que genera dinero real.',
+      // --- Contacto ---
+      ct_tag: 'Hablemos',
+      ct_title: 'Inscríbete Ahora',
+      ct_h3: '¿Listo para cambiar tu futuro?',
+      ct_p: 'Escríbenos ahora mismo y separa tu turno. Nuestro equipo te dará toda la información sobre fechas y horarios disponibles.',
+      ct_horario: 'Lunes a Sábado',
+      ct_fb: 'Valpatruck en Facebook',
+      lbl_nombre: 'Nombre completo',
+      lbl_tel: 'Teléfono',
+      lbl_email: 'Correo electrónico',
+      lbl_paquete: 'Paquete de interés',
+      lbl_msg: 'Mensaje (opcional)',
+      ph_nombre: 'Tu nombre',
+      ph_tel: '(629) 000-0000',
+      ph_email: 'correo@ejemplo.com',
+      ph_msg: 'Cuéntanos algo sobre ti o tus preguntas...',
+      opt0: 'Selecciona un paquete',
+      opt1: 'Básico – 6 hrs ($2,100)',
+      opt2: 'Intermedio – 12 hrs ($3,960)',
+      opt3: 'Intermedio Avanzado – 18 hrs ($5,400)',
+      opt4: 'Profesional – 24 hrs ($6,720)',
+      opt5: 'Práctica Libre ($300/hr)',
+      btn_submit: 'Enviar Solicitud',
+      // --- Footer ---
+      ft_paquetes: 'Paquetes', ft_nosotros: 'Nosotros',
+      ft_porque: '¿Por Qué?', ft_contacto: 'Contacto',
+      ft_copy: '© 2026 Valpatruck LLC – Escuela de Maquinaria Pesada · Nashville, TN · 629-200-2544',
+      ft_dev: 'Desarrollado por <strong style="color:var(--negro);font-weight:600;">DGP Global Group</strong>',
+      // --- Lang btn ---
+      lang_flag: '🇺🇸', lang_code: 'EN',
+    },
+    en: {
+      splash_tagline: 'Heavy Equipment Training School · Nashville, TN',
+      splash_location: 'Nashville, Tennessee · 629-200-2544',
+      nav_paquetes: 'Packages',
+      nav_nosotros: 'About Us',
+      nav_contacto: 'Contact',
+      nav_facebook: 'Facebook',
+      nav_inscribete: 'Enroll',
+      sb_inicio: 'Home',
+      sb_paquetes: 'Packages & Prices',
+      sb_nosotros: 'About Us',
+      sb_porque: 'Why Choose Us?',
+      sb_contacto: 'Contact',
+      sb_info_title: 'Contact Information',
+      sb_cta: 'Enroll Now',
+      hero_badge: 'Nashville, Tennessee',
+      hero_title: 'Operate a Real <em>Excavator</em>',
+      hero_sub: 'Train on a <strong style="color:var(--amarillo)">Caterpillar 320</strong> — one of the most powerful machines on the market. You operate from day one. No months of theory. No leaving Nashville.',
+      hc1: '100% real hands-on training from day one',
+      hc2: 'You run the machine — not just watch',
+      hc3: 'No lodging or meal costs',
+      hc4: 'Go home every day — no travel needed',
+      hc5: 'Learn a skill that earns real money',
+      btn_paquetes: 'View Packages & Prices',
+      btn_wa_hero: 'WhatsApp Now',
+      stat1_label: 'Real machinery',
+      stat2_label: 'Free practice / hr',
+      stat3_label: 'Hands-on training',
+      slide1: '<span>100% Hands-On</span> Heavy Equipment Training',
+      slide2: 'Caterpillar 320 — <span>You Operate</span> from Day One',
+      slide3: 'Learn in <span>Nashville, TN</span> — No Travel Required',
+      slide4: 'A Skill That <span>Earns Real Money</span>',
+      cursos_tag: 'Choose your level',
+      cursos_title: 'Packages &amp; Prices',
+      cursos_sub: 'Train on a <strong style="color:var(--amarillo)">Caterpillar 320</strong> — you operate the machine from the very first moment.',
+      c1_nombre: 'Basic',
+      c1_desc: 'Learn the essential controls and basic excavator movements. Perfect if you have never operated before.',
+      c1_tag1: '6 hours', c1_tag2: 'Beginners',
+      c2_nombre: 'Intermediate',
+      c2_desc: 'Excavation, leveling, and real fieldwork. Build on your skills with double the hours.',
+      c2_tag1: '12 hours', c2_tag2: 'Mid Level',
+      c3_nombre: 'Advanced Intermediate',
+      c3_desc: 'Advanced excavation techniques and operation on different terrain types. Get ready for the job market.',
+      c3_tag1: '18 hours', c3_tag2: 'Advanced',
+      c4_nombre: 'Professional',
+      c4_desc: 'Complete training + final evaluation + certificate. The most comprehensive package to enter the workforce.',
+      c4_tag1: '24 hours', c4_tag2: 'Certificate',
+      libre_title: 'Free Practice with Excavator',
+      libre_desc: 'Already know how to operate? Book machine time and practice at your own pace.',
+      libre_hr: '/ hour',
+      btn_reserva: 'Reserve Your Slot on WhatsApp',
+      about_tag: 'Who We Are',
+      about_title: 'About <em style="color:var(--amarillo);font-style:normal;">Valpatruck</em>',
+      about_badge: 'Murfreesboro, Tennessee',
+      about_p1: '<strong>Valpatruck</strong> is a heavy equipment school located in Murfreesboro, Tennessee, built for people who want to learn a real, well-paying skill without traveling or spending months on theory.',
+      about_p2: 'Our method is simple: <strong>you operate from the very first moment.</strong> No months sitting through slide decks. At Valpatruck you get on the machine and start doing real work from day one.',
+      about_p3: 'We train on a <strong>Caterpillar 320</strong>, one of the most powerful and advanced excavators on the market — the same machinery you\'ll find on real job sites. You can go home every day without paying for lodging or food.',
+      av1_title: '100% Hands-On', av1_text: 'You operate from the start',
+      av2_title: 'No Extra Costs', av2_text: 'No lodging or food expenses',
+      av3_title: 'Real Machinery', av3_text: 'Original Caterpillar 320',
+      av4_title: 'Flexible', av4_text: 'Monday–Saturday, your schedule',
+      about_fb: 'Follow Us on Facebook',
+      pq_tag: 'Why choose us',
+      pq_title: 'You don\'t come to watch<br>— you operate',
+      r1_title: 'Real Caterpillar 320',
+      r1_text: 'You train on a CAT 320, one of the most advanced and powerful excavators on the market. No simulators. No models.',
+      r2_title: 'Operating from Day 1',
+      r2_text: 'Forget months sitting in theory class. At Valpatruck you get on the machine from the very first moment of training.',
+      r3_title: 'No Extra Expenses',
+      r3_text: 'No lodging or food to pay for. Go home every day. No leaving Nashville.',
+      r4_title: 'Increase Your Income',
+      r4_text: 'Heavy equipment operators are among the highest-paid workers in construction. Invest in a skill that generates real money.',
+      ct_tag: "Let's Talk",
+      ct_title: 'Enroll Now',
+      ct_h3: 'Ready to change your future?',
+      ct_p: 'Message us now and reserve your slot. Our team will give you all the information on available dates and schedules.',
+      ct_horario: 'Monday to Saturday',
+      ct_fb: 'Valpatruck on Facebook',
+      lbl_nombre: 'Full name',
+      lbl_tel: 'Phone',
+      lbl_email: 'Email address',
+      lbl_paquete: 'Package of interest',
+      lbl_msg: 'Message (optional)',
+      ph_nombre: 'Your name',
+      ph_tel: '(629) 000-0000',
+      ph_email: 'email@example.com',
+      ph_msg: 'Tell us a bit about yourself or your questions...',
+      opt0: 'Select a package',
+      opt1: 'Basic – 6 hrs ($2,100)',
+      opt2: 'Intermediate – 12 hrs ($3,960)',
+      opt3: 'Advanced Intermediate – 18 hrs ($5,400)',
+      opt4: 'Professional – 24 hrs ($6,720)',
+      opt5: 'Free Practice ($300/hr)',
+      btn_submit: 'Send Request',
+      ft_paquetes: 'Packages', ft_nosotros: 'About Us',
+      ft_porque: 'Why Us?', ft_contacto: 'Contact',
+      ft_copy: '© 2026 Valpatruck LLC – Heavy Equipment Training School · Nashville, TN · 629-200-2544',
+      ft_dev: 'Developed by <strong style="color:var(--negro);font-weight:600;">DGP Global Group</strong>',
+      lang_flag: '🇪🇸', lang_code: 'ES',
+    }
+  };
+
+  let currentLang = localStorage.getItem('vt_lang') || 'es';
+
+  function applyLang(lang) {
+    const t = T[lang];
+    const q = (sel) => document.querySelector(sel);
+    const qa = (sel) => document.querySelectorAll(sel);
+
+    // Helper: set innerHTML
+    const h = (sel, key) => { const el = q(sel); if (el) el.innerHTML = t[key]; };
+    // Helper: set textContent of last text child (for SVG+text elements)
+    const lt = (els, key) => { if (els) els.forEach((el,i) => { if (t[key + '_' + i] !== undefined) { const tn = [...el.childNodes].reverse().find(n=>n.nodeType===3); if(tn) tn.textContent = t[key+'_'+i]; } }); };
+    // Helper: set placeholder
+    const ph = (sel, key) => { const el = q(sel); if (el) el.placeholder = t[key]; };
+
+    // Splash
+    const splashTag = q('.splash-tagline'); if(splashTag) splashTag.textContent = t.splash_tagline;
+    const splashLoc = q('.splash-location'); if(splashLoc) splashLoc.textContent = t.splash_location;
+
+    // Nav links (pure text links)
+    const navLinks = qa('.nav-links a');
+    if (navLinks[0]) navLinks[0].textContent = t.nav_paquetes;
+    if (navLinks[1]) navLinks[1].textContent = t.nav_nosotros;
+    if (navLinks[2]) navLinks[2].textContent = t.nav_contacto;
+    if (navLinks[3]) { navLinks[3].childNodes.forEach(n=>{ if(n.nodeType===3) n.textContent = ' '+t.nav_facebook; }); }
+    const navCta = q('.nav-cta'); if(navCta) navCta.textContent = t.nav_inscribete;
+
+    // Sidebar nav
+    const sbLinks = qa('.sidebar-nav a');
+    if (sbLinks[0]) { const tn=[...sbLinks[0].childNodes].find(n=>n.nodeType===3&&n.textContent.trim()); if(tn) tn.textContent = ' '+t.sb_inicio; }
+    if (sbLinks[1]) { const tn=[...sbLinks[1].childNodes].find(n=>n.nodeType===3&&n.textContent.trim()); if(tn) tn.textContent = ' '+t.sb_paquetes; }
+    if (sbLinks[2]) { const tn=[...sbLinks[2].childNodes].find(n=>n.nodeType===3&&n.textContent.trim()); if(tn) tn.textContent = ' '+t.sb_nosotros; }
+    if (sbLinks[3]) { const tn=[...sbLinks[3].childNodes].find(n=>n.nodeType===3&&n.textContent.trim()); if(tn) tn.textContent = ' '+t.sb_porque; }
+    if (sbLinks[4]) { const tn=[...sbLinks[4].childNodes].find(n=>n.nodeType===3&&n.textContent.trim()); if(tn) tn.textContent = ' '+t.sb_contacto; }
+    const sbInfoTitle = q('.sidebar-info-title'); if(sbInfoTitle) sbInfoTitle.textContent = t.sb_info_title;
+    const sbCta = q('.sidebar-cta a'); if(sbCta) { const tn=[...sbCta.childNodes].find(n=>n.nodeType===3&&n.textContent.trim()); if(tn) tn.textContent = ' '+t.sb_cta; }
+
+    // Hero
+    const heroBadge = q('.hero-badge'); if(heroBadge) { const tn=[...heroBadge.childNodes].find(n=>n.nodeType===3&&n.textContent.trim()); if(tn) tn.textContent = ' '+t.hero_badge; }
+    h('.hero-title', 'hero_title');
+    h('.hero-sub', 'hero_sub');
+    const hcItems = qa('.hc-item');
+    [t.hc1,t.hc2,t.hc3,t.hc4,t.hc5].forEach((txt,i)=>{ if(hcItems[i]){ const tn=[...hcItems[i].childNodes].find(n=>n.nodeType===3&&n.textContent.trim()); if(tn) tn.textContent = txt; } });
+    const btnPaq = q('.hero-actions .btn-primary'); if(btnPaq){ const tn=[...btnPaq.childNodes].find(n=>n.nodeType===3&&n.textContent.trim()); if(tn) tn.textContent = t.btn_paquetes; }
+    const btnWa  = q('.hero-actions .btn-outline'); if(btnWa){ const tn=[...btnWa.childNodes].find(n=>n.nodeType===3&&n.textContent.trim()); if(tn) tn.textContent = t.btn_wa_hero; }
+    const statLabels = qa('.stat-label');
+    if(statLabels[0]) statLabels[0].textContent = t.stat1_label;
+    if(statLabels[1]) statLabels[1].textContent = t.stat2_label;
+    if(statLabels[2]) statLabels[2].textContent = t.stat3_label;
+
+    // Slider captions
+    const caps = qa('.slide-caption');
+    if(caps[0]) caps[0].innerHTML = t.slide1;
+    if(caps[1]) caps[1].innerHTML = t.slide2;
+    if(caps[2]) caps[2].innerHTML = t.slide3;
+    if(caps[3]) caps[3].innerHTML = t.slide4;
+
+    // Cursos
+    const secTags = qa('.section-tag');
+    const secTitles = qa('.section-title');
+    if(secTags[0]) secTags[0].textContent = t.cursos_tag;
+    if(secTitles[0]) secTitles[0].innerHTML = t.cursos_title;
+    const cursosSub = q('#cursos > p:nth-of-type(2)');
+    if(cursosSub) cursosSub.innerHTML = t.cursos_sub;
+
+    const cards = qa('.curso-card');
+    const cardKeys = [['c1','c1'],['c2','c2'],['c3','c3'],['c4','c4']];
+    cards.forEach((card, ci) => {
+      const pfx = cardKeys[ci]?.[0]; if(!pfx) return;
+      const nom = card.querySelector('.curso-nombre'); if(nom) nom.textContent = t[pfx+'_nombre'];
+      const desc = card.querySelector('.curso-desc'); if(desc) desc.textContent = t[pfx+'_desc'];
+      const tags = card.querySelectorAll('.curso-tag');
+      tags.forEach((tg,ti) => {
+        const key = pfx+'_tag'+(ti+1); if(t[key]){
+          const tn=[...tg.childNodes].find(n=>n.nodeType===3&&n.textContent.trim());
+          if(tn) tn.textContent = t[key]; else tg.textContent = t[key];
+        }
+      });
+    });
+    const libreTitle = q('#cursos [style*="font-weight:800"] .libre-title, #cursos [style*="font-size:1.2rem"]');
+    if(libreTitle) libreTitle.textContent = t.libre_title;
+    const libreDesc = q('#cursos [style*="font-size:.85rem"]');
+    if(libreDesc) libreDesc.textContent = t.libre_desc;
+    const libreHr = q('#cursos [style*="font-size:1rem"][style*="color"]');
+    if(libreHr) libreHr.textContent = t.libre_hr;
+    const btnReserva = q('#cursos .btn-primary');
+    if(btnReserva){ const tn=[...btnReserva.childNodes].find(n=>n.nodeType===3&&n.textContent.trim()); if(tn) tn.textContent = ' '+t.btn_reserva; }
+
+    // About
+    if(secTags[1]) secTags[1].textContent = t.about_tag;
+    if(secTitles[1]) secTitles[1].innerHTML = t.about_title;
+    const abBadge = q('.about-badge'); if(abBadge) abBadge.textContent = t.about_badge;
+    const abParas = qa('.about-text p');
+    if(abParas[0]) abParas[0].innerHTML = t.about_p1;
+    if(abParas[1]) abParas[1].innerHTML = t.about_p2;
+    if(abParas[2]) abParas[2].innerHTML = t.about_p3;
+    const avTitles = qa('.about-val-title');
+    const avTexts  = qa('.about-val-text');
+    ['av1','av2','av3','av4'].forEach((k,i)=>{
+      if(avTitles[i]) avTitles[i].textContent = t[k+'_title'];
+      if(avTexts[i])  avTexts[i].textContent  = t[k+'_text'];
+    });
+    const abFb = q('.about-link:last-child'); if(abFb) abFb.childNodes.forEach(n=>{ if(n.nodeType===3&&n.textContent.trim()) n.textContent = ' '+t.about_fb; });
+
+    // Por Qué
+    if(secTags[2]) secTags[2].textContent = t.pq_tag;
+    if(secTitles[2]) secTitles[2].innerHTML = t.pq_title;
+    const razones = qa('.razon');
+    [['r1','r1'],['r2','r2'],['r3','r3'],['r4','r4']].forEach(([,pfx],i)=>{
+      if(!razones[i]) return;
+      const rt = razones[i].querySelector('.razon-titulo'); if(rt) rt.textContent = t[pfx+'_title'];
+      const rx = razones[i].querySelector('.razon-texto'); if(rx) rx.textContent = t[pfx+'_text'];
+    });
+
+    // Contacto
+    if(secTags[3]) secTags[3].textContent = t.ct_tag;
+    if(secTitles[3]) secTitles[3].textContent = t.ct_title;
+    const ctH3 = q('.contacto-info h3'); if(ctH3) ctH3.textContent = t.ct_h3;
+    const ctP  = q('.contacto-info p');  if(ctP)  ctP.textContent  = t.ct_p;
+    const datoTexts = qa('.dato-text');
+    // dato 4 = horario, dato 5 = facebook
+    if(datoTexts[3]) datoTexts[3].textContent = t.ct_horario;
+    if(datoTexts[4]) { datoTexts[4].childNodes.forEach(n=>{ if(n.nodeType===3&&n.textContent.trim()) n.textContent = t.ct_fb; }); const a=datoTexts[4].querySelector('a'); if(a&&a.childNodes.length) a.textContent = t.ct_fb; }
+    // Form labels
+    const labels = qa('.form-group label');
+    ['lbl_nombre','lbl_tel','lbl_email','lbl_paquete','lbl_msg'].forEach((k,i)=>{ if(labels[i]) labels[i].textContent = t[k]; });
+    // Placeholders
+    const inp = qa('.form-group input, .form-group textarea');
+    ['ph_nombre','ph_tel','ph_email'].forEach((k,i)=>{ if(inp[i]) inp[i].placeholder = t[k]; });
+    const ta = q('.form-group textarea'); if(ta) ta.placeholder = t.ph_msg;
+    // Select options
+    const opts = qa('.form-group select option');
+    ['opt0','opt1','opt2','opt3','opt4','opt5'].forEach((k,i)=>{ if(opts[i]) opts[i].textContent = t[k]; });
+    // Submit btn
+    const btnSub = q('.btn-submit'); if(btnSub) btnSub.textContent = t.btn_submit;
+
+    // Footer
+    const ftLinks = qa('.footer-links a');
+    ['ft_paquetes','ft_nosotros','ft_porque','ft_contacto'].forEach((k,i)=>{ if(ftLinks[i]) ftLinks[i].textContent = t[k]; });
+    const ftCopies = qa('.footer-copy');
+    if(ftCopies[0]) ftCopies[0].textContent = t.ft_copy;
+    if(ftCopies[1]) ftCopies[1].innerHTML = t.ft_dev;
+
+    // Lang button
+    const lb = q('#lang-btn');
+    if(lb){ lb.querySelector('.lang-flag').textContent = t.lang_flag; lb.querySelector('.lang-code').textContent = t.lang_code; }
+
+    // Page lang attribute
+    document.documentElement.lang = lang;
+  }
+
+  function toggleLang() {
+    currentLang = currentLang === 'es' ? 'en' : 'es';
+    localStorage.setItem('vt_lang', currentLang);
+    applyLang(currentLang);
+  }
+
+  // Apply saved/detected language on load
+  // (run after DOM ready — placed before other scripts)
+
   /* ---- SPLASH ---- */
   window.addEventListener('load', () => {
+    applyLang(currentLang);
     setTimeout(() => {
       document.getElementById('splash').classList.add('hidden');
       setTimeout(() => document.getElementById('splash').remove(), 700);
@@ -1032,21 +1680,116 @@
   resetTimer();
 
   /* ---- SCROLL ANIMATIONS ---- */
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
+
+  // Section titles underline + section-tag bar
+  const titleObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('line-visible');
+        titleObs.unobserve(e.target);
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.section-title').forEach(el => titleObs.observe(el));
 
-  document.querySelectorAll('.curso-card, .razon, .about-val').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity .5s ease, transform .5s ease';
-    observer.observe(el);
-  });
+  const tagObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('tag-visible');
+        tagObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.section-tag').forEach(el => tagObs.observe(el));
+
+  // Generic reveal with stagger
+  function setupReveal(selector, cls = 'reveal') {
+    const els = document.querySelectorAll(selector);
+    els.forEach(el => el.classList.add(cls));
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e, idx) => {
+        if (e.isIntersecting) {
+          const delay = parseFloat(e.target.dataset.delay || 0);
+          setTimeout(() => e.target.classList.add('visible'), delay);
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    els.forEach((el, i) => {
+      el.dataset.delay = i * 80;
+      obs.observe(el);
+    });
+  }
+
+  setupReveal('.curso-card', 'reveal');
+  setupReveal('.razon', 'reveal');
+  setupReveal('.about-val', 'reveal');
+  setupReveal('.dato', 'reveal');
+  setupReveal('.contacto-info h3, .contacto-info p', 'reveal');
+  setupReveal('.form-group', 'reveal');
+
+  // About section: image from left, text from right
+  const aboutImg = document.querySelector('.about-visual');
+  const aboutText = document.querySelector('.about-text');
+  if (aboutImg && aboutText) {
+    aboutImg.classList.add('reveal-left');
+    aboutText.classList.add('reveal-right');
+    const aObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); aObs.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    aObs.observe(aboutImg);
+    aObs.observe(aboutText);
+  }
+
+  // Hero stats counter animation
+  function animateCounter(el, target, prefix = '', suffix = '') {
+    const duration = 1400;
+    const start = performance.now();
+    const isDecimal = target % 1 !== 0;
+    const step = (now) => {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = isDecimal ? (eased * target).toFixed(0) : Math.round(eased * target);
+      el.textContent = prefix + val + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+
+  const statsObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        // Stats are text like "CAT 320", "$300", "100%"
+        // Animate the numeric ones
+        document.querySelectorAll('.stat-num').forEach(el => {
+          const txt = el.textContent.trim();
+          if (txt === '$300') { animateCounter(el, 300, '$'); }
+          else if (txt === '100%') { animateCounter(el, 100, '', '%'); }
+        });
+        statsObs.disconnect();
+      }
+    });
+  }, { threshold: 0.5 });
+  const statsEl = document.querySelector('.hero-stats');
+  if (statsEl) statsObs.observe(statsEl);
+
+  // Slider active-slide class for caption animation
+  function updateActiveSlide() {
+    slides.forEach((s, i) => s.classList.toggle('active-slide', i === current));
+  }
+  const origGoTo = goToSlide;
+  // Patch goToSlide to also update active class
+  window.moveSlider = function(dir) {
+    current = (current + dir + slides.length) % slides.length;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dotsContainer.querySelectorAll('.slider-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+    updateActiveSlide();
+    clearInterval(timer);
+    timer = setInterval(() => window.moveSlider(1), 4500);
+  };
+  slides[0].classList.add('active-slide');
 
   /* ---- FORM ---- */
   function handleSubmit(e) {
