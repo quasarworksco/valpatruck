@@ -569,9 +569,135 @@
     .wa-float:hover { transform: scale(1.12); }
 
     /* ========================
-       ANIMATIONS
+       ANIMATIONS — KEYFRAMES
     ======================== */
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeUp    { from { opacity:0; transform:translateY(32px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeLeft  { from { opacity:0; transform:translateX(-40px); } to { opacity:1; transform:translateX(0); } }
+    @keyframes fadeRight { from { opacity:0; transform:translateX(40px); } to { opacity:1; transform:translateX(0); } }
+    @keyframes fadeIn    { from { opacity:0; } to { opacity:1; } }
+    @keyframes scaleIn   { from { opacity:0; transform:scale(.92); } to { opacity:1; transform:scale(1); } }
+
+    /* Reveal classes — set by JS */
+    .reveal { opacity:0; will-change:opacity,transform; }
+    .reveal.visible { animation: fadeUp .65s cubic-bezier(.22,1,.36,1) forwards; }
+    .reveal-left.visible { animation: fadeLeft .65s cubic-bezier(.22,1,.36,1) forwards; }
+    .reveal-right.visible { animation: fadeRight .65s cubic-bezier(.22,1,.36,1) forwards; }
+    .reveal-scale.visible { animation: scaleIn .6s cubic-bezier(.22,1,.36,1) forwards; }
+
+    /* Section title underline reveal */
+    .section-title { position: relative; display: inline-block; }
+    .section-title::after {
+      content:''; position:absolute; bottom:-6px; left:0;
+      width:0; height:3px;
+      background: linear-gradient(90deg, var(--amarillo), var(--acento));
+      border-radius:2px;
+      transition: width .7s cubic-bezier(.22,1,.36,1);
+    }
+    .section-title.line-visible::after { width:100%; }
+
+    /* Section tag animated left bar */
+    .section-tag {
+      position:relative; padding-left: .8rem;
+    }
+    .section-tag::before {
+      content:''; position:absolute; left:0; top:50%; transform:translateY(-50%);
+      width:3px; height:0;
+      background: linear-gradient(180deg, var(--amarillo), var(--acento));
+      border-radius:2px;
+      transition: height .5s ease;
+    }
+    .section-tag.tag-visible::before { height:100%; }
+
+    /* Animated gradient background — subtle color shift on sections */
+    @keyframes gradientDrift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    #por-que {
+      background: linear-gradient(135deg, #1a1a1a 0%, #1f1c0e 50%, #1a1a1a 100%);
+      background-size: 200% 200%;
+      animation: gradientDrift 8s ease infinite;
+    }
+    #about {
+      background: linear-gradient(135deg, #0d0d0d 0%, #12110a 50%, #0d0d0d 100%);
+      background-size: 200% 200%;
+      animation: gradientDrift 10s ease infinite;
+    }
+    #contacto {
+      background: linear-gradient(135deg, #0d0d0d 0%, #110d05 50%, #0d0d0d 100%);
+      background-size: 200% 200%;
+      animation: gradientDrift 12s ease infinite;
+    }
+
+    /* Nav border color shimmer */
+    nav { border-image: linear-gradient(90deg, var(--amarillo), var(--acento), var(--amarillo)) 1; }
+    @keyframes navBorder {
+      0%,100% { border-image-source: linear-gradient(90deg, var(--amarillo), var(--acento), var(--amarillo)); }
+      50%     { border-image-source: linear-gradient(90deg, var(--acento), var(--amarillo), var(--acento)); }
+    }
+    nav { animation: navBorder 4s ease infinite; }
+
+    /* WhatsApp float — pulse ring */
+    @keyframes waPulse {
+      0%   { box-shadow: 0 4px 20px rgba(37,211,102,.5), 0 0 0 0 rgba(37,211,102,.4); }
+      70%  { box-shadow: 0 4px 20px rgba(37,211,102,.5), 0 0 0 14px rgba(37,211,102,0); }
+      100% { box-shadow: 0 4px 20px rgba(37,211,102,.5), 0 0 0 0 rgba(37,211,102,0); }
+    }
+    .wa-float { animation: waPulse 2.2s ease infinite; }
+
+    /* CTA button glow pulse */
+    @keyframes ctaGlow {
+      0%,100% { box-shadow: 0 4px 20px rgba(247,194,0,.2); }
+      50%     { box-shadow: 0 4px 30px rgba(247,194,0,.5); }
+    }
+    .btn-primary { animation: ctaGlow 2.5s ease infinite; }
+    .btn-primary:hover { animation: none; }
+
+    /* Card shimmer on hover */
+    .curso-card { position:relative; overflow:hidden; }
+    .curso-card::before {
+      content:''; position:absolute; top:0; left:-100%; width:60%; height:100%;
+      background: linear-gradient(120deg, transparent, rgba(247,194,0,.06), transparent);
+      transition: left .5s ease;
+    }
+    .curso-card:hover::before { left:150%; }
+
+    /* Razon icon color shift */
+    @keyframes iconPulse {
+      0%,100% { filter: drop-shadow(0 0 0px var(--amarillo)); }
+      50%     { filter: drop-shadow(0 0 6px rgba(247,194,0,.6)); }
+    }
+    .razon-icon svg { animation: iconPulse 3s ease infinite; }
+
+    /* Stat number glow */
+    @keyframes statGlow {
+      0%,100% { text-shadow: 0 0 0 transparent; }
+      50%     { text-shadow: 0 0 18px rgba(247,194,0,.4); }
+    }
+    .stat-num { animation: statGlow 3s ease infinite; }
+
+    /* About image overlay color shift */
+    .about-visual::after {
+      content:''; position:absolute; inset:0; pointer-events:none;
+      background: linear-gradient(135deg, rgba(247,194,0,.08) 0%, transparent 60%);
+      animation: gradientDrift 6s ease infinite;
+      background-size: 200% 200%;
+    }
+
+    /* Hero badge subtle pulse */
+    @keyframes badgePulse {
+      0%,100% { opacity:1; }
+      50%     { opacity:.85; }
+    }
+    .hero-badge { animation: fadeUp .6s ease both, badgePulse 3s 1s ease infinite; }
+
+    /* Slider caption animation */
+    @keyframes captionIn {
+      from { opacity:0; transform:translateY(16px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .slide.active-slide .slide-caption { animation: captionIn .5s .2s ease both; }
 
     /* ========================
        RESPONSIVE
@@ -1148,21 +1274,116 @@
   resetTimer();
 
   /* ---- SCROLL ANIMATIONS ---- */
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
+
+  // Section titles underline + section-tag bar
+  const titleObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('line-visible');
+        titleObs.unobserve(e.target);
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.section-title').forEach(el => titleObs.observe(el));
 
-  document.querySelectorAll('.curso-card, .razon, .about-val').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity .5s ease, transform .5s ease';
-    observer.observe(el);
-  });
+  const tagObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('tag-visible');
+        tagObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.section-tag').forEach(el => tagObs.observe(el));
+
+  // Generic reveal with stagger
+  function setupReveal(selector, cls = 'reveal') {
+    const els = document.querySelectorAll(selector);
+    els.forEach(el => el.classList.add(cls));
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e, idx) => {
+        if (e.isIntersecting) {
+          const delay = parseFloat(e.target.dataset.delay || 0);
+          setTimeout(() => e.target.classList.add('visible'), delay);
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    els.forEach((el, i) => {
+      el.dataset.delay = i * 80;
+      obs.observe(el);
+    });
+  }
+
+  setupReveal('.curso-card', 'reveal');
+  setupReveal('.razon', 'reveal');
+  setupReveal('.about-val', 'reveal');
+  setupReveal('.dato', 'reveal');
+  setupReveal('.contacto-info h3, .contacto-info p', 'reveal');
+  setupReveal('.form-group', 'reveal');
+
+  // About section: image from left, text from right
+  const aboutImg = document.querySelector('.about-visual');
+  const aboutText = document.querySelector('.about-text');
+  if (aboutImg && aboutText) {
+    aboutImg.classList.add('reveal-left');
+    aboutText.classList.add('reveal-right');
+    const aObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); aObs.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    aObs.observe(aboutImg);
+    aObs.observe(aboutText);
+  }
+
+  // Hero stats counter animation
+  function animateCounter(el, target, prefix = '', suffix = '') {
+    const duration = 1400;
+    const start = performance.now();
+    const isDecimal = target % 1 !== 0;
+    const step = (now) => {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = isDecimal ? (eased * target).toFixed(0) : Math.round(eased * target);
+      el.textContent = prefix + val + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+
+  const statsObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        // Stats are text like "CAT 320", "$300", "100%"
+        // Animate the numeric ones
+        document.querySelectorAll('.stat-num').forEach(el => {
+          const txt = el.textContent.trim();
+          if (txt === '$300') { animateCounter(el, 300, '$'); }
+          else if (txt === '100%') { animateCounter(el, 100, '', '%'); }
+        });
+        statsObs.disconnect();
+      }
+    });
+  }, { threshold: 0.5 });
+  const statsEl = document.querySelector('.hero-stats');
+  if (statsEl) statsObs.observe(statsEl);
+
+  // Slider active-slide class for caption animation
+  function updateActiveSlide() {
+    slides.forEach((s, i) => s.classList.toggle('active-slide', i === current));
+  }
+  const origGoTo = goToSlide;
+  // Patch goToSlide to also update active class
+  window.moveSlider = function(dir) {
+    current = (current + dir + slides.length) % slides.length;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dotsContainer.querySelectorAll('.slider-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+    updateActiveSlide();
+    clearInterval(timer);
+    timer = setInterval(() => window.moveSlider(1), 4500);
+  };
+  slides[0].classList.add('active-slide');
 
   /* ---- FORM ---- */
   function handleSubmit(e) {
