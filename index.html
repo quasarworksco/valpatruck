@@ -389,39 +389,55 @@
     ======================== */
     section { padding: 5rem 2.5rem; }
     .section-tag {
-      font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem;
+      font-family: 'Inter', sans-serif; font-size: 0.72rem;
       font-weight: 700; letter-spacing: 4px; color: var(--amarillo);
-      text-transform: uppercase; margin-bottom: .6rem;
+      text-transform: uppercase; margin-bottom: .7rem;
     }
     .section-title {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      font-weight: 900; text-transform: uppercase; line-height: 1;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 900; text-transform: uppercase; line-height: .97;
+      letter-spacing: -.5px;
     }
 
     /* ========================
        CURSOS
     ======================== */
     #cursos { background: var(--gris-oscuro); }
-    .cursos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .cursos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1.8rem; margin-top: 3rem; }
     .curso-card {
       background: var(--gris-medio); border: 1px solid rgba(255,255,255,.06);
-      border-radius: 4px; overflow: hidden;
-      transition: transform .25s, border-color .25s;
+      border-radius: 8px; overflow: hidden;
+      transition: transform .25s, border-color .25s, box-shadow .25s;
     }
-    .curso-card:hover { transform: translateY(-6px); border-color: var(--amarillo); }
-    .curso-icon-wrap { height: 130px; display: flex; align-items: center; justify-content: center; background: var(--negro); }
-    .curso-body { padding: 1.4rem; }
-    .curso-nombre { font-family: 'Barlow Condensed', sans-serif; font-size: 1.3rem; font-weight: 800; text-transform: uppercase; margin-bottom: .5rem; }
-    .curso-desc { font-size: 0.85rem; color: var(--gris-texto); line-height: 1.6; margin-bottom: 1rem; }
-    .curso-meta { display: flex; gap: .6rem; flex-wrap: wrap; margin-bottom: .8rem; }
+    .curso-card:hover { transform: translateY(-7px); border-color: var(--amarillo); box-shadow: 0 12px 36px rgba(0,0,0,.35); }
+    .curso-icon-wrap { height: 140px; display: flex; align-items: center; justify-content: center; background: var(--negro); }
+    .curso-body { padding: 1.6rem; }
+    .curso-nombre {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.55rem; font-weight: 900;
+      text-transform: uppercase; letter-spacing: .5px;
+      margin-bottom: .55rem; line-height: 1.05;
+    }
+    .curso-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem; font-weight: 400;
+      color: var(--gris-texto); line-height: 1.7; margin-bottom: 1.1rem;
+    }
+    .curso-meta { display: flex; gap: .55rem; flex-wrap: wrap; margin-bottom: 1rem; }
     .curso-tag {
-      display: inline-flex; align-items: center; gap: .3rem;
+      display: inline-flex; align-items: center; gap: .35rem;
       background: rgba(247,194,0,.1); color: var(--amarillo);
-      font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
-      padding: .25rem .6rem; border-radius: 2px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
+      padding: .3rem .7rem; border-radius: 20px;
     }
-    .curso-precio { font-family: 'Barlow Condensed', sans-serif; font-size: 2rem; font-weight: 900; color: var(--amarillo); }
+    .curso-precio {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 2.4rem; font-weight: 900; color: var(--amarillo);
+      letter-spacing: -1px; line-height: 1;
+      margin-top: .4rem;
+    }
     .curso-precio.acento { color: var(--acento); }
 
     /* ========================
@@ -459,10 +475,10 @@
       padding: .8rem 1rem; border-radius: 0 2px 2px 0;
     }
     .about-val-title {
-      font-family: 'Barlow Condensed', sans-serif; font-size: .95rem;
-      font-weight: 800; text-transform: uppercase; margin-bottom: .2rem;
+      font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem;
+      font-weight: 900; text-transform: uppercase; letter-spacing: .3px; margin-bottom: .25rem;
     }
-    .about-val-text { font-size: .8rem; color: var(--gris-texto); }
+    .about-val-text { font-family: 'Inter', sans-serif; font-size: .8rem; font-weight: 500; color: var(--gris-texto); }
     .about-contact { margin-top: 2rem; display: flex; flex-direction: column; gap: .8rem; }
     .about-link {
       display: inline-flex; align-items: center; gap: .6rem;
@@ -478,8 +494,8 @@
     .razones-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem; margin-top: 3rem; }
     .razon { border-left: 3px solid var(--amarillo); padding-left: 1.2rem; }
     .razon-icon { margin-bottom: .7rem; }
-    .razon-titulo { font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 800; text-transform: uppercase; margin-bottom: .4rem; }
-    .razon-texto { font-size: 0.85rem; color: var(--gris-texto); line-height: 1.7; }
+    .razon-titulo { font-family: 'Barlow Condensed', sans-serif; font-size: 1.25rem; font-weight: 900; text-transform: uppercase; letter-spacing: .3px; margin-bottom: .5rem; }
+    .razon-texto { font-family: 'Inter', sans-serif; font-size: 0.875rem; color: var(--gris-texto); line-height: 1.75; }
 
     /* ========================
        CONTACTO
