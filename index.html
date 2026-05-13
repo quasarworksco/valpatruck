@@ -524,14 +524,27 @@
     /* ========================
        WHATSAPP FLOAT
     ======================== */
-    .wa-float {
+    .float-stack {
       position: fixed; bottom: 1.8rem; right: 1.8rem; z-index: 200;
-      background: #25D366; width: 56px; height: 56px; border-radius: 50%;
+      display: flex; flex-direction: column; gap: .65rem; align-items: center;
+    }
+    .wa-float, .sms-float {
+      width: 56px; height: 56px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 20px rgba(37,211,102,.5);
       transition: transform .2s; text-decoration: none;
     }
-    .wa-float:hover { transform: scale(1.12); }
+    .wa-float {
+      background: #25D366;
+      box-shadow: 0 4px 20px rgba(37,211,102,.5);
+    }
+    .wa-float:hover, .sms-float:hover { transform: scale(1.12); }
+    .sms-float {
+      background: #007AFF;
+      box-shadow: 0 4px 20px rgba(0,122,255,.4);
+    }
+
+    .form-actions { display: flex; gap: .8rem; flex-wrap: wrap; }
+    .form-actions .btn-submit { flex: 1; min-width: 140px; font-size: .95rem; padding: .85rem 1rem; }
 
     /* ========================
        ANIMATIONS — KEYFRAMES
@@ -610,6 +623,34 @@
       100% { box-shadow: 0 4px 20px rgba(37,211,102,.5), 0 0 0 0 rgba(37,211,102,0); }
     }
     .wa-float { animation: waPulse 2.2s ease infinite; }
+
+    /* ========================
+       INCLUSION BANNER
+    ======================== */
+    #inclusion {
+      background: #0d0d0d; padding: 4rem 2.5rem;
+      border-top: 1px solid rgba(255,255,255,.05);
+    }
+    .inclusion-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
+    }
+    .inclusion-img {
+      width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 6px;
+      border: 2px solid var(--amarillo);
+    }
+    .inclusion-text .section-tag { margin-bottom: .6rem; }
+    .inclusion-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 900;
+      text-transform: uppercase; line-height: 1; color: #fff; margin-bottom: 1.2rem;
+    }
+    .inclusion-title em { color: var(--amarillo); font-style: normal; }
+    .inclusion-p { color: var(--gris-texto); font-size: 1rem; line-height: 1.75; }
+    @media (max-width: 768px) {
+      .inclusion-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .inclusion-img { order: -1; }
+    }
 
     /* CTA button glow pulse */
     @keyframes ctaGlow {
@@ -799,11 +840,11 @@
       Real
     </h1>
     <p class="hero-sub">
-      Entrenas en una <strong style="color:var(--amarillo)">Caterpillar 320</strong> — una de las máquinas más potentes del mercado. Tú operas desde el primer momento. Sin meses de teoría. Sin salir de Nashville.
+      Entrenas en <strong style="color:var(--amarillo)">Maquinaria Caterpillar</strong> — equipos reales, de los más potentes del mercado. Tú operas desde el primer momento. Sin meses de teoría.
     </p>
     <div class="hero-checklist">
       <div class="hc-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Entrenamiento 100% práctico en maquinaria real</div>
-      <div class="hc-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Tú operas la Caterpillar 320 desde el primer día</div>
+      <div class="hc-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Tú operas la Máquina desde el primer día</div>
       <div class="hc-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Certificado incluido en el paquete Profesional</div>
       <div class="hc-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Una habilidad que mejora tus ingresos de verdad</div>
     </div>
@@ -818,7 +859,7 @@
       </a>
     </div>
     <div class="hero-stats">
-      <div><div class="stat-num">CAT 320</div><div class="stat-label">Maquinaria real</div></div>
+      <div><div class="stat-num">CAT</div><div class="stat-label">Maquinaria Caterpillar</div></div>
       <div><div class="stat-num">$300</div><div class="stat-label">Práctica libre / hr</div></div>
       <div><div class="stat-num">100%</div><div class="stat-label">Entrenamiento práctico</div></div>
     </div>
@@ -837,7 +878,7 @@
 
     <div class="slide" style="background-image:url('https://lh3.googleusercontent.com/d/1ENXqcvu_5ZzYVRC5D5I55MKYdWPSBg9i');">
       <div class="slide-overlay"></div>
-      <div class="slide-caption">Caterpillar 320 — <span>Tú Operas</span> desde el Primer Día</div>
+      <div class="slide-caption">Maquinaria Caterpillar — <span>Tú Operas</span> desde el Primer Día</div>
     </div>
 
     <div class="slide" style="background-image:url('https://lh3.googleusercontent.com/d/1B9yqX9AnIQgNdBgskU4mPMt484ahremW');">
@@ -862,11 +903,26 @@
   <div class="slider-dots" id="sliderDots"></div>
 </div>
 
+<!-- ======================== INCLUSION BANNER ======================== -->
+<section id="inclusion">
+  <div class="inclusion-inner">
+    <div class="inclusion-text">
+      <p class="section-tag">Inclusión</p>
+      <h2 class="inclusion-title">Todos son<br><em>Bienvenidos</em></h2>
+      <p class="inclusion-p">En Valpatruck creemos que la industria de la construcción es para todos — hombres y mujeres por igual. No importa tu experiencia previa: aquí empiezas desde cero y llegas hasta donde quieras llegar. Si tienes las ganas, nosotros ponemos el equipo real.</p>
+    </div>
+    <img class="inclusion-img"
+         src="https://lh3.googleusercontent.com/d/1IGqJZFZ_v8vX5gqQPyp-j0WCOQrR1iWu"
+         alt="Operadora de maquinaria pesada en Valpatruck"
+         onerror="this.style.background='#1a1a1a'" />
+  </div>
+</section>
+
 <!-- ======================== CURSOS ======================== -->
 <section id="cursos">
   <p class="section-tag">Elige tu nivel</p>
   <h2 class="section-title">Paquetes &amp; Precios</h2>
-  <p style="color:var(--gris-texto);margin-top:.8rem;font-size:.95rem;">Entrena en una <strong style="color:var(--amarillo)">Caterpillar 320</strong> — tú operas la máquina desde el primer momento.</p>
+  <p style="color:var(--gris-texto);margin-top:.8rem;font-size:.95rem;">Entrena en <strong style="color:var(--amarillo)">Maquinaria Caterpillar</strong> — tú operas desde el primer momento.</p>
   <div class="cursos-grid">
 
     <div class="curso-card">
@@ -944,10 +1000,14 @@
     <div style="font-family:'Barlow Condensed',sans-serif;font-size:2.2rem;font-weight:900;color:var(--amarillo);">$300 <span style="font-size:1rem;color:var(--gris-texto);">/ hora</span></div>
   </div>
 
-  <div style="text-align:center;margin-top:2.5rem;">
-    <a href="https://wa.me/16292002544?text=Hola,%20quiero%20reservar%20en%20Valpatruck" target="_blank" class="btn-primary" style="font-size:1.1rem;padding:1rem 2.5rem;">
+  <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:2.5rem;">
+    <a href="https://wa.me/16292002544?text=Hola,%20quiero%20reservar%20mi%20turno%20en%20Valpatruck" target="_blank" class="btn-primary" style="font-size:1.05rem;padding:.9rem 2rem;">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-      Reserva tu Turno por WhatsApp
+      WhatsApp
+    </a>
+    <a href="sms:+16292002544?body=Hola%20Valpatruck%2C%20quiero%20reservar%20mi%20turno." target="_blank" class="btn-primary" style="font-size:1.05rem;padding:.9rem 2rem;background:#222;border:2px solid var(--amarillo);color:var(--amarillo);">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+      Mensaje de Texto
     </a>
   </div>
 </section>
@@ -966,13 +1026,12 @@
     </div>
     <div class="about-text">
       <p>
-        <strong>Valpatruck</strong> es una escuela de maquinaria pesada ubicada en Nashville, Tennessee, creada para personas que quieren aprender una habilidad real y bien pagada sin tener que viajar ni invertir meses en teoría.
+        <strong style="color:var(--amarillo);font-family:'Barlow Condensed',sans-serif;font-size:1.05rem;letter-spacing:.5px;text-transform:uppercase;">Misión de VALPATRUCK</strong><br>
+        En VALPATRUCK nuestra misión es capacitar operadores de maquinaria pesada con entrenamiento 100% práctico, real y enfocado en el trabajo de campo, formando personas seguras, responsables y listas para ingresar rápidamente a la industria de la construcción y excavación. Nos comprometemos a brindar una enseñanza accesible, honesta y de calidad, utilizando equipos reales y experiencias prácticas que preparen a nuestros estudiantes para oportunidades laborales reales en Estados Unidos y el resto del mundo.
       </p>
       <p>
-        Nuestro método es simple: <strong>tú operas desde el primer momento.</strong> Nada de sentarte meses viendo diapositivas. En Valpatruck subes a la máquina y empiezas a trabajar de verdad desde el día uno.
-      </p>
-      <p>
-        Entrenamos en una <strong>Caterpillar 320</strong>, una de las excavadoras más tecnológicas y potentes del mercado — la misma maquinaria que encontrarás en los trabajos reales. Puedes ir y volver a tu casa todos los días sin pagar hospedaje ni comida.
+        <strong style="color:var(--amarillo);font-family:'Barlow Condensed',sans-serif;font-size:1.05rem;letter-spacing:.5px;text-transform:uppercase;">Visión de VALPATRUCK</strong><br>
+        Ser una empresa líder en entrenamiento práctico de maquinaria pesada en Estados Unidos, reconocida por formar operadores altamente capacitados, seguros y preparados para el trabajo real en campo. En VALPATRUCK buscamos expandir nuestras oportunidades de capacitación a diferentes estados, ayudando a más personas a construir un mejor futuro a través de una profesión con alta demanda y crecimiento en la industria de la construcción y excavación de suelos.
       </p>
       <div class="about-values">
         <div class="about-val">
@@ -980,16 +1039,16 @@
           <div class="about-val-text">Operas la máquina desde el inicio</div>
         </div>
         <div class="about-val">
-          <div class="about-val-title">Sin Gastos Extra</div>
-          <div class="about-val-text">Sin hospedaje ni comida</div>
-        </div>
-        <div class="about-val">
           <div class="about-val-title">Maquinaria Real</div>
-          <div class="about-val-text">Caterpillar 320 original</div>
+          <div class="about-val-text">Maquinaria Caterpillar original</div>
         </div>
         <div class="about-val">
           <div class="about-val-title">Flexible</div>
-          <div class="about-val-text">Lunes a sábado, tus horarios</div>
+          <div class="about-val-text">Domingo a domingo, a coordinar</div>
+        </div>
+        <div class="about-val">
+          <div class="about-val-title">Inclusivo</div>
+          <div class="about-val-text">Hombres y mujeres bienvenidos</div>
         </div>
       </div>
       <div class="about-contact">
@@ -1004,6 +1063,10 @@
         <a href="https://www.facebook.com/profile.php?id=61560440650919&mibextid=wwXIfr" target="_blank" class="about-link">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.49h-2.79V24C19.61 23.1 24 18.1 24 12.07z"/></svg>
           Síguenos en Facebook
+        </a>
+        <a href="https://www.instagram.com/valpatruck?igsh=enlwcW5xcG91cGo=&utm_source=ig_contact_invite" target="_blank" class="about-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="url(#igGrad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><defs><linearGradient id="igGrad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f09433"/><stop offset="25%" stop-color="#e6683c"/><stop offset="50%" stop-color="#dc2743"/><stop offset="75%" stop-color="#cc2366"/><stop offset="100%" stop-color="#bc1888"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#dc2743" stroke="none"/></svg>
+          Síguenos en Instagram
         </a>
       </div>
     </div>
@@ -1020,8 +1083,8 @@
       <div class="razon-icon">
         <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="14" width="14" height="6" rx="2"/><path d="M15 17h2l4-8H9l2 5"/><circle cx="5" cy="20" r="2"/><circle cx="11" cy="20" r="2"/></svg>
       </div>
-      <div class="razon-titulo">Caterpillar 320 Real</div>
-      <p class="razon-texto">Practicas en una CAT 320, una de las excavadoras más tecnológicas y potentes del mercado. Nada de simuladores ni maquetas.</p>
+      <div class="razon-titulo">Maquinaria Real</div>
+      <p class="razon-texto">Practicas en Maquinaria Caterpillar real — ni simuladores, ni maquetas, ni pantallas. Estudio y práctica 100% en campo con equipo real desde el primer día.</p>
     </div>
 
     <div class="razon">
@@ -1030,14 +1093,6 @@
       </div>
       <div class="razon-titulo">Operas desde el Día 1</div>
       <p class="razon-texto">Olvida meses sentado viendo teoría. En Valpatruck subes a la máquina desde el primer momento del entrenamiento.</p>
-    </div>
-
-    <div class="razon">
-      <div class="razon-icon">
-        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      </div>
-      <div class="razon-titulo">Sin Gastos Extras</div>
-      <p class="razon-texto">No tienes que pagar hospedaje ni comida. Puedes ir y volver a tu casa todos los días. Sin salir de Nashville.</p>
     </div>
 
     <div class="razon">
@@ -1077,15 +1132,15 @@
       </div>
       <div class="dato">
         <div class="dato-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--amarillo)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-        <div class="dato-text">Lunes a Sábado</div>
+        <div class="dato-text">Domingo a domingo · horario a coordinar</div>
       </div>
       <div class="dato">
-        <div class="dato-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.49h-2.79V24C19.61 23.1 24 18.1 24 12.07z"/></svg></div>
-        <div class="dato-text"><a href="https://www.facebook.com/profile.php?id=61560440650919&mibextid=wwXIfr" target="_blank">Valpatruck en Facebook</a></div>
+        <div class="dato-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="url(#igGrad2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><defs><linearGradient id="igGrad2" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f09433"/><stop offset="50%" stop-color="#dc2743"/><stop offset="100%" stop-color="#bc1888"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#dc2743" stroke="none"/></svg></div>
+        <div class="dato-text"><a href="https://www.instagram.com/valpatruck?igsh=enlwcW5xcG91cGo=&utm_source=ig_contact_invite" target="_blank">@valpatruck en Instagram</a></div>
       </div>
     </div>
 
-    <form onsubmit="handleSubmit(event)">
+    <form id="contactForm">
       <div class="form-group"><label>Nombre completo</label><input type="text" placeholder="Tu nombre" required /></div>
       <div class="form-group"><label>Teléfono</label><input type="tel" placeholder="(629) 000-0000" required /></div>
       <div class="form-group"><label>Correo electrónico</label><input type="email" placeholder="correo@ejemplo.com" required /></div>
@@ -1101,7 +1156,16 @@
         </select>
       </div>
       <div class="form-group"><label>Mensaje (opcional)</label><textarea placeholder="Cuéntanos algo sobre ti o tus preguntas..."></textarea></div>
-      <button type="submit" class="btn-submit">Enviar Solicitud</button>
+      <div class="form-actions">
+        <button type="button" onclick="submitWA(this)" class="btn-submit">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          WhatsApp
+        </button>
+        <button type="button" onclick="submitSMS(this)" class="btn-submit" style="background:#1a1a1a;border:2px solid var(--amarillo);color:var(--amarillo);">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          Mensaje de Texto
+        </button>
+      </div>
     </form>
   </div>
 </section>
@@ -1123,6 +1187,9 @@
       <a href="https://www.facebook.com/profile.php?id=61560440650919&mibextid=wwXIfr" target="_blank" title="Facebook">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.49h-2.79V24C19.61 23.1 24 18.1 24 12.07z"/></svg>
       </a>
+      <a href="https://www.instagram.com/valpatruck?igsh=enlwcW5xcG91cGo=&utm_source=ig_contact_invite" target="_blank" title="Instagram">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="url(#igFt)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><defs><linearGradient id="igFt" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f09433"/><stop offset="50%" stop-color="#dc2743"/><stop offset="100%" stop-color="#bc1888"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#dc2743" stroke="none"/></svg>
+      </a>
       <a href="https://wa.me/16292002544" target="_blank" title="WhatsApp">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
       </a>
@@ -1141,10 +1208,15 @@
   <span class="lang-code">EN</span>
 </button>
 
-<!-- ======================== WHATSAPP FLOAT ======================== -->
-<a href="https://wa.me/16292002544?text=Hola,%20quiero%20información%20sobre%20los%20cursos%20de%20Valpatruck" class="wa-float" target="_blank" title="WhatsApp">
-  <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-</a>
+<!-- ======================== FLOATING ACTION BUTTONS ======================== -->
+<div class="float-stack">
+  <a href="sms:+16292002544?body=Hola%20Valpatruck%2C%20me%20interesa%20información%20sobre%20sus%20cursos." class="sms-float" target="_blank" title="Mensaje de Texto">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+  </a>
+  <a href="https://wa.me/16292002544?text=Hola,%20quiero%20información%20sobre%20los%20cursos%20de%20Valpatruck" class="wa-float" target="_blank" title="WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+  </a>
+</div>
 
 <script>
   /* ===================================================
@@ -1172,9 +1244,9 @@
       // --- Hero ---
       hero_badge: 'Murfreesboro, Tennessee',
       hero_title: 'Opera una <em>Excavadora</em> Real',
-      hero_sub: 'Entrenas en una <strong style="color:var(--amarillo)">Caterpillar 320</strong> — una de las máquinas más potentes del mercado. Tú operas desde el primer momento. Sin meses de teoría. Sin salir de Nashville.',
+      hero_sub: 'Entrenas en <strong style="color:var(--amarillo)">Maquinaria Caterpillar</strong> — equipos reales, de los más potentes del mercado. Tú operas desde el primer momento. Sin meses de teoría.',
       hc1: 'Entrenamiento 100% práctico en maquinaria real',
-      hc2: 'Tú operas la Caterpillar 320 desde el primer día',
+      hc2: 'Tú operas la Máquina desde el primer día',
       hc3: 'Certificado incluido en el paquete Profesional',
       hc4: 'Una habilidad que mejora tus ingresos de verdad',
       hc5: '',
@@ -1185,13 +1257,13 @@
       stat3_label: 'Entrenamiento práctico',
       // --- Slider captions ---
       slide1: 'Entrenamiento <span>100% Práctico</span> en Maquinaria Real',
-      slide2: 'Caterpillar 320 — <span>Tú Operas</span> desde el Primer Día',
+      slide2: 'Maquinaria Caterpillar — <span>Tú Operas</span> desde el Primer Día',
       slide3: 'Aprende en <span>Nashville, TN</span> — Sin Salir del Estado',
       slide4: 'Una Habilidad Que <span>Genera Dinero Real</span>',
       // --- Cursos ---
       cursos_tag: 'Elige tu nivel',
       cursos_title: 'Paquetes &amp; Precios',
-      cursos_sub: 'Entrena en una <strong style="color:var(--amarillo)">Caterpillar 320</strong> — tú operas la máquina desde el primer momento.',
+      cursos_sub: 'Entrena en <strong style="color:var(--amarillo)">Maquinaria Caterpillar</strong> — tú operas desde el primer momento.',
       c1_nombre: 'Básico',
       c1_desc: 'Aprende los controles esenciales y los movimientos básicos de la excavadora. Ideal si nunca has operado antes.',
       c1_tag1: '6 horas', c1_tag2: 'Principiantes',
@@ -1212,23 +1284,23 @@
       about_tag: 'Quiénes Somos',
       about_title: 'Sobre <em style="color:var(--amarillo);font-style:normal;">Valpatruck</em>',
       about_badge: 'Murfreesboro, Tennessee',
-      about_p1: '<strong>Valpatruck</strong> es una escuela de maquinaria pesada ubicada en Murfreesboro, Tennessee, creada para personas que quieren aprender una habilidad real y bien pagada sin tener que viajar ni invertir meses en teoría.',
-      about_p2: 'Nuestro método es simple: <strong>tú operas desde el primer momento.</strong> Nada de sentarte meses viendo diapositivas. En Valpatruck subes a la máquina y empiezas a trabajar de verdad desde el día uno.',
-      about_p3: 'Entrenamos en una <strong>Caterpillar 320</strong>, una de las excavadoras más tecnológicas y potentes del mercado — la misma maquinaria que encontrarás en los trabajos reales. Puedes ir y volver a tu casa todos los días sin pagar hospedaje ni comida.',
+      about_p1: '<strong style="color:var(--amarillo);font-family:\'Barlow Condensed\',sans-serif;font-size:1.05rem;letter-spacing:.5px;text-transform:uppercase;">Misión de VALPATRUCK</strong><br>En VALPATRUCK nuestra misión es capacitar operadores de maquinaria pesada con entrenamiento 100% práctico, real y enfocado en el trabajo de campo, formando personas seguras, responsables y listas para ingresar rápidamente a la industria de la construcción y excavación.',
+      about_p2: '<strong style="color:var(--amarillo);font-family:\'Barlow Condensed\',sans-serif;font-size:1.05rem;letter-spacing:.5px;text-transform:uppercase;">Visión de VALPATRUCK</strong><br>Ser una empresa líder en entrenamiento práctico de maquinaria pesada en Estados Unidos, reconocida por formar operadores altamente capacitados, seguros y preparados para el trabajo real en campo.',
+      about_p3: '',
       av1_title: '100% Práctico', av1_text: 'Operas la máquina desde el inicio',
-      av2_title: 'Sin Gastos Extra', av2_text: 'Sin hospedaje ni comida',
-      av3_title: 'Maquinaria Real', av3_text: 'Caterpillar 320 original',
-      av4_title: 'Flexible', av4_text: 'Lunes a sábado, tus horarios',
+      av2_title: 'Maquinaria Real', av2_text: 'Maquinaria Caterpillar original',
+      av3_title: 'Flexible', av3_text: 'Domingo a domingo, a coordinar',
+      av4_title: 'Inclusivo', av4_text: 'Hombres y mujeres bienvenidos',
       about_fb: 'Síguenos en Facebook',
       // --- Por Qué ---
       pq_tag: 'Por qué elegirnos',
       pq_title: 'Aquí no vienes<br>a mirar — operas',
-      r1_title: 'Caterpillar 320 Real',
-      r1_text: 'Practicas en una CAT 320, una de las excavadoras más tecnológicas y potentes del mercado. Nada de simuladores ni maquetas.',
+      r1_title: 'Maquinaria Real',
+      r1_text: 'Practicas en Maquinaria Caterpillar real — ni simuladores, ni maquetas, ni pantallas. Estudio y práctica 100% en campo con equipo real desde el primer día.',
       r2_title: 'Operas desde el Día 1',
       r2_text: 'Olvida meses sentado viendo teoría. En Valpatruck subes a la máquina desde el primer momento del entrenamiento.',
-      r3_title: 'Sin Gastos Extras',
-      r3_text: 'No tienes que pagar hospedaje ni comida. Puedes ir y volver a tu casa todos los días. Sin salir de Nashville.',
+      r3_title: '',
+      r3_text: '',
       r4_title: 'Mejora tus Ingresos',
       r4_text: 'Los operadores de maquinaria pesada son de los trabajadores mejor pagados en construcción. Invierte en una habilidad que genera dinero real.',
       // --- Contacto ---
@@ -1236,8 +1308,8 @@
       ct_title: 'Inscríbete Ahora',
       ct_h3: '¿Listo para cambiar tu futuro?',
       ct_p: 'Escríbenos ahora mismo y separa tu turno. Nuestro equipo te dará toda la información sobre fechas y horarios disponibles.',
-      ct_horario: 'Lunes a Sábado',
-      ct_fb: 'Valpatruck en Facebook',
+      ct_horario: 'Domingo a domingo · horario a coordinar',
+      ct_fb: '@valpatruck en Instagram',
       lbl_nombre: 'Nombre completo',
       lbl_tel: 'Teléfono',
       lbl_email: 'Correo electrónico',
@@ -1279,9 +1351,9 @@
       sb_cta: 'Enroll Now',
       hero_badge: 'Murfreesboro, Tennessee',
       hero_title: 'Operate a Real <em>Excavator</em>',
-      hero_sub: 'Train on a <strong style="color:var(--amarillo)">Caterpillar 320</strong> — one of the most powerful machines on the market. You operate from day one. No months of theory. No leaving Nashville.',
+      hero_sub: 'Train on <strong style="color:var(--amarillo)">Caterpillar Machinery</strong> — real, powerful equipment. You operate from day one. No months of theory.',
       hc1: '100% hands-on training on real machinery',
-      hc2: 'You operate the Caterpillar 320 from day one',
+      hc2: 'You operate the Machine from day one',
       hc3: 'Certificate included in the Professional package',
       hc4: 'A skill that genuinely increases your income',
       hc5: '',
@@ -1291,12 +1363,12 @@
       stat2_label: 'Free practice / hr',
       stat3_label: 'Hands-on training',
       slide1: '<span>100% Hands-On</span> Heavy Equipment Training',
-      slide2: 'Caterpillar 320 — <span>You Operate</span> from Day One',
+      slide2: 'Caterpillar Machinery — <span>You Operate</span> from Day One',
       slide3: 'Learn in <span>Nashville, TN</span> — No Travel Required',
       slide4: 'A Skill That <span>Earns Real Money</span>',
       cursos_tag: 'Choose your level',
       cursos_title: 'Packages &amp; Prices',
-      cursos_sub: 'Train on a <strong style="color:var(--amarillo)">Caterpillar 320</strong> — you operate the machine from the very first moment.',
+      cursos_sub: 'Train on <strong style="color:var(--amarillo)">Caterpillar Machinery</strong> — you operate from the very first moment.',
       c1_nombre: 'Basic',
       c1_desc: 'Learn the essential controls and basic excavator movements. Perfect if you have never operated before.',
       c1_tag1: '6 hours', c1_tag2: 'Beginners',
@@ -1316,30 +1388,30 @@
       about_tag: 'Who We Are',
       about_title: 'About <em style="color:var(--amarillo);font-style:normal;">Valpatruck</em>',
       about_badge: 'Murfreesboro, Tennessee',
-      about_p1: '<strong>Valpatruck</strong> is a heavy equipment school located in Murfreesboro, Tennessee, built for people who want to learn a real, well-paying skill without traveling or spending months on theory.',
-      about_p2: 'Our method is simple: <strong>you operate from the very first moment.</strong> No months sitting through slide decks. At Valpatruck you get on the machine and start doing real work from day one.',
-      about_p3: 'We train on a <strong>Caterpillar 320</strong>, one of the most powerful and advanced excavators on the market — the same machinery you\'ll find on real job sites. You can go home every day without paying for lodging or food.',
+      about_p1: '<strong style="color:var(--amarillo);font-family:\'Barlow Condensed\',sans-serif;font-size:1.05rem;letter-spacing:.5px;text-transform:uppercase;">VALPATRUCK Mission</strong><br>At VALPATRUCK our mission is to train heavy equipment operators with 100% practical, real, field-focused instruction — building safe, responsible individuals ready to enter the construction industry quickly.',
+      about_p2: '<strong style="color:var(--amarillo);font-family:\'Barlow Condensed\',sans-serif;font-size:1.05rem;letter-spacing:.5px;text-transform:uppercase;">VALPATRUCK Vision</strong><br>To be a leading practical heavy equipment training company in the United States, recognized for producing highly skilled operators prepared for real field work, expanding to additional states.',
+      about_p3: '',
       av1_title: '100% Hands-On', av1_text: 'You operate from the start',
-      av2_title: 'No Extra Costs', av2_text: 'No lodging or food expenses',
-      av3_title: 'Real Machinery', av3_text: 'Original Caterpillar 320',
-      av4_title: 'Flexible', av4_text: 'Monday–Saturday, your schedule',
+      av2_title: 'Real Machinery', av2_text: 'Original Caterpillar machinery',
+      av3_title: 'Flexible', av3_text: 'Sunday to Sunday, schedule to arrange',
+      av4_title: 'Inclusive', av4_text: 'Men and women welcome',
       about_fb: 'Follow Us on Facebook',
       pq_tag: 'Why choose us',
       pq_title: 'You don\'t come to watch<br>— you operate',
-      r1_title: 'Real Caterpillar 320',
-      r1_text: 'You train on a CAT 320, one of the most advanced and powerful excavators on the market. No simulators. No models.',
+      r1_title: 'Real Machinery',
+      r1_text: 'You train on real Caterpillar machinery — no simulators, no scale models, no screens. Real study and real practice in the field from day one.',
       r2_title: 'Operating from Day 1',
       r2_text: 'Forget months sitting in theory class. At Valpatruck you get on the machine from the very first moment of training.',
-      r3_title: 'No Extra Expenses',
-      r3_text: 'No lodging or food to pay for. Go home every day. No leaving Nashville.',
+      r3_title: '',
+      r3_text: '',
       r4_title: 'Increase Your Income',
       r4_text: 'Heavy equipment operators are among the highest-paid workers in construction. Invest in a skill that generates real money.',
       ct_tag: "Let's Talk",
       ct_title: 'Enroll Now',
       ct_h3: 'Ready to change your future?',
       ct_p: 'Message us now and reserve your slot. Our team will give you all the information on available dates and schedules.',
-      ct_horario: 'Monday to Saturday',
-      ct_fb: 'Valpatruck on Facebook',
+      ct_horario: 'Sunday to Sunday · schedule to arrange',
+      ct_fb: '@valpatruck on Instagram',
       lbl_nombre: 'Full name',
       lbl_tel: 'Phone',
       lbl_email: 'Email address',
@@ -1687,36 +1759,42 @@
   slides[0].classList.add('active-slide');
 
   /* ---- FORM ---- */
+  function _getFormData(btn) {
+    const f = btn.closest('form');
+    if (!f.reportValidity()) return null;
+    return {
+      f,
+      nombre:   f.querySelector('input[type="text"]').value.trim(),
+      telefono: f.querySelector('input[type="tel"]').value.trim(),
+      email:    f.querySelector('input[type="email"]').value.trim(),
+      paquete:  f.querySelector('select').value,
+      mensaje:  f.querySelector('textarea').value.trim()
+    };
+  }
+
+  function submitWA(btn) {
+    const d = _getFormData(btn);
+    if (!d) return;
+    const text = [
+      `Hola, me interesa un paquete de Valpatruck.`, ``,
+      `👤 Nombre: ${d.nombre}`, `📞 Teléfono: ${d.telefono}`,
+      `📧 Email: ${d.email}`, `📦 Paquete: ${d.paquete}`,
+      d.mensaje ? `💬 Mensaje: ${d.mensaje}` : ''
+    ].filter(Boolean).join('\n');
+    window.open(`https://wa.me/16292002544?text=${encodeURIComponent(text)}`, '_blank');
+    d.f.reset();
+  }
+
+  function submitSMS(btn) {
+    const d = _getFormData(btn);
+    if (!d) return;
+    const text = `Hola Valpatruck, me interesa. Nombre: ${d.nombre}, Tel: ${d.telefono}, Email: ${d.email}, Paquete: ${d.paquete}${d.mensaje ? ', Msg: '+d.mensaje : ''}`;
+    window.open(`sms:+16292002544?body=${encodeURIComponent(text)}`, '_blank');
+    d.f.reset();
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
-    const f = e.target;
-    const nombre  = f.querySelector('input[type="text"]').value.trim();
-    const telefono = f.querySelector('input[type="tel"]').value.trim();
-    const email   = f.querySelector('input[type="email"]').value.trim();
-    const paquete = f.querySelector('select').value;
-    const mensaje = f.querySelector('textarea').value.trim();
-
-    // WhatsApp con los datos del formulario
-    const waText = [
-      `Hola, me interesa un paquete de Valpatruck.`,
-      ``,
-      `👤 Nombre: ${nombre}`,
-      `📞 Teléfono: ${telefono}`,
-      `📧 Email: ${email}`,
-      `📦 Paquete: ${paquete}`,
-      mensaje ? `💬 Mensaje: ${mensaje}` : ''
-    ].filter(Boolean).join('\n');
-
-    window.open(`https://wa.me/16292002544?text=${encodeURIComponent(waText)}`, '_blank');
-
-    // TODO: Formspree — agregar el endpoint cuando el cliente lo proporcione
-    // fetch('https://formspree.io/f/XXXXXXXX', {
-    //   method: 'POST',
-    //   headers: { 'Accept': 'application/json' },
-    //   body: new FormData(f)
-    // });
-
-    f.reset();
   }
 </script>
 </body>
