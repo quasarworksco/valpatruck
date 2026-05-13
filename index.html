@@ -1231,16 +1231,17 @@
       nav_paquetes: 'Paquetes',
       nav_nosotros: 'Nosotros',
       nav_contacto: 'Contacto',
-      nav_facebook: 'Facebook',
       nav_inscribete: 'Inscríbete',
-      // --- Sidebar ---
+      // --- Hamburger menu ---
       sb_inicio: 'Inicio',
       sb_paquetes: 'Paquetes & Precios',
       sb_nosotros: 'Nosotros',
       sb_porque: '¿Por Qué Nosotros?',
       sb_contacto: 'Contacto',
-      sb_info_title: 'Información de Contacto',
-      sb_cta: 'Inscríbete Ahora',
+      // --- Inclusion ---
+      inclusion_tag: 'Inclusión',
+      inclusion_title: 'Todos son <em>Bienvenidos</em>',
+      inclusion_p: 'En Valpatruck creemos que la industria de la construcción es para todos — hombres y mujeres por igual. No importa tu experiencia previa: aquí empiezas desde cero y llegas hasta donde quieras llegar. Si tienes las ganas, nosotros ponemos el equipo real.',
       // --- Hero ---
       hero_badge: 'Murfreesboro, Tennessee',
       hero_title: 'Opera una <em>Excavadora</em> Real',
@@ -1292,6 +1293,7 @@
       av3_title: 'Flexible', av3_text: 'Domingo a domingo, a coordinar',
       av4_title: 'Inclusivo', av4_text: 'Hombres y mujeres bienvenidos',
       about_fb: 'Síguenos en Facebook',
+      about_ig: 'Síguenos en Instagram',
       // --- Por Qué ---
       pq_tag: 'Por qué elegirnos',
       pq_title: 'Aquí no vienes<br>a mirar — operas',
@@ -1299,8 +1301,6 @@
       r1_text: 'Practicas en Maquinaria Caterpillar real — ni simuladores, ni maquetas, ni pantallas. Estudio y práctica 100% en campo con equipo real desde el primer día.',
       r2_title: 'Operas desde el Día 1',
       r2_text: 'Olvida meses sentado viendo teoría. En Valpatruck subes a la máquina desde el primer momento del entrenamiento.',
-      r3_title: '',
-      r3_text: '',
       r4_title: 'Mejora tus Ingresos',
       r4_text: 'Los operadores de maquinaria pesada son de los trabajadores mejor pagados en construcción. Invierte en una habilidad que genera dinero real.',
       // --- Contacto ---
@@ -1325,6 +1325,8 @@
       opt3: 'Intermedio Avanzado – 18 hrs ($5,400)',
       opt4: 'Profesional – 24 hrs ($6,720)',
       opt5: 'Práctica Libre ($300/hr)',
+      btn_form_wa: 'WhatsApp',
+      btn_form_sms: 'Mensaje de Texto',
       btn_submit: 'Enviar Solicitud',
       // --- Footer ---
       ft_paquetes: 'Paquetes', ft_nosotros: 'Nosotros',
@@ -1340,15 +1342,15 @@
       nav_paquetes: 'Packages',
       nav_nosotros: 'About Us',
       nav_contacto: 'Contact',
-      nav_facebook: 'Facebook',
       nav_inscribete: 'Enroll',
       sb_inicio: 'Home',
       sb_paquetes: 'Packages & Prices',
       sb_nosotros: 'About Us',
       sb_porque: 'Why Choose Us?',
       sb_contacto: 'Contact',
-      sb_info_title: 'Contact Information',
-      sb_cta: 'Enroll Now',
+      inclusion_tag: 'Inclusion',
+      inclusion_title: 'Everyone is <em>Welcome</em>',
+      inclusion_p: 'At Valpatruck we believe the construction industry is for everyone — men and women alike. No prior experience needed: start from zero and go as far as you want. If you have the drive, we provide the real equipment.',
       hero_badge: 'Murfreesboro, Tennessee',
       hero_title: 'Operate a Real <em>Excavator</em>',
       hero_sub: 'Train on <strong style="color:var(--amarillo)">Caterpillar Machinery</strong> — real, powerful equipment. You operate from day one. No months of theory.',
@@ -1396,14 +1398,13 @@
       av3_title: 'Flexible', av3_text: 'Sunday to Sunday, schedule to arrange',
       av4_title: 'Inclusive', av4_text: 'Men and women welcome',
       about_fb: 'Follow Us on Facebook',
+      about_ig: 'Follow Us on Instagram',
       pq_tag: 'Why choose us',
       pq_title: 'You don\'t come to watch<br>— you operate',
       r1_title: 'Real Machinery',
       r1_text: 'You train on real Caterpillar machinery — no simulators, no scale models, no screens. Real study and real practice in the field from day one.',
       r2_title: 'Operating from Day 1',
       r2_text: 'Forget months sitting in theory class. At Valpatruck you get on the machine from the very first moment of training.',
-      r3_title: '',
-      r3_text: '',
       r4_title: 'Increase Your Income',
       r4_text: 'Heavy equipment operators are among the highest-paid workers in construction. Invest in a skill that generates real money.',
       ct_tag: "Let's Talk",
@@ -1427,6 +1428,8 @@
       opt3: 'Advanced Intermediate – 18 hrs ($5,400)',
       opt4: 'Professional – 24 hrs ($6,720)',
       opt5: 'Free Practice ($300/hr)',
+      btn_form_wa: 'WhatsApp',
+      btn_form_sms: 'Text Message',
       btn_submit: 'Send Request',
       ft_paquetes: 'Packages', ft_nosotros: 'About Us',
       ft_porque: 'Why Us?', ft_contacto: 'Contact',
@@ -1492,7 +1495,15 @@
     // Cursos
     const secTags = qa('.section-tag');
     const secTitles = qa('.section-title');
-    if(secTags[0]) secTags[0].textContent = t.cursos_tag;
+    // secTags: [0]=inclusion [1]=cursos [2]=about [3]=por-qué [4]=contacto
+    // secTitles: [0]=cursos [1]=about [2]=por-qué [3]=contacto (inclusion uses .inclusion-title)
+
+    // Inclusion
+    if(secTags[0]) secTags[0].textContent = t.inclusion_tag;
+    const inclTitle = q('.inclusion-title'); if(inclTitle) inclTitle.innerHTML = t.inclusion_title;
+    const inclP = q('.inclusion-p'); if(inclP) inclP.textContent = t.inclusion_p;
+
+    if(secTags[1]) secTags[1].textContent = t.cursos_tag;
     if(secTitles[0]) secTitles[0].innerHTML = t.cursos_title;
     const cursosSub = q('#cursos > p:nth-of-type(2)');
     if(cursosSub) cursosSub.innerHTML = t.cursos_sub;
@@ -1521,7 +1532,7 @@
     if(btnReserva){ const tn=[...btnReserva.childNodes].find(n=>n.nodeType===3&&n.textContent.trim()); if(tn) tn.textContent = ' '+t.btn_reserva; }
 
     // About
-    if(secTags[1]) secTags[1].textContent = t.about_tag;
+    if(secTags[2]) secTags[2].textContent = t.about_tag;
     if(secTitles[1]) secTitles[1].innerHTML = t.about_title;
     const abBadge = q('.about-badge'); if(abBadge) abBadge.textContent = t.about_badge;
     const abParas = qa('.about-text p');
@@ -1534,20 +1545,22 @@
       if(avTitles[i]) avTitles[i].textContent = t[k+'_title'];
       if(avTexts[i])  avTexts[i].textContent  = t[k+'_text'];
     });
-    const abFb = q('.about-link:last-child'); if(abFb) abFb.childNodes.forEach(n=>{ if(n.nodeType===3&&n.textContent.trim()) n.textContent = ' '+t.about_fb; });
+    const abLinks = qa('.about-link');
+    const abFb = abLinks[abLinks.length - 2]; if(abFb) abFb.childNodes.forEach(n=>{ if(n.nodeType===3&&n.textContent.trim()) n.textContent = ' '+t.about_fb; });
+    const abIg = abLinks[abLinks.length - 1]; if(abIg) abIg.childNodes.forEach(n=>{ if(n.nodeType===3&&n.textContent.trim()) n.textContent = ' '+t.about_ig; });
 
     // Por Qué
-    if(secTags[2]) secTags[2].textContent = t.pq_tag;
+    if(secTags[3]) secTags[3].textContent = t.pq_tag;
     if(secTitles[2]) secTitles[2].innerHTML = t.pq_title;
     const razones = qa('.razon');
-    [['r1','r1'],['r2','r2'],['r3','r3'],['r4','r4']].forEach(([,pfx],i)=>{
+    [['r1','r1'],['r2','r2'],['r4','r4']].forEach(([,pfx],i)=>{
       if(!razones[i]) return;
       const rt = razones[i].querySelector('.razon-titulo'); if(rt) rt.textContent = t[pfx+'_title'];
       const rx = razones[i].querySelector('.razon-texto'); if(rx) rx.textContent = t[pfx+'_text'];
     });
 
     // Contacto
-    if(secTags[3]) secTags[3].textContent = t.ct_tag;
+    if(secTags[4]) secTags[4].textContent = t.ct_tag;
     if(secTitles[3]) secTitles[3].textContent = t.ct_title;
     const ctH3 = q('.contacto-info h3'); if(ctH3) ctH3.textContent = t.ct_h3;
     const ctP  = q('.contacto-info p');  if(ctP)  ctP.textContent  = t.ct_p;
@@ -1565,8 +1578,10 @@
     // Select options
     const opts = qa('.form-group select option');
     ['opt0','opt1','opt2','opt3','opt4','opt5'].forEach((k,i)=>{ if(opts[i]) opts[i].textContent = t[k]; });
-    // Submit btn
-    const btnSub = q('.btn-submit'); if(btnSub) btnSub.textContent = t.btn_submit;
+    // Form action buttons (WA + SMS)
+    const formBtns = qa('.form-actions .btn-submit');
+    if(formBtns[0]) { const tn=[...formBtns[0].childNodes].find(n=>n.nodeType===3&&n.textContent.trim()); if(tn) tn.textContent = ' '+t.btn_form_wa; }
+    if(formBtns[1]) { const tn=[...formBtns[1].childNodes].find(n=>n.nodeType===3&&n.textContent.trim()); if(tn) tn.textContent = ' '+t.btn_form_sms; }
 
     // Footer
     const ftLinks = qa('.footer-links a');
