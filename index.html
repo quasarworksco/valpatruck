@@ -1553,8 +1553,8 @@
     const ctP  = q('.contacto-info p');  if(ctP)  ctP.textContent  = t.ct_p;
     const datoTexts = qa('.dato-text');
     // dato 4 = horario, dato 5 = facebook
-    if(datoTexts[3]) datoTexts[3].textContent = t.ct_horario;
-    if(datoTexts[4]) { datoTexts[4].childNodes.forEach(n=>{ if(n.nodeType===3&&n.textContent.trim()) n.textContent = t.ct_fb; }); const a=datoTexts[4].querySelector('a'); if(a&&a.childNodes.length) a.textContent = t.ct_fb; }
+    if(datoTexts[4]) datoTexts[4].textContent = t.ct_horario;
+    if(datoTexts[5]) { const a=datoTexts[5].querySelector('a'); if(a) a.textContent = t.ct_fb; }
     // Form labels
     const labels = qa('.form-group label');
     ['lbl_nombre','lbl_tel','lbl_email','lbl_paquete','lbl_msg'].forEach((k,i)=>{ if(labels[i]) labels[i].textContent = t[k]; });
