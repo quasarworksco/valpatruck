@@ -1772,9 +1772,24 @@
     };
   }
 
+  function _sendFormspree(d) {
+    const body = new FormData();
+    body.append('nombre',   d.nombre);
+    body.append('telefono', d.telefono);
+    body.append('email',    d.email);
+    body.append('paquete',  d.paquete);
+    body.append('mensaje',  d.mensaje);
+    fetch('https://formspree.io/f/mzdowrvg', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body
+    });
+  }
+
   function submitWA(btn) {
     const d = _getFormData(btn);
     if (!d) return;
+    _sendFormspree(d);
     const text = [
       `Hola, me interesa un paquete de Valpatruck.`, ``,
       `👤 Nombre: ${d.nombre}`, `📞 Teléfono: ${d.telefono}`,
@@ -1788,6 +1803,7 @@
   function submitSMS(btn) {
     const d = _getFormData(btn);
     if (!d) return;
+    _sendFormspree(d);
     const text = `Hola Valpatruck, me interesa. Nombre: ${d.nombre}, Tel: ${d.telefono}, Email: ${d.email}, Paquete: ${d.paquete}${d.mensaje ? ', Msg: '+d.mensaje : ''}`;
     window.open(`sms:+16292002544?body=${encodeURIComponent(text)}`, '_blank');
     d.f.reset();
